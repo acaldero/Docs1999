@@ -1,0 +1,161 @@
+<html>
+<title>Resumenes</title>
+<!body background="backhelp.gif">
+<br><hr>
+<h1><p align=center>Varios</p></h1>
+<hr><br>
+
+
+
+<br>
+<a name="Lista_Varios"><h2>Varios ...</h2> </a>
+<p><pre>
+       # doskey nc=xc --- alias (newCom) (xCom) --- &lt;nC&gt;="&lt;xC&gt;" --- ???
+
+	 * Cada vez que ejecute (newCom) lo que verdaderamente
+	   se ejecuta es el xCom
+
+	   Los alias pueden estar en un fichero, para "cargarlos" usar :
+                (ux) source &lt;FileWithAliases&gt;
+                (vms) @&lt;FileWithAliases.com&gt;
+		(cms/sp) ver seccion ficheros especiales
+
+	 * Particularidades :
+
+	  --- Unix -------------------------------------------------------
+	 | - Para ver los alias actualmente definidos :                   |
+	 |        alias                                                   |
+	 | - Si tienes un alias tipo 'alias rm rm -i' y quieres que se    |
+	 |    ejecute el comando y no el alias cuando teclees rm,         |
+	 |    antepon '\' :  '\rm'                                        |
+	  --- DOS --------------------------------------------------------
+	 | En ms-dos desde la 5.0, se puede usar doskey. Por ejemplo,     |
+	 | para abreviar la orden copy (que lleva dos parametros)         |
+	 | pondremos :                                                    |
+	 |                 doskey cp=COPY $1 $2                           |
+	  --- VMS --------------------------------------------------------
+	 | Los alias cargados desde fichero tienen otra sintaxis :        |
+         |                 $&lt;newCom&gt;:==&lt;xcmd&gt;                 |
+	  ----------------------------------------------------------------
+
+       # ver --- uname -a --- ??? ---| query cplevel   |--
+				     | query cmslevel  |
+
+	 * Version del sistema operativo
+	   ( y otras informaciones sobre el mismo )
+
+	   - En CMS/CP, QUERY CPLEVEL y QUERY CMSLEVEL informan
+	     de la version del S.O.
+
+       # date --- time -u --- show daytime --- ???
+
+	 * Muestra la fecha y hora actual.
+
+       # leave &lt;hora min&gt; (ux)
+
+	 * si pones "leave 20 20" a las 8 y 15 minutos de la tarde
+	   (night in winter) sonara una alarma y saldra un aviso
+	   en pantalla cada minuto hasta las 8 y 20 minutos
+	   (como un despertador, pero para irse a casa a dormir)
+
+       # echo &lt;msg&gt; --- echo &lt;msg&gt; --- ??? --- ???
+
+	 * Escribe su argumento (una cadena de caracteres que puede
+	   contener el espacio en blanco) por la salida estandar.
+	   En dos, al ejecutar "echo mensaje ack" se vera "mensaje ack"
+
+       # ??? --- stty &lt;sec&gt; &lt;sec-cont&gt; --- ??? ÷÷÷ SET PFn IMMED comando
+
+         * Permite asociar una secuencia de control (&lt;sec-cont&gt;)
+	   cualquiera, a una funcion (caso Unix), o bien
+	   definir una funcion cualquiera para una tecla de
+	   funcion (caso CMS-CP)
+	 * En Unix, los caracteres (y secuencias de control) por
+	   defecto asociados a una serie de "funciones" del sistema
+	   operativo varian de un sistema a otro. con stty puedes
+	   cambiarlas.
+	   El nuevo valor se puede dar :
+	      - Con acento circunflejo : `^c'
+	      - Como entero, empezando con :
+		 `0x' si es hexadecimal
+		 `0'  si es octal
+	      - `^-' o `undef' desactiva los caracteres asociados.
+	   La funciones que se pueden definir son :
+	      intr        --- Envia una senyal de interrupcion.
+	      quit        ---   "   la senyal de salir.
+	      erase       --- Borra el ultimo caracter escrito.
+	      kill        ---   "   la linea actual.
+	      eof         --- Envia final de fichero (final de entrada).
+	      eol         --- Final de linea.
+	      eol2 (np)   --- Caracter fin de linea alternativo.
+	      swtch (np)  --- Intercambio a otra capa de shell.
+	      start       --- Proseguir la salida despues de parar.
+	      stop        --- Para la salida.
+	      susp        --- Enviar senyal de parar.
+	      dsusp (np)  --- Envio de una senyal de parar terminal despues
+			      de limpiar la entrada.
+	      rprnt (np)  --- Reescribir la linea actual.
+	      werase (np) --- Borrar la ultima palabra escrita.
+	      lnext (np)  --- Introducir el siguiente caracter escrito
+			      literalmente, incluso si es un caracter
+			      especial.
+
+       # doskey --- set -o vi --- ver nota1 --- ver nota2
+
+	 * Con doskey se permite que todo comando metido anteriormente
+	   se pueda recuperar en DOS con solo pulsar FlechaArr o FlechaAbj
+	 * "set -o vi" funciona solo en algunos Unix con el ksh y creo que
+	   para recuperar los comandos hay que dar Contro-K-l y Control-K-p
+	   (???) En los que no funcione, y con suerte, podramos usar el
+	   shell tcsh, con lo que tenemos una especie de doskey.
+	 * NOTA1:
+	   en vms esta inicializada esta opcion por defecto. Con
+	   FlechaArr y FlechaAbj se recuperan los comandos.
+	 * NOTA2:
+	   en cms/cp basta con "definirse" dos teclas que hagan esa
+	   funcion;
+
+		SET PFn RETRIEVE BACKWARD
+		SET PFn RETRIEVE FORWARD
+
+		    PFn Corresponde con una tecla de funcion, donde
+			n es el numero de dicha tecla.
+
+	   Con estos dos comandos puedes definir una tecla para recuperar
+	   los comandos introducidos anteriormente y no tener que volver
+	   a teclearlos.
+
+       # /usr/5bin/banner (ux)
+
+	 * Permite poner en "rotulo" la cadena de caracteres que se le
+	   pase como argumento
+
+       # calendar (ux)
+
+	 * Presenta el calendario de todos los meses hasta el final
+	   del presente anyo. Si se pone "calendar 95", presenta
+	   todos los meses del anyo 1995.
+
+       # bc (ux)
+
+	 * Calculadora !
+	   si estais en X-window, olvidaros y ejecutar xcalc
+	   ( la autentica , genuina calculadora )
+
+       # uniq &lt;fichero&gt; (ux)
+
+	 * Borra lineas identicas consecutivas de un fichero.
+
+       # smartdrv /C (dos) --- sync (ux)
+
+	 * Escribe el contenido de los bloques modificados que estan
+	   en la memoria cache o en buffers en su correspondientes
+	   posiciones en los ficheros del disco duro.
+</pre>
+
+
+
+<br><hr>
+</html>
+
+

@@ -1,0 +1,645 @@
+<html>
+<title>Sistemas Operativos</title>
+<!body background="backhelp.gif">
+<br><hr>
+<h1><p align=center>Sistema operativo D.O.S.</p></h1>
+<hr><br>
+
+
+<pre>
+<ol>
+
+<!#########################################################################>
+<a name="n_comenzando"><h1><p align=left><li>Comenzando</p></h1></a>
+
+<p>
+<a name="n_informacion"><h2>A.-Informacion de Recursos disponibles</h2></a>
+  Gran parte de los D.O.S. esta pensado para ser monousuario, monotarea.
+  ( aunque hay excepciones, como por ejemplo el 'tsx-lite' )
+
+  Por ello listar los recursos del sistema es listar los recursos del usuario.
+
+
+    <h3>A.1.-Informacion sobre disco</h3>
+    Para listar el espacio total+libre de una unidad de disco,
+    NO tenemos comandos especificos;
+
+    # chkdsk &lt;unidad disco&gt;
+
+      * Con la primera parte del comando 'chkdsk' tendremos la
+        informacion del la unidad que se le pase como parametro.
+
+    # dir &lt;unidad disco&gt; /v
+
+      * Pero tambien tenemos para ver el espacio libre+ocupado
+        con el comando 'dir', al final del listado que saque.
+
+[chkdsk]
+&gt;
+&gt;   C:\&gt;chkdsk c:
+&gt;
+&gt;   El volumen PRINCIPAL   se cre¢ el 01-25-1996 10:34
+&gt;   El n£mero de serie del volumen es FFFF-FFFF
+&gt;
+&gt;     106,299,392 bytes de espacio total en disco
+&gt;       3,194,880 bytes en 49 archivo(s) oculto(s)
+&gt;         679,936 bytes en 82 directorio(s)
+&gt;      66,199,552 bytes en 1,282 archivo(s) de usuario
+&gt;      36,225,024 bytes disponibles en disco
+&gt;   
+&gt;           8,192 bytes en cada unidad de asignaci¢n
+&gt;          13,960 total de unidades de asignaci¢n en el disco
+&gt;           5,406 unidades de asignaci¢n disponibles en disco
+&gt;
+&gt;         655,360 bytes de memoria total
+&gt;         594,480 bytes libres
+&gt;
+
+
+    <h3>A.2.-Informacion sobre Memoria</h3>
+
+    # chkdsk &lt;cualquier unidad de disco&gt;
+
+      * Usar el comando 'chkdsk', y fijarnos en la ultima
+        informacion que nos presenta (que corresponde al total/usado
+        de la memoria base)
+
+    # mem
+
+      * Lista en detalle la memoria usada/libre, para cada tipo
+        de memoria (convencional, superior...)
+
+[mem]
+&gt;
+&gt;   C:\&gt;mem 
+&gt;
+&gt;   Tipo de memoria    Total       Usada      Libre
+&gt;   ----------------  --------   --------   --------
+&gt;   Convencional          640K        60K       580K
+&gt;   Superior                0K         0K         0K
+&gt;   Reservada             384K       384K         0K
+&gt;   Extendida (XMS)     2,072K       176K     1,896K
+&gt;   ----------------  --------   --------   --------
+&gt;   Memoria total       3,096K       620K     2,476K
+&gt;   
+&gt;   Total por debajo      640K        60K       580K
+&gt;
+&gt;   ................................................
+&gt;
+
+
+<p>
+<a name="n_optener"><h2>B.-Optener Ayuda</h2></a>
+  La tradicion (por suerte a extingir), es consultar el manual a cada
+  instante. Gracias a unos 'maravillosos numerajos', se va a la lista
+  de codigos de error y se busca el error que nos salio.
+
+  Ahora se usan mensajes de error mas amigable y la ayuda en contexto
+  es profusa. (sale un tipo de ayuda segun en que parte del programa
+  estemos)
+
+  Tenemos 3 formas de consegir la ayuda referente a cualquier
+  comando/programa :
+
+
+    # &lt;comando&gt; /?
+
+      * escribir '/?' despues del nombre del programa, y dar enter.
+      * Presenta las opciones mas importantes.
+
+    # help &lt;comando/programa a consultar&gt;
+
+      * usar el programa 'help' seguido del item a consultar.
+      * Particularidades :
+       --- MSDOS ----------------------------------------------------
+      | - el comando help usa el entorno del editor y                |
+      |   el programa qbasic.                                        |
+      | - existe a partir de la version 6.0                          |
+       --------------------------------------------------------------
+
+    # fasthelp &lt;comando/programa a consultar&gt;
+
+      * Para una ayuda muy resumida, (de solo una linea!)
+        usaremos el comando 'fasthelp'.
+      * Particularidades :
+       --- MSDOS ----------------------------------------------------
+      | - 'fasthelp' existe apartir de la version 6.0                |
+      | - en la version 5.0, 'help' realiza esta funcion.            |
+       --------------------------------------------------------------
+
+
+
+<!#########################################################################>
+<a name="n_ejecucion"><h1><p align=left><li>Ejecucion de comandos</p></h1></a>
+
+<p>
+<a name="n_gestionprocesos"><h2>A.-Gestion de Procesos</h2></a>
+
+    # &lt;programa&gt;
+
+      * Para ejecutar un programa, solo hay que poner el nombre
+        y dar enter. El D.O.S. lo busca en el directorio actual
+        o en los directorios de la variable de entorno PATH.
+        Si no esta en ambos, habra que poner el nombre completo
+        del programa : path\nombre_prog
+
+    # [Unix95] ps
+
+      * Muestra la lista de procesos (tareas) con su corespondiente
+        numero asociado ( PID )
+
+    # [Unix95] kill &lt;numero&gt;
+
+      * Mata un proceso de la lista de procesos identificado
+        por su numero asociado ( PID )
+      * Para parar todos los proceso de golpe,
+        Control-Alt-Sup hace maravillas!
+        ( es conocido como el saludo de los tres dedos )
+
+    # [Win95] start &lt;prog_win95&gt;
+
+      * Lanza la ejecucion de 'prog_win95' en background.
+
+
+<p>
+<a name="n_interpretes"><h2>B.-Interpretes de comandos : 'shells'</h2></a>
+
+  El interprete de comandos es el programa que se encarga de
+  leer los comandos que pedimos a la maquina, y hacer lo nece-
+  sario para que se ejecuten.
+     
+    <h3>B.1.-'Shells' mas sencillos</h3></li>
+    # command.com
+
+      * Interprete de comandos por defecto.
+      * Hay que ir tecleando uno a uno los comandos/programas
+        que queramos que ejecute.
+
+    # dosshell.exe
+
+      * Programa con un entorno que facilita el manejo de todos los
+        comandos del D.O.S., tanto para ver el sistema de fichero,
+        como para modificarlo.
+
+
+    <h3>B.2.-Como personalizar el 'shell'</h3></li>
+    Tenemos dos formas de personalizar el shell :
+        
+        <h4><u>B.2.1-VARIABLES DE ENTORNO</u></h4></li>
+        Una variable de entorno es una cadena de caracteres que
+        hace referencia a otra cadena. Ejemplo, "saludo=hola",
+        saludo es la variable de entorno que usaremos para
+        referirnos a hola.
+        Veamos el uso con ejemplos de referencia :
+
+        # set &lt;&lt;d&gt;&gt;=&lt;&lt;c:\dos&gt;&gt;
+
+	  * Como se definen las variables de entorno ...
+
+        # set
+
+	  * ... como se ver las variables de entorno y su equivalencia ...
+
+        # dir %&lt;&lt;d&gt;&gt;%
+
+	  * ... y como se referencian ...
+
+        # set &lt;&lt;d&gt;&gt;=
+
+	  * ... y como se borran!.
+
+
+        <h4><u>B.2.2-FICHEROS DE CONFIGURACION</u></h4></li>
+        Seguramente, las modificaciones echas en el apartado
+        anterior querremos que sean permanentes, no tener que
+        teclearlas cada vez que arranquemos la cuenta. Como?,
+        escribiendo los comandos en un fichero llamado :
+
+        # autoexec.bat
+
+
+
+<!#########################################################################>
+<a name="n_sistema"><h1><p align=left><li>Sistema de Ficheros</p></h1></a>
+
+<p>
+<h2>A.-Navegando en los Directorios</h2>
+
+    # dir &lt;directorio&gt;
+        .  dir /v --&gt; informacion completa
+        .  dir /s --&gt; listado recursivo
+
+      * Lista los ficheros del directorio que se le pase como argumento
+        ( si no se usa argumentos, lista el directorio en que nos
+          encontremos en ese preciso momento )
+      * Particularidades :
+       --- MSDOS 5.0 -&gt; ------------------------------------------
+      | - 'dir /s'                                                   |
+      |   lista el contenido del directorio actual y sus             |
+      |   subdirectorios                                             |
+      |   ( atentos a la tecla de pausa! o a usar                    |
+      |     la opcion '/p' tambien )                                 |
+       --------------------------------------------------------------
+
+    # cd &lt;c&gt;
+        . cd \   ---&gt; ir a la raiz
+        . cd ..  ---&gt; ir al anterior
+
+      * Cambia de directorio.
+        Realmente, cambia el contenido de una variable del sistema
+        operativo en la cual guarda el directorio de trabajo, que es
+        aquel que el sistema usara cuando lo omitamos.
+      * Particularidades :
+       --- Novell ---------------------------------------------------
+      |  - 'cd ...' --- 'cd ..\..'                                   |
+      |  - 'cd &lt;servidor&gt;\&lt;volumen&gt;:&lt;directorio1\directorio2...&gt;' |
+      |     Permite pasar a un directorio de un servidor y volumen en concreto. |
+       --- MSDOS 7.0 -&gt; ------------------------------------------
+      | - Podemos usar :                                             |
+      |     . cd "Este es un directorio especial"                    |
+      |     . cd "Este es un directorio especial                     |
+      |   para acceder a un directorio por su nombre extendido,      |
+      |   o bien usar la nomenclatura tradicional                    |
+      |     . cd  Este~1                                             |
+      | - 'cd ....' --- 'cd ..\..\..'                                |
+      |                                                              |
+       --------------------------------------------------------------
+
+    # dir
+
+      * Ademas de listar los ficheros, al principio, indica cual
+        es el actual directorio de trabajo.
+        ( es decir, el listado de directorios a pasa para ir desde
+          la raiz al directorio donde estamos actualmente. )
+
+[dir]
+&gt;
+&gt;   A:\GRAPHC&gt;dir
+&gt;
+&gt;   El volumen de la unidad A es PRINCIPAL 
+&gt;   El numero de serie del volumen es FFFF-FFFF
+&gt;   Directorio de A:\GRAPHC 
+&gt;
+&gt;   .            &lt;DIR&gt;         11-12-94   5:45a
+&gt;   ..           &lt;DIR&gt;         11-12-94   5:45a
+&gt;   QPEG         &lt;DIR&gt;         11-12-94   3:32p
+&gt;   MPEG     EXE  /      18044 11-12-94   4:01p              \ 
+&gt;           /   /            \                                |
+&gt;          /  /  4 archivo(s) \       18044 bytes             |
+&gt;         |  |       |        |     1073216 bytes libres      |
+&gt;   |     |  |     numero     /                               |
+&gt;   |     |  |   ficheros    /           |                    |
+&gt;   |     |   \             /            |                    /
+&gt;   |     |     \          /             |                   /
+&gt;   |     |       \       |              |                  /
+&gt; nombre extension |  tama&ntilde     bytes ocupados       fecha y hora
+&gt;                  |              por los ficheros      de ultima
+&gt;         &lt;DIR&gt; si es directorio   y bytes libres     modificacion
+&gt;         nada si es un fichero
+&gt;
+
+
+<p>
+<h2>B.-Analizando Ficheros</h2>
+
+    # more &lt; &lt;fichero&gt;
+        . ctrl-c            ---&gt; salir
+        . cualquier tecla   ---&gt; siguiente pagina
+
+      * Visualiza el contenido de un fichero, parando cuando se
+        "llene" una pantalla y esperando a que el usuario presione
+        teclas para continuar, o no.
+      * Particularidades :      
+       --- MSDOS ----------------------------------------------------
+      | - tambien vale :                                             |
+      |   . 'type msdos | more'                                      |
+      |   . 'more &lt;fichero&gt;' (7.0 -&gt;)                       |
+       --- DRDOS ----------------------------------------------------
+      | - tambien vale :                                             |
+      |   . 'type &lt;f&gt; /p'                                      |
+       --------------------------------------------------------------
+
+    # type &lt;fichero&gt;
+
+      * Visualizacion fichero sin pausa.
+
+    # [Unix95] tail -&lt;numero&gt; &lt;f&gt;
+
+      * Visualiza las ultimas &lt;numero&gt; lineas del fichero &lt;f&gt;.
+
+    # [Unix95] head -&lt;numero&gt; &lt;f&gt;
+
+      * Visualiza las primeras &lt;numero&gt; lineas del fichero &lt;f&gt;.
+
+    # {fc/comp} &lt;fichero1&gt; &lt;fichero2&gt;
+
+      * Compara el contenido de dos ficheros e indica las
+        diferencias que encuentra.
+        Se recomienda usar :
+
+           FC   para ficheros ASCII y
+           COMP para binarios de identico tama&ntilde.
+
+    # [Unix95] wc -l &lt;fichero&gt;
+
+      * Cuenta el numero de caracteres, palabras y lineas
+        del fichero &lt;fichero&gt;.
+
+    # sort &lt;fichero&gt;
+
+      * Ordena items de un fichero.
+
+
+<p>
+<h2>C.-Busqueda de/en Ficheros</h2>
+
+    # find &lt;cadena&gt; &lt;fichero&gt;
+      [bc2.0->] grep &lt;expresion regular&gt; &lt;fichero&gt;
+
+      * Busca una cadena de caracteres en un fichero.
+
+    # dir &lt;nombre de fichero&gt; /s
+
+      * Usado para buscar donde se encuentra un fichero
+      * Particularidades :
+        - 'dir &lt;fichero&gt; /s' funciona en :
+          . ms-dos-&gt;5.0
+          . dr-dos-&gt;5.0
+          . pc-dos-&gt;5.0
+
+
+<p>
+<h2>D.-Facilidades en accesos a Ficheros</h2>
+
+  <u>1.- CAMINOS DE BUSQUEDA (PATH)</u>
+   - Se suele usar una variable de entorno especial que contiene
+     una lista de directorios donde buscar donde esta un fichero
+     ejecutable cuando solo le damos al interprete de comandos
+     el nombre del fichero binario, y no esta en el directorio
+     actual (primero en la busqueda).
+
+   - En general es algo asi:
+        PATH=c:\dos;c:\
+
+   - Por defecto, esta limitado a 128 caracteres, pero se puede cambiar;
+     Para ampliar a 512 caracteres, basta con editar el archivo
+     'config.sys' y a&ntilde;adir :
+        shell=c:\command.com /e:512
+
+
+<p>
+<h2>E.-Modificando el Sist. de Fich.</h2>
+
+  # md &lt;dir name&gt;
+    mkdir &lt;dir name&gt;
+
+    * Crea un directorio nuevo, hijo del actual, llamado &lt;dir name&gt;.
+
+  # rd &lt;dir name&gt;
+    rmdir &lt;dir name&gt;
+
+    * Borra el directorio &lt;dir name&gt;.
+    * '&lt;dir name&gt;' puede ser el path concatenado con
+      el nombre del directorio a borrar :
+
+            &gt; rd a:\doks\pp\direct
+            ( borra el directorio "direct", hijo de pp )
+
+  # del &lt;nombre fichero&gt;
+    erase &lt;nombre fichero&gt;
+
+    * Borra el fichero &lt;nombre fichero&gt;.
+    * Igual que al borrar directorios, &lt;nombre fichero&gt; puede
+      ser el path y nombre del fichero :
+
+             &gt; del a:\directo\fiche.dos
+             borra "fiche.dos", hijo del directorio "directo"
+
+    * Si no te deja borrar el s.o. , es que segun las proteccion,
+      no estas autorizado. Cambialas y luego intentalo de nuevo
+      (ver seccion protecciones)
+    * Es posible "desborrarlo" y recuperarlo con el comando 'undelete *.*',
+      si no se ha usado su espacio en disco para otro fichero.
+    * Particularidades :
+       --- Novell ---------------------------------------------------
+      | - 'purge' sirve para que los ficheros borrados NO se puedan  |
+      |   recuperar de ninguna forma (si no eres supervisor, claro!) |
+       --------------------------------------------------------------
+
+  # copy &lt;nombre fichero origengt; &lt;nombre fichero destinogt;
+
+    * Copia un fichero :
+      crea otro fichero que tendra el mismo contenido que el original.
+      Si se omite el nombre de fichero destino, y solo se indica el
+      directorio donde colocarlo, se usara el mismo nombre que el
+      que tiene el fichero origen.
+
+  # ren     &lt;nombre&gt; &lt;nuevo nombre&gt;
+    rename  &lt;nombre&gt; &lt;nuevo nombre&gt;
+    move    &lt;nombre&gt; &lt;nuevo nombre&gt;
+
+    * Cambia de nombre un fichero.
+      'move' puede cambiar tambien el nombre de un directorio.
+    * Particularidades :
+       --- MSDOS 7.0 -&gt; ---------------------------------------------
+      | - ren/rename tambien cambia el nombre de directorios         |
+       --------------------------------------------------------------
+
+  # move &lt;path\fichero&gt; &lt;nuevo_path\fichero&gt;
+
+    * Cambia la ubicacion de un fichero.
+      (lo traslada a otro directorio borrandolo de su posicion original)
+      Puede cambiar, ademas, el nombre del fichero.
+      Ciertas versiones, pueden cambiar la ubicacion de un directorio.
+    * En los sistemas que no lo implementa se puede simular con la
+      secuencia "rename+delete" o "copy+delete".
+    * Particularidades :
+      - aparece a partir de las siguientes versiones :
+        . MSDOS 6.0  -&gt;
+        . DRDOS 5.0  -&gt;
+        . PCDOS 6.1? -&gt;
+
+  # [Unix95] touch -t MMDDhhmm &lt;fichero&gt;
+
+    * Cambia SOLO la fecha de un fichero;
+      La fecha de ultima modificacion del fichero sera 'MMDDhhmm'.
+      'MMDDhhmm' es el mes-dia-hora-minuto en numeros y juntos.
+
+  # copy con &lt;f&gt;
+
+    * Edita linea a linea (sin retroceso) un fichero.
+      Para terminar, teclear el final de fichero con Ctrl-Z 
+
+  # { edlin | edit | ... &lt;fichero&gt; }
+
+    * Edita un fichero. ( permite cambiar el contenido de un
+      fichero, normalmente de texto, claro. )
+    * Hay muchos editores, que no pertenecen al sistema operativo
+      base, pero son mas potentes y versatiles.
+    * Particularidades :     
+      - el nombre del editor depende del D.O.S. :
+        . 'edit' ----- MSDOS 5.0-&gt;
+        . 'editor' --- DRDOS (castellano) 5.0-&gt;
+
+  # [Unix95] cut -b &lt;bytes&gt; &lt;fichero&gt;
+
+    * Crea los ficheros que necesite, resultado de partir el
+      fichero de entrada &lt;fichero&gt; en ficheros de &lt;bytes&gt; bytes
+      de tama&ntildeo.
+
+  # copy &lt;a&gt; + &lt;b&gt;
+
+    * Concatena el fichero &lt;b&gt; al final del &lt;a&gt;.
+
+
+<p>
+<h2>F.-Atributos</h2>
+
+  <h3><u>F.1.-Como interpretar los flags</u></h3>
+
+[attrib]
+&gt;
+&gt;  C:\&gt;attrib
+&gt;    rash   A:\JAMON\YORK
+&gt;   \---/
+&gt;     |
+&gt;      -- lectura, modificado, sistema, oculto.
+
+
+  <h3><u>F.2.-Uso atributos</u></h3>
+
+  # attrib &lt;fichero&gt;
+    [MSDOS 7.0] dir /v
+
+    * Permite ver los "flags" actuales de cada ficheros.
+      Si se omite &lt;fichero&gt;, presenta el listado de todos.
+    * En 'dir /v', nos fijaremos en la primera columna de la derecha.
+
+  # attrib {+r|-r}{+s|-s}{+h|-h}{+a|-a} &lt;fichero&gt;
+
+    * Cambia los "flags".
+      '+' significa activar y '-' desactivar.
+      Si se omite un flag, su valor no se altera.
+
+
+
+<!#########################################################################>
+<a name="n_manejo"><h1><p align=left><li>Manejo de Dispositivos</p></h1></a>
+
+
+<p>
+<h2>A.-Discos</h2>
+
+    <h3><u>A.1.-Acceso a disco</u></h3>
+    Se consideran 'unidad de discos' a los dispositivos fisicos
+    de acceso directo ( floppy, disco duro, cd-rom, ... ) y a las
+    particiones logicas que sobre ellos se realizen.
+    Cada uno se distingue con una letra del abecedario, seguido de ':'
+    Las asignaciones por defecto mas frecuentes :
+      - 'a:' para el floppy de la 1a disquetera.
+      - 'c:' primer disco duro.
+      - 'f:' primera unidad de red ...
+
+    # &lt;letra&gt;:
+
+      * Permiten cambiar al disco identificado por la letra del abecedario
+        'letra', y acceder a su informacion.
+
+    # join
+
+      * Une una unidad de disco a un directorio en otra unidad.
+        De esa forma, cambiando a ese directorio podemos ver el
+        contenido de la unidad. :
+
+           join a: c:\floppya
+           ( cada vez que pongas c: y cd floppya es como si
+             hubieras puesto a: )
+
+      * '&lt;a:&gt;'
+         equivale a :
+         'join &lt;a:&gt; &lt;c:\a&gt;' + 'cd \a'
+
+    # subst &lt;unidad_virtual:&gt; &lt;unidad:\path\directorio&gt;
+
+      * Asocia una ruta ( un path, un directorio con su camino
+        de aceso completo ) a una unidad 'virtual' :
+
+           subst w: c:\dos\tmp
+           ( cada vez que pongas w:, es como cd c:\dos\tmp )
+
+    # subst
+
+      * Lista todas las asociaciones echas con 'subst'
+
+    # subst &lt;unidad_virtual&gt;: /d
+
+      * Borra una asocia echa anteriormente.
+
+
+    <h3><u>A.2.-Manejo de discos</u></h3>
+
+    # diskcopy &lt;unidad_origen&gt;: &lt;unidad_destino&gt;:
+
+      * Permite duplicar un Floppy.
+        La unidad destino NO necesita estar formateada.
+
+
+    # format &lt;unidad&gt;:
+
+      * Graba informacion de control necesaria para que D.O.S. pueda
+        manejar el disco. Indispensable antes de usar por
+        primera vez.
+
+
+<p>
+<h2>B.-Impresion</h2>
+
+  # print &lt;fichero(s)&gt; /d:&lt;puerto&gt;
+
+    * Envian un o varios ficheros a la impresora que este conecta
+      al puerto &lt;puerto&gt; (LPT1,...,COM!,...)
+      ( si se esta imprimiendo alguno, pasa a una cola de espera )
+    * Particularidades :
+       --- Novell ---------------------------------------------------
+      | - poner 'nprint &lt;f&gt;' para imprimir.                    |
+       --------------------------------------------------------------
+
+  # print
+
+    * Permite visualizar la cola de impresion
+      ( ficheros a espera de ser imprimidos por la impresora )
+    * Particularidades :
+       --- Novell ---------------------------------------------------
+      | - poner 'npq' para ver la cola asociada a la impresora.      |
+       --------------------------------------------------------------
+
+  # print &lt;fichero(s)&gt; /C
+
+      * Borra uno o mas trabajos de la cola de impresion
+
+
+<p>
+<h2>C.-Terminales</h2>
+
+  # tecla(pausa)
+
+    * Detiene la salida en pantalla de un proceso (para leer,
+      por ejemplo)
+
+  # tecla(return)
+
+    * Continua la salida en pantalla.
+
+  # cls
+
+    * Borra la pantalla y situa el cursor en la esquina
+      superior izquierda.
+
+<!#########################################################################>
+
+</pre>
+</ol>
+
+
+<hr><br>
+</html>

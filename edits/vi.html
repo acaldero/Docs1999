@@ -1,0 +1,298 @@
+<html>
+<title>Sistemas Operativos</title>
+<!body background="backhelp.gif">
+<br><hr>
+<h1><p align=center>Vi (Unix)</p></h1>
+<hr><br>
+
+
+<pre>
+<ol>
+
+<!#########################################################################>
+<a name="n_caracteristicas"><h1><p align=left><li>CARACTERISTICAS GENERALES</p></h1></a>
+
+     Como parametro, se pasa el nombre del fichero a editar; si no existe,
+  se crear vacio
+
+  Los parametros mas usados son :
+  - vi -r <fichero a recuperar>
+    Hay veces que por accidente, 'muere' el vi mientras se estaba editando.
+    Para volver a editar un fichero tal y como estaba en el momento
+    de morir el vi, se usa esta opcion.
+  - vi -m <fichero de errores>
+    Solo existe en algunas implementaciones!!!.
+    Sirve para, en el fichero fuente de un lenguaje de programacion, saltar
+    de un error al anterior o al siguente.
+    Ejemplo en LINUX :
+
+         sh -c "make 2>err.txt"
+         vi -m err.txt
+
+
+  El vi tiene 3 modos de funcionamiento :
+  -Edicion (input mode)     --- En el que escribimos texto
+  -Automatico (visual mode) --- Para moverse sobre el texto,  buscar, etc.
+                                ( ademas, es el "modo puente" entre los otros dos )
+  -Linea (colon mode)       --- el modo en el cual se indica al editor los comandos
+                                de edicion especiales que no se pueden meter en modo
+                                automatico
+
+  Para entender estos dos ultimos modos, acordaros del entorno del "Borland C++"
+  o del "TopSpeed", que cuando estais editando y quereis alguna funcion, dais
+  a Alt-? (Alt-F --> opciones de fichero, por ejemplo). Para simular las
+  funciones que estan en los menus del BC o TS, aqui :
+   1) pasaremos a modo automatico...
+      (se da tecla ESC que normalmente es la F11 o "Control-c")
+   2) pasamos al modo linea...
+      (tecleamos el caracter ":",
+       gran parte de las funciones se ejecutan aqui)
+   3) las funciones se escriben entonces y dando a enter se ejecutan. 
+
+
+          M.Edit                  M.Auto                  M.Line
+          ------   F11/Esc/C-c    ------        :         ------
+         |      |   --------->   |      |   ---------->  |      |
+         |      |   <--------    |      |   <---------   |      |
+          ------     a,i,...      ------      F11/Esc     ------
+                     (funciones
+                      creacion
+                      de texto)
+
+
+     <u> Vi (VMS) </u>
+     Este es una adaptacion del editor de Unix VI a VMS, esta escrito
+  con el TPU y en algunas ocasiones puede no funcionar muy correctamente,
+  sobre todo si se define como editor a utilizar por otras aplicaciones
+  (EAN, NEWSRDR), si alguien se anima a usarlo, cuidado.
+
+  Tiene 2 modos de funcionamiento :
+     modo comando ---> cada letra (mayuscula y/o minuscula) tiene una
+                       accion definida.
+                       hay comandos que tienen mas de una letra,
+                       que se precede de ":". (cmds de linea)!
+     modo insercion -> todo lo que se teclee se incorpora al fichero
+                       que se este editando.
+
+  Los comandos de paso :
+
+			 tecla F11 (esc)
+			<----------------
+	       comando                    insercion
+			---------------->
+			     i,a,o...
+
+
+
+<!#########################################################################>
+<a name="n_funcionalidades"><h1><p align=left><li>FUNCIONES MAS USUALES</p></h1></a>
+<ul> 
+     <a name="n_fquit"><li>Funciones salir</li></a>
+
+      - vi ---------------------------
+     |
+     |  desde modo linea
+     |     :q  -- sale si el fichero no ha sido modificado 
+     |     :q! -- sale sin salvar 
+     |     :x  -- sale salvando las modificaciones 
+     |     :w  -- salva sin salir 
+     |     :n  -- sale del documento actual y pasa al siguiente.
+     |            usado cuando se llama al vi de esta forma:
+     |              'vi hlp*' 
+     |
+      ---------------------------------
+
+     <a name="n_fmove"><li>Funciones de Movimiento en el texto</li></a>
+     <ul>
+        <a name="n_fmoveinpan"><li>movimientos dentro de la pantalla</li></a>
+
+          - vi ---------------------------
+         |
+         |          --&gt; primera linea pantalla
+         |      H |
+         |         ...
+         |                         b    w
+         |         --&gt;             --   --               [linea i-1]
+         |      j |               |  | |  |
+         |          -- word1 w-2  w  xxx  w  w-3  word4  [linea i  ]
+         |      k |     ^         ^  |||  ^         ^
+         |         --&gt;  |         |  |||  |         |    [linea i+1]
+         |              |          -- | --          |
+         |              |         c-H |  L          |
+         |              |             |             |
+         |               ------------- -------------
+         |               O(first word) $(last word)
+         |         ...
+         |      M |--&gt; mitad pantalla
+         |
+         |      L |
+         |         --&gt; ultima linea pantalla
+         |
+          - vi (Vms) ----------------------
+         |
+         |      "$" va a final de linea
+         |      "^" va a principio de linea
+         |
+          ---------------------------------
+          
+         <a name="n_fmovebtpan"><li>movimiento entre pantallas</li></a>
+
+          - vi ---------------------------
+         |
+         |     Ctrl-B ---       Pagina hacia atras
+         |     Ctrl-F ---          "     "   delante
+         |     Ctrl-U --- media    "     "   atras
+         |     Ctrl-D ---   "      "     "   delante
+         |     nG     --- n linea fichero
+         |     Ctrl-G --- da la posicion del fichero
+         |
+          ---------------------------------
+     </ul>
+
+     <a name="n_ffile" ><li>Funciones gestion ficheros</li></a>
+
+      - vi ---------------------------
+     |
+     |   desde modo automatico
+     |     ZZ ( salva la copia que vemos en pantalla con el
+     |               nombre del fichero )
+     |   desde modo linea
+     |     :w  --- salva todo sin salir
+     |     :write &lt;fichero&gt; --- escribe todo en &lt;fichero&gt;
+     |     :n  --- sale del documento actual y pasa al siguiente.
+     |             usado cuando se llama al vi de esta forma:
+     |             'vi hlp-*'
+     |
+      -------------------------
+
+     <a name="n_ffind" ><li>Funciones busqueda en texto</li></a>
+
+      - vi ---------------------------
+     |
+     |     ?         --- busqueda hacia atras
+     |     /&lt;texto&gt;  ---     "      "   delante
+     |     //        --- repite la ultima busqueda
+     |     n         ---    "   "  busqueda
+     |     N         --- invierte el sentido de la busqueda
+     |
+      - vi (Vms) ---------------------
+     |
+     |     /&lt;texto&gt; ---  "   "   delante
+     |     n        ---  "   "  busqueda
+     |
+      --------------------------------
+
+     <a name="n_fxch"  ><li>Funciones reemplazamiento en texto</li></a>
+
+      - vi ---------------------------
+     |
+     |     R --- reemplaza texto hasta que se pulse la
+     |           tecla ESC.
+     |
+      --------------------------------
+
+     <a name="n_fins"  ><li>Funciones insertado y borrado (y desborrado)</li></a>
+
+      - vi ---------------------------
+     |
+     |     a --- aniade despues cursor
+     |     A ---    "   final linea
+     |     i --- inserta antes cursor
+     |     I ---    "    final linea
+     |     o --- abre linea encima de la actual
+     |     O ---  "     "   debajo  "  "   "
+     |
+     |      x,X --- borra un caracter
+     |      dd  ---   "   una linea
+     |      r   --- reemplaza un caracter
+     |      w,W ---   "   una palabra
+     |      D   ---   "   texto hasta final de linea
+     |
+     |      cyy --- copia una linea   al buffer c
+     |      cyw ---   "    "  palabra "    "    "
+     |      cp  ---   "   el buffer c despues del cursor
+     |      cP  ---   "    "    "   " antes    "    "
+     |
+     |      .   --- repite la ultima modificacion
+     |
+     |      Desborrado:
+     |      u   --- 'desace' el ultimo cambio (ultimo comando aplicado).
+     |      p   --- inserta en la posicion actual del cursor,
+     |              la porcion de texto borrada con :
+     |              &lt;# veces&gt; &lt;comando a ejecutar ese # veces&gt;
+     |
+      - vi  (Vms) --------------------
+     |
+     |      "o"  Inserta una linea despues del cursor
+     |      "O"  Inserta una linea antes del cursor
+     |      "i"  permite insertar en la posicion del cursor
+     |      "a"  permite insertar en el caracter siguiente al del cursor
+     |      "I"  permite insertar al principio de la linea actual
+     |      "A"  permite insertar al final de la linea
+     |      "x"  borrar caracter actual.
+     |      "dd" borra una palabra
+     |      "dw" borra una palabra
+     |      "D"  borra hasta final de linea
+     |
+     |      Desborrado:
+     |      "u" deshace el ultimo comando
+     |      "P" Paste en la posicion del cursor
+     |
+      --------------------------------
+
+     <a name="n_frdraw"><li>Funcion refresco de pantalla</li></a>
+
+      - vi ---------------------------
+     |
+     |       desde el modo automatico
+     |
+     |         Ctrl-L   --- reescribe la pantalla
+     |
+      --------------------------------
+
+     <a name="n_fhelp" ><li>Funcion peticion de ayuda</li></a>
+
+      - vi ---------------------------
+     |
+     |     en el shell :
+     |
+     |       man vi
+     |
+      - vi (Vms) ---------------------
+     |
+     |     modo linea :
+     |
+     |       help
+     |
+     |     documentacion de la implementacion --&gt; SYS$UTIL:[VI.DOC]VI.MEM
+     |     tutorial                           --&gt; SYS$UTIL:[VI.DOC]TUTOR.MEM
+     |
+      --------------------------------
+
+     <a name="n_fmore" ><li>Otras Funciones...</li></a>
+
+      - vi ---------------------------
+     |
+     |  desde el modo linea
+     |
+     |     :read &lt;fichero&gt;      --- incluye un fichero
+     |     :set number          --- muestra los numeros de linea
+     |     :set opciones        --- pone nuevas opciones
+     |     :&lt;rango subs/ texto&gt; --- sustituye texto
+     |     :!&lt;comando&gt;          --- Ejecuta el comando &lt;comando&gt;. Si no
+     |                              se le indica comando alguno, lanza un
+     |                              shell.
+     |
+      --------------------------------
+
+</ul> 
+
+
+<!#########################################################################>
+
+</pre>
+</ol>
+
+
+<hr><br>
+</html>

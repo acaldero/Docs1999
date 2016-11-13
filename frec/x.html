@@ -1,0 +1,184 @@
+<html>
+<title>Resumenes</title>
+<!body background="backhelp.gif">
+<br><hr>
+<h1><p align=center>X</p></h1>
+<hr><br>
+
+
+
+<br>
+<a><h2>X-Windows</h2> </a>
+<p><pre>
+       Destacar 4 puntos :
+	 - En principio este apartado esta dedicado a Unix y Windows.
+	   Los "clientes" de Windows perteneceran a la version
+	   Windows 3.1
+	 - Esta seccion se divide en dos partes :
+	     - que hacer para inicializar ....
+	     - que programas puedo ejecutar en X.
+	 - Los ficheros de configuracion X estan en el apartado de
+	   ficheros especiales.
+	 - Este apartado pretende dar un vistazo general Y toda aquella
+	   idea que sea dificil encontrar con un "man ..."
+
+
+       7.1.- Como arrancar ...
+       -----------------------
+
+	 Arranca tu cuenta desde un terminal grafico;
+	 puede pasar 2 cosas :
+
+	    a.- Que veas una ventana grafica que te pide el login y
+		password;
+		el root de tu maquina a configurado el xdm
+		(administrador de X) y no tienes que hacer nada.
+		En el fichero .xsession especificaras los programas
+		que arrancaran cuando entres en tu cuenta ( ver seccion
+		ficheros especiales )
+	    b.- en una ventana te aparece el login y pass, como los de
+		modo texto;
+		cuando hayas entrado, pon :
+
+                     finger &lt;tu numero de cuenta&gt;
+
+		apunta en que display estas (gnomo2.fi... ,
+		gnomo3.fi... , etc ) y segun el shell que uses pon :
+
+		     ksh     >>>    set DISPLAY=gnomo2.fi.upm.es:0.0
+				    EXPORT DISPLAY
+		     tcsh , csh >>> setenv DISPLAY gnomo2.fi.upm.es:0.0
+
+		logicamente, sustituye gnomo2 por el nombre de tu
+		display que conseguiste con finger.
+		Con ello, el servidor X sabra a donde mandar lo que
+		le pidan los clientes. Ahora puede hacer dos cosas :
+
+		     A.- Arrancar los programas clientes uno a uno.
+		     B.- Tener un fichero .xinitrc con los clientes
+			 que queremos que se ejecuten, y poner "xinit"
+
+
+       7.2.- Programas X (clientes X)
+       ------------------------------
+
+	  Para arrancar la mayoria de los clientes desde la ventana
+	 de login ( la ventana que tiene el shell inicial ) y que
+	 podais seguir trabajando, necesitareis "lanzanlos"
+	 ( ejecutarlos ) en background, es decir que le pongais el
+	 "&" al final. Todo aquel que lo pueda llevar, lo tendra
+	 en este resumen.
+	  Todos los clientes tiene algun parametro. Para mas informacion
+         usar "man &lt;cliente x&gt;".
+
+	   # { mwm & / tmw & / gwm & / ... } (ux)
+
+	     * Lo primeros que NECESITARAS sera un gestor de ventanas.
+	       Al arrancarlo desde la ventana de arranque, aparecera un
+	       borde a todas tus ventanas ese borde te permitira cambiar
+	       de tamano tus ventanas minimizarla, ...
+	     * En muchos gestores, manteniendo apretada la tecla "control"
+	       y un boton del raton ( la primera vez tarda un poco ) sale
+	       un menu, uno por cada boton del raton.
+	       En ellos se elige desde el tipo de letra, si queremos
+	       la "scrollbar" ...
+	       En algunos (TWM) dando al boton izquierdo ( izquierdo para
+	       la configuracion diestra, derecho para la zurda ) y
+	       arrastrando a la vez el raton, POR un lugar de la pantalla
+	       donde NO haya ventanas, sale un menu que permite matar
+	       proceso, reconfigura ...
+	     * El mwm es el gestor motif (Motif Windows Manager)
+	       ( este gestor lo puedes arrancar sin tener que hacer nada de
+		 los pasos del apartado anterior si estas en un terminal
+		 Textronix; das al boton configuracion que esta donde la
+		 pausa en el teclado PC y esperas.
+		 Aparecera un ventana con un monton de opciones.
+		 Bajas los menus hasta que te encuentres con uno que
+		 tenga como opcion "motif" y seleccionalo. Espera y
+		 veras como arranca un motif interesante )
+		 como en el tema de cual es mejor procesador de texto o
+		 cual es el mejor sistema operativo, si Window95 o
+		 OS/2 Wrap, cada uno tiene su propia opinion. Por
+		 ello PROBAR todos los que esten en vuestra maquina y
+		 decirdir vosotros. Encontrares cosas buena y malas a todo
+		 pero la valoracion que hagais en conjunto dependera de
+		 cada persona, y por lo tanto la decision que tomeis.
+
+	   # clock (win) --- xclock -{analogic/digital} & (ux)
+
+	     * Programa que visualiza un relog en la pantalla indicando
+	       la hora ( hora del sistema ).
+	       Vital en nuestra facultad, si no queremos perder el bus
+	     * Exite otro llamado "oclock" (Unix). Es interesante que
+	       probeis ambos ( si esta el ejecutable en vuestra maquina )
+
+	   # xterm & (ux)
+
+	     * Se abre una ventana donde se ejecuta un shell!
+	       Permite trabajar con muchos shells y en cada uno
+	       lanzar clientes X o procesos normales.
+
+	   # write (win) --- xedit & (ux)
+
+	     * Es el editor en entorno grafico.
+	     * En Unix, xedit es un editor parecido al vi en algunos
+	       comandos, pero con menus y muy intuitivo.
+
+	   # sysmon (win) --- xload & (ux)
+
+	     * Sale un grafico en una ventana, parecido a una montanyita
+	       que se eleva si el sistema operativo esta realizando
+	       cada vez mas esfuezo y disminuye si el sistema esta
+	       ocioso ( lo de ocioso lo he sacado de procesos y
+	       redes, no me pegueis )
+
+	   # xtetris & (ux)
+
+	     * Programa de dificil definicion por ser tan restringido
+	       su uso!.
+
+	   # xrn & (ux)
+
+	     * El lector de news ( Read News ) pero en x facil y sencillo
+	       de manejar ( cuando entiendes todos los menus, cosa no muy
+	       dificil, aunque si pesada solo la primera vez ). Obligado
+	       usarlo si estais en un terminal grafico, lo agradecereis.
+
+           # xwd &lt;par...&gt; (ux)
+
+	     * El "X window Dumper" permite guardar la imagen de
+	       una ventana en un fichero, normalmente en un formato
+	       que pueden reconocer otros programas que manejan
+	       esas imagenes (editores texto, editores graficos ...)
+
+           # xset &lt;par...&gt; (ux)
+
+	     * Programa que configura un monton de cosas del
+	       entorno.
+
+           # xsetroot &lt;par...&gt; (ux)
+
+	     * Programa que permite configurar el tapiz, es decir, la
+	       parte de la pantalla que no pertenece a ninguna ventana.
+	       Ya sabemos que se puede poner "imagenes" ( ENTIENDASE lo
+	       que INDIRECTAMENTE quiero decir ) como fondo. Por favor,
+	       no jugeis el fondo que no sea vuestro ( y la persona que
+	       este no la conozcais y este currando). Sienta tan mal como
+	       cuando te vuelcan un fichero en tu terminal vt-xxx ( y si
+	       se quejan y os pillan teneis un muy buen castigo! para
+	       ambas cosas )
+
+	   # winhelp (win) --- xman & (ux)
+
+	     * La ayuda.
+
+	   # calc (win) --- xcalc & (ux)
+
+	     * La calculadora.
+</pre>
+
+
+<br><hr>
+</htmll>
+
+

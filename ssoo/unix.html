@@ -1,0 +1,851 @@
+<html>
+<title>Sistemas Operativos</title>
+<!body background="backhelp.gif">
+<br><hr>
+<h1><p align=center>Sistema operativo Unix</p></h1>
+<hr><br>
+
+
+<pre>
+<ol>
+
+<!#########################################################################>
+<a name="n_comenzando"><h1><p align=left><li>Comenzando</p></h1></a>
+
+<p>
+<a name="n_entrarysalir"><h2>A.-Entrar y Salir de la Cuenta</h2></a>
+
+  # login
+
+    * Comandos que nos permiten entrar en nuestra cuenta
+
+  # passwd
+
+    * Permite cambiar la contrase&ntilde;a de entrada
+
+[passwd]
+>          Batman:a999999# passwd
+>          Changing password for a999999
+>          Enter old password:
+>          Enter new password:
+>          Re-type new password:
+>          Password changed.
+
+    * El programa te pedira tu antigua password (comprueba que eres tu)
+      y tambien te pedira la nueva 2 veces. Si te confundes, presiona
+      la tecla control y la letra 'c' a la vez, y vuelve a ejecutar.
+
+  # exit
+    logout
+
+    * Permite salir de la cuenta.
+    * Usando el comando 'exit', puede indicarte que no saldras
+      de la cuenta por que queda tareas tareas pendientes.
+      Pon otra vez 'exit' y saldras. (En la mayoria de los Unix)
+    * Tambien se sale con Control-D, solo en algunos shells.
+
+
+<p>
+<a name="n_informacion"><h2>B.-Informacion de Recursos disponibles</h2></a>
+
+  # quota -v
+                           
+    * Lista la cantidad de recurso asignado a ti y la cantidad
+      ocupado (tiempo, Disco, ...)
+
+[quota]
+>          Batman:a999999# quota -v
+>	   Disk quotas for a999999 (uid 999):
+>	   Filesystem usage quota limit timeleft  files quota limit timeleft
+>	   /u           683   950  1000              80    95   100
+
+    * A partir de los 1000 no te deja meter nada, y tendras el tiempo
+      indicado por timeleft para quitar los (limit-quota) que sobran
+
+  # df
+
+    * Lista el espacio total+libre de cada una de las unidades.
+
+  # du
+
+    * Lista el espacio que ocupa los fichero en el directorio
+      actual y subdirectorios de este.
+
+
+<p>
+<a name="n_optener"><h2>C.-Optener Ayuda</h2></a>
+
+  # &lt;comando&gt; --h
+
+    * Cada vez se usa mas un nuevo estandar, reservar '--h'
+      para la ayuda.
+
+  # man &lt;comando&gt;
+
+    * Presenta informa sobre el comando que se le indique.
+      ( sintaxis, para que sirve y un monton de cosas mas... )
+    * Permite la opcion de usar parametros y manejar
+      comandos internos :
+      - al llamarlo :
+        . man list          ---> lista los comandos de unix por orden
+                                 alfabetico de los que man tiene ayuda.
+        . man -a &lt;cmd&gt; --> presenta toda la informacion que tenga
+                                 el mismo nombre que &lt;cmd&gt;.
+                                 Conforme se sale de la primera ayuda,
+                                 se entra en la siguiente relacionada.
+        . man -k &lt;cmd&gt; --> lista toda los comandos relacionados
+                                 con &lt;cmd&gt; pero no presenta la ayuda
+                                 de cada uno, como si lo hace la
+                                 opcion -a.
+      - dentro de man :
+        . 'h'      ---> lista de todas las funciones que hay
+                        dentro de man.
+        . 'q'      ---> sale del man.
+        . ' '      ---> siguiente pantalla
+
+
+
+<!#########################################################################>
+<a name="n_ejecucion"><h1><p align=left><li>Ejecucion de comandos</p></h1></a>
+
+<p>
+<a name="n_gestionprocesos"><h2>A.-Gestion de Procesos</h2></a>
+
+    # &lt;programa&gt;
+
+      * Para ejecutar un programa, solo hay que poner el nombre
+        y dar enter. Unix lo busca en los directorios de la
+        variable de entorno PATH, en orden.
+        Si no esta, habra que poner el nombre completo del
+        programa : /path/nombre_prog
+
+    # ps
+
+      * Muestra la lista de procesos con su corespondiente numero
+        asociado llamado PID ( Process IDentification )
+
+    # kill -9 &lt;numero&gt;
+
+      * Mata un proceso de la lista de procesos identificado por 
+        su numero asociado (PID)
+      * Kill sirve para mandar senyales a los procesos.            
+        La senyal 9, es la de matar. 
+        (otras : HUP INT QUIT ILL TRAP IOT FPE KILL USR1 SEGV      
+                       USR2 PIPE ALRM TERM CHLD CONT STOP TSTP TTIN      
+                       TTOU WINCH ...)                                   
+
+    # Ctrl-z
+
+      * entiendase, dar a Ctrl y z simultaneamente.
+      * para un proceso (no lo mata ,lo deja 'congelado')
+
+    # jobs
+
+      * Lista de procesos en espera con su correspondiente orden
+
+    # bg &lt;orden&gt;
+
+      * Hace que un programa en espera se ejecute en background.
+
+    # fg &lt;orden&gt;
+
+      * Hace que un programa en espera se ejecute en foreground,
+        por pantalla.
+
+    # %&lt;orden&gt;
+
+      * Vuelve al proceso que previamente se habia parado
+        ( totalmente equivalente al anterior )
+      * En algunas versiones de unix, se puede poner :
+
+           %&lt;nombre programa a traer a foreground&gt;
+
+    # &lt;programa&gt; &
+                                        
+      * El programa se ejecutara en background
+      * Equivalente a :
+            ejecutar (programa)
+            pararlo con ctrl z
+            jobs
+            bg (orden de programa)
+
+
+    # nohup &lt;programa&gt; &
+
+      * Se ejecuta el programa en background y aunque te salgas
+        de tu cuenta y apagues el terminal!.
+      * Es usado cuando vamos a salirnos de la cuenta, por no poder
+        esperar por lo que el proceso padre morira pero el proceso
+        hijo no!. ( es usado para esos ftp's que tardan mucho, pero
+        ojo! si hay mucho que hacen lo mismo, tarda mas y a lo peor
+        colapsan la maquina, con lo que hay que reinicializarla y se
+        pierde el trabajo de todos. Panificar y si se ve que esta
+        sobrecargado, dejarlo para mas tarde! )
+
+    # at &lt;hora&gt; &lt;proceso&gt;
+                                       
+      * Para ejecutar un proceso(s) a la hora y dia que se quiera!.
+        ( para ejecutar mas de un comando, basta con que el
+          proceso sea un shell-script )
+
+
+<p>
+<a name="n_interpretes"><h2>B.-Interpretes de comandos : 'shells'</h2></a>
+
+    <h3>B.1.-'Shells' mas sencillos</h3></li>
+
+    # mc
+
+      * Mightnight Commandant
+        Clonico de comandante norton para Unix.
+
+    # { ash,bash,csh,ksh,msh,sh,tcsh,tsh,zsh,...  } 
+
+      * Interprete de comandos al cual indicar los comandos 
+        que queramos ejecutar.
+
+
+    <h3>B.2.-Como personalizar el 'shell'</h3></li>
+
+    # chsh
+
+      * Cambia el shell definido en el fichero password que es el que
+        se ejecuta al entrar en tu cuenta
+      * Aconsejo el tcsh, pues tiene muchas utilidades :
+         - se puede sacar los comandos metidos anteriormente, como
+           si tuvieras en DOS el DosKey instalado
+         - si escribes parte del nombre de un fichero (o directorio)
+           y das a tabulador, completa el nombre
+         - si pones 'set correct=all', cada vez que el crea que te
+           equivocas, te presenta el comando mas parecido y pide
+           confirmacion para ejecutarlo.
+         - etc.
+      * En algunos sistemas, solo lo puede hacer el root.
+
+[chsh]
+&gt;        chsh /bin/tcsh
+
+              o bien
+
+&gt;        chsh
+&gt;        (1) /bin/sh
+&gt;        (2) /bin/csh
+&gt;        (3) /bin/bash
+&gt;        (4) /bin/tcsh
+&gt;        which you want? _4
+
+
+        <h4><u>B.2.1-VARIABLES DE ENTORNO</u></h4></li>
+        Una variable de entorno es una cadena de caracteres que hace
+        referencia a otra cadena. Ejemplo, "saludo=hola", saludo es la
+        variable de entorno que usaremos para referirnos a hola.
+        Veamos su manejo con ejemplos de referencia.
+
+        # set &lt;&lt;HOMY&gt;&gt;=&lt;&lt;/u/my&gt;&gt;
+          setenv &lt;&lt;uik&gt;&gt; &lt;&lt;a990&gt;&gt;
+
+	  * Como se definen las variables de entorno ...
+
+        # set
+          setenv
+
+	  * ... como se ver las variables de entorno y su equivalencia ...
+
+        # cd   $&lt;&lt;HOMY&gt;&gt;
+          echo $&lt;&lt;uik&gt;&gt;   
+
+	  * ... y como se referencian ...
+
+        # set &lt;&lt;HOMY&gt;&gt;=
+          setenv &lt;&lt;uik&gt;&gt;
+
+	  * ... y como se borran!.
+
+
+        <h4><u>B.2.2-FICHEROS DE CONFIGURACION</u></h4></li>
+        Seguramente, las modificaciones echas en el apartado anterior
+        querremos que sean permanentes, no tener que teclearlas cada
+        vez que arranquemos la cuenta. Como?, escribiendo los comandos
+        en un fichero llamado :
+
+           .cshrc   (csh)
+           .profile (ksh)
+
+
+<!#########################################################################>
+<a name="n_sistema"><h1><p align=left><li>Sistema de Ficheros</p></h1></a>
+
+<p>
+<h2>A.-Navegando en los Directorios</h2>
+
+    # ls &lt;directorio&gt;
+        .  ls -lasF --&gt; informacion completa
+        .  ls -i    --&gt; pares inodo-fichero
+        .  ls -R    --&gt; listado recursivo
+
+      * Lista los ficheros del directorio que se le pase como argumento
+        ( si NO se le pasa argumento, lista el directorio en que nos
+          encontremos en ese preciso momento )
+      * Para conseguir un listado 'recursivo' hay varias opciones :
+        ls -R                &lt;dir&gt;
+        find . -print -name  &lt;dir&gt;
+        du -a                &lt;dir&gt;
+      * Particularidades :
+       --- AIX (El unix de IBM) -------------------------------------
+      | - existe tambien 'li' y 'di'                                 |
+       --------------------------------------------------------------
+
+[ls]
+&gt;
+&gt;   ~/bin/ls -lasF
+&gt;
+&gt;
+&gt;      total bloques en el directorio
+&gt;         |
+&gt;         |
+&gt;
+&gt;    |  total 8                                                         |
+&gt;    |  1 drwxr-xr-x   4 root     root         1024 Oct 11 01:11 .      |
+&gt;    |  1 drwxr-xr-x  18 root     root         1024 Oct 11 01:15 ..     |
+&gt;    |  1 drwxr-xr-x   2 root     bin          1024 Oct 11 01:14 bin    |
+&gt;    |  5 drwxr-xr-x   2 root     users        5120 Oct 11 01:12 dev    |
+&gt;
+&gt;       |     |        |   |       |            |    \         /  |
+&gt;       |     |        |    \       -----       |      -------    |
+&gt;      /      |        |      \          |      |        |        |
+&gt; numero  permisos  numero de   due&ntilde  grupo  tama&ntilde  fecha    nombre
+&gt;Bloques            entradas                   fichero           fich/dir
+&gt;
+&gt;     ** "numero de entradas" significa :
+&gt;          - si es un directorio, el numero de entradas que posee
+&gt;            ese directorio. ( el numero de entradas de un directorio
+&gt;            es  el numero de ficheros mas el numero de directorios
+&gt;            excluyendo el directorio ".", que es el mismo )
+&gt;          - si es un fichero, es el numero de entradas de directorio
+&gt;            que apuntan a ese fichero ( nodos-i )
+&gt;       ** la primera columna depende de la implementacion de Unix.
+&gt;          Es el numero de bloques. El tama&ntilde de un bloque en unas
+&gt;          implementaciones es 1024 bytes y en otras 512 bytes.
+&gt;
+
+
+    # cd "&lt;directorio&gt;"
+        . cd /    ---&gt; ir a la raiz
+        . cd      ---&gt; ir a tu cuenta
+        . cd ..   ---&gt; ir al anterior
+
+      * Cambia de directorio.
+        Realmente, cambia el contenido de una variable del sistema
+        operativo en la cual guarda el directorio de trabajo, que es
+        aquel que el sistema usara cuando lo omitamos.
+      * Hay ciertos detalles a recordar :
+        - la \ de dos es la / en unix :                               
+                cd /u/camino/... (ux) ---  cd \u\camino\... (dos)     
+        - para acceder al directorio 'HoLa', vale :
+             - cd HoLa                                                
+             - cd "HoLa"                                              
+          PERO, si hace mkdir "HoLa ", solo se puede acceder con      
+                 cd "HoLa "                                           
+
+
+    # pwd
+      echo $cwd
+
+      * Imprime el Current Working Directory, es decir, el listado
+        de directorios a pasa para ir desde la raiz al directorio
+        donde estamos actualmente.
+
+
+    # pushd/popd &lt;directorio&gt;
+
+      * Se crea una pila, en la que se almacena el nombre de los
+        directorios que nosotros queramos, y se permite
+        facilmente cambiar a uno de los directorios de la pila
+
+        popd      --- cuando se ejecute, nos cambiaremos al
+                      directorio situado en cabeza de pila y
+                      este desaparece de la cima.
+        pushd     --- lista todos los componentes de la pila.
+                      (en algunos sistemas, no lista, si intercambia
+                      el directorio actual con el cima de pila)
+        pushd &lt;d&gt; --- inserta un nuevo dir en cima de pila.
+
+
+
+<p>
+<h2>B.-Analizando Ficheros</h2>
+
+    # more &lt;fichero&gt;
+        . q                 ---&gt; salir
+        . barra espaciadora ---&gt; siguiente pagina
+        . b                 ---&gt; pagina anterior
+        . enter             ---&gt; siguiente linea
+        . h                 ---&gt; ayuda
+
+      * Visualiza el contenido de un fichero, parando cuando se
+        "llene" una pantalla y esperando a que el usuario presione
+        teclas para continuar, o no.
+
+
+    # cat &lt;fichero&gt;
+
+      * Visualizacion fichero sin pausa;
+        el nombre de cat proviene de "CATenate".
+      * Particularidades :
+       --- Algunos Unix ---------------------------------------------
+      |  "> &lt;fichero&gt;" --- "cat &gt; &lt;fichero&gt;"                     |
+       --------------------------------------------------------------
+
+
+    # tail -&lt;numero&gt; &lt;fichero&gt;
+
+      * Visualiza las ultimas &lt;numero&gt; lineas del
+        fichero &lt;fichero&gt;.
+      * Si es un fichero al que otro proceso esta a&ntilde;adiendo
+        datos al mismo tiempo, usar "tail -f &lt;fichero&gt;".
+
+
+    # head -&lt;numero&gt; &lt;fichero&gt;
+
+      * Visualiza las primeras &lt;numero&gt; lineas del
+        fichero &lt;fichero&gt;.
+
+
+    # file &lt;fichero&gt;
+
+      * Dice a que tipo de fichero pertenece &lt;fichero&gt; :
+           bin   -- binario, ejecutable
+           ascii -- texto
+           c     -- fuente en c
+           ...
+
+
+    # diff &lt;fichero_1&gt; &lt;fichero_2&gt;
+
+      * Compara el contenido de dos ficheros e indica las diferencias
+        que encuentra.
+
+
+    # wc -l &lt;fichero&gt;
+
+      * Cuenta el numero de lineas, palabras, etc. del
+        fichero &lt;fichero&gt; :
+             wc -c &lt;fichero&gt; ---&gt; cuenta caracteres.
+             wc -l &lt;   "   &gt; ---&gt;    "   lineas.
+             wc -w &lt;   "   &gt; ---&gt;    "   palabras.
+
+
+    # sort &lt;...&gt;
+
+      * Ordena items de un fichero.
+
+
+
+<p>
+<h2>C.-Busqueda de/en Ficheros</h2>
+
+    # find &lt;...&gt; --- grep &lt;...&gt; --- SEARCH &lt;...&gt; ---  ???
+
+      * Busca una cadena de caracteres en un fichero.
+      * 'grep' es el acronimo de "Global Regular Expression Print"
+      * 'grep' no busca la cadena que le pongamos directamente;
+        Esa cadena es interpretada como patron o "expresion regular"
+        Ejemplos :
+
+             grep pepk fichero  --&gt; Busca la cadena pepk en fichero
+             grep [0-9] fichero --&gt; Devuelve las lineas que           
+                                       contengan un digito.              
+             grep a* fichero    --&gt; Devuelve las lineas que           
+                                        contengan cadenas de aes.
+
+
+    # find &lt;dir_comienzo_busqueda&gt; -name &lt;nombre_fichero_a_buscar&gt;
+
+      * Usado para buscar donde se encuentra un fichero;
+        Si no se indica directorio de comienzo de busqueda, usa
+        el actual
+
+
+    # whereis &lt;fichero&gt; 
+
+      * Igual que el `find', pero busca SOLO
+        ficheros fuentes ( en c ), objetos, y binarios
+
+
+    # which &lt;fichero&gt;   
+
+      * Igual que el `find' pero busca SOLO
+        en los directorios especificados en la variable path.
+
+
+
+<p>
+<h2>D.-Facilidades en accesos a Ficheros</h2>
+
+  <u>1.- CAMINOS DE BUSQUEDA (PATH)</u>
+   - Se suele usar una variable de entorno especial que contiene
+     una lista de directorios donde buscar donde esta un fichero
+     ejecutable cuando solo le damos al interprete de comandos
+     el nombre del fichero binario, y no esta en el directorio
+     actual (primero en la busqueda).
+
+   - En general es algo asi:
+        path=/bin;/usr/bin;~/bin
+
+
+  <u>2.- 'LINKS'</u>
+   - Los links son referencias a otro fichero. Si tienes un fichero
+     en un lugar lejano, podras crearte un fichero en tu cuenta
+     que sera una referencia a ese lejano.
+     ? Que ventaja tiene con respecto a que te lo copies a tu cuenta ?,
+     pues que al copiartelo hay 2 copias (obvio) en cambio un link solo
+     hay una, y el link es solo una referencia con lo que no "gasta"
+     cuota, ahorrando espacio en disco.
+
+       # ln [-s] &lt;origen&gt; &lt;nombre&gt;
+
+         * Permite referenciar un fichero que esta presente fisicamente
+           en otro lugar (&lt;origen&gt;) como si estuviera en el lugar
+           donde esta la referencia (&lt;nombre&gt;).
+
+
+	   Existen dos tipos de enlazado:
+	    - El 'duro' :
+              crea un nodo-i (nueva entrada de directorio) de que 
+              apunta al mismo fichero. Ahora para borrar el fichero,
+	      sera necesario borrar los dos nombres que lo referencian
+	    - El simbolico :
+	      se consigue con la opcion -s. El fichero resultante es de
+	      tipo 'l', de modo que viene a ser una macro que el S.O.
+	      sustituye en el comando que tecleemos con ese nombre. Por
+	      ejemplo,
+
+            lrwxrwxrwx 0 a900000 users 12-1-95 13:30  pek -&gt; /usr/bin/mycmd
+
+	      cuando tecleemos 'cat pepk' el S.O. ejecutara
+	      'cat /usr/bin/mycmd' con los permisos de /usr/bin/mycmd.
+	      Si no tenemos derechos sobre ese fichero, no se ejecutara.
+	      Pero si nuestro comando solo afecta al enlace (entrada de
+	      directorio) y no al propio fichero (como la orden de borrar
+	      o mover el fichero) tenemos todos los derechos, pero
+	      solo sobre la entrada.
+
+   - NOTA:
+     Los enlaces normales solo pueden hacerse si el enlace a crear
+     esta en el mismo dispositivo fisico (disco...) que el fichero.
+     Si no ocurre asi, solo podremos hacer enlaces simbolicos.
+
+     Los permisos de uso del fichero &lt;destino&gt; no son los que tenga
+     el, sino los que tenga el fichero referenciado (&lt;origen&gt;).
+
+     Si tenemos un enlace a un fichero de otro usuario,
+     si dicho usuario lo borra solo borrara su enlace y no el
+     propio fichero, con lo que queda a nuestra disposicion pero
+     ocupando espacio suyo!.
+
+
+
+<p>
+<h2>E.-Modificando el Sist. de Fich.</h2>
+
+    # mkdir &lt;directorio&gt;
+
+      * Crea un directorio nuevo, hijo del actual,
+        llamado &lt;directorio&gt;.
+
+
+    # mkdirhier &lt;d1/d2...&gt;
+
+      * Crea varios directorios, al mismo tiempo.
+        ( creara el directorio d1 y luego el subdirectorio d2 y
+          asi sucesivamente )
+
+
+    # rmdir &lt;directorio&gt;
+
+      * Borra el directorio &lt;directorio&gt;.
+        &lt;directorio&gt; puede ser el path concatenado con el
+        nombre del directorio a borrar.
+
+[rmdir]
+&gt;  $rmdir \u\cuarto\a900000\a
+
+
+    # mknod &lt;path&gt; &lt;tipo&gt; &lt;princ&gt; &lt;sec&gt;
+
+      * Crea ficheros especiales ( como los del directorio /dev )
+        donde :
+
+          &lt;tipo&gt; puede ser :
+	      c ( asociado a dispositivo caracter (term))
+	      b (     "    "       "     bloque (discos))
+
+          &lt;princ&gt; es el numero de dispositivo
+                        hardware (0,1,2...)
+
+          &lt;sec&gt; es el numero de dispositivo secundario
+                      asociado a &lt;princ&gt;
+
+        Por ejemplo :
+
+           En Minix y otros sistemas similares en PCs, el diskette
+          lleva el numero &lt;princ&gt; igual a 2. El segundo numero
+          &lt;sec&gt; indica, para el caso del diskette, el tipo
+          de formato (doble densidad, etc) y la unidad.
+          Por ejemplo, los discos 3 1/2 HD se codifican con un 28 para
+          la primera unidad de diskette y 29 para la segunda.
+          Los 3 1/2 DD llevan los codigos respectivos 16 y 17.
+
+
+    # rm &lt;fichero&gt;
+
+      * Borra el fichero &lt;fichero&gt; ;
+        Igual que al borrar directorios, &lt;fichero&gt; puede ser
+        el path y nombre del fichero.
+      * Notas :
+         - Si no te deja borrar el s.o. , es que segun las proteccion,
+	   no estas autorizado. Cambialas y luego intentalo de nuevo
+	   (ver seccion protecciones)
+
+          - De momento, solo en el caso de DOS, es posible "desborrarlo"
+            y recuperarlo con el comando undelete
+            ( en unix se suele simular moviendo el fichero al directorio
+              /tmp. Si se quiere recuperar, se mueve desde /tmp hasta donde
+              estubiera. Periodicamente el sysop ( responsable del sistema )
+              borra todos los ficheros del /tmp, con lo que son "desborrables"
+              por un periodo de tiempo )
+      * Particularidades :
+       --- Algunos Unix ---------------------------------------------
+      | - funciona 'del' o 'erase' tambien                           |
+       --------------------------------------------------------------
+
+
+    # cp &lt;fichero&gt;
+
+      * Copia un fichero :
+        crea otro fichero que tendra el mismo contenido que el original.
+      * Notas :
+         - Normalmente no se permite que el fichero destino tenga el
+           mismo nombre que el origen.
+
+
+    # cat -o &lt;a&gt; &lt;b&gt; &gt; &lt;a&gt;
+
+      * Concatena el fichero &lt;b&gt; al final del &lt;a&gt;.
+
+
+    # mv &lt;nombre_fichero&gt; &lt;nuevo_nombre&gt;
+
+      * Cambia de nombre un fichero o un directorio.
+
+
+    # mv &lt;ubicacion&gt; &lt;nueva_ubicacion&gt;
+
+      * Cambia la ubicacion de un fichero:
+        lo traslada a otro directorio borrandolo de su posicion original
+        Ejemplo :
+
+            move c:\practica\memoria.txt a:\memoria.txt
+      * Notas :
+         - En los sistemas que no lo implementa se puede simular con la
+           secuencia "rename+delete" o "copy+delete".
+
+
+    # touch -t MMDDhhmm &lt;fichero&gt;
+
+      * Cambia SOLO la fecha de un fichero;
+        ( la fecha de ultima modificacion del fichero )
+
+        MMDDhhmm es el mes-dia-hora-minuto en numeros y juntos.
+
+
+    # cat &gt; &lt;fichero&gt;
+      cat &gt;&gt; &lt;fichero&gt; ---&gt; apendiza.
+
+      * Edita linea a linea (sin retroceso) un fichero;
+        Para terminar, teclear el final de fichero (EOF)
+        con 'Ctrl-D'.
+
+
+    # { vi | vedit } &lt;fichero&gt;
+
+      * Edita un fichero.
+        ( permite cambiar el contenido de un fichero,
+          normalmente de texto. )
+      * La eleccion del editor depende de muchas cosas, y es
+        algo personal. Aun asi, ahi va una 'orientacion' :
+              VI     --- texto simple                                  
+              LaText --- a lo WordPerfect/WordStar                     
+              EMACS  --- Trabajo con lisp/c                            
+
+
+    # fmt -with &lt;ancho&gt;
+
+      * Ajusta el ancho de un texto a la profundidad indicada
+        (&lt;ancho&gt;), conservando las palabras ( es decir, no las
+        corta, si no que las pasa a la linea siguiente )
+        es por tanto un formateador de texto.
+
+
+    # split -b &lt;bytes&gt; &lt;infile&gt;
+
+      * Crea los ficheros que necesite, resultado de partir el
+        fichero de entrada &lt;infile&gt; en ficheros
+        de &lt;bytes&gt; bytes de tama&ntilde;o.
+
+
+    # expand -t&lt;numero&gt; &lt;fichero&gt;
+
+      * Convierte las tabulaciones del fichero '&lt;fichero&gt;'
+        en '&lt;numero&gt;' espacios en blanco.
+
+
+
+<p>
+<h2>F.-Atributos</h2>
+
+  <h3><u>F.1.-Como interpretar los flags</u></h3>
+
+[ls -l]
+&gt;
+&gt;  /bin/ls -l
+&gt;                   --- rwx : lectura,escritura,ejecucion.
+&gt;                  |
+&gt;                 /-\
+&gt;          drwxr-xr-x  2 root   root  5120 Oct 11 01:12  devil
+&gt;          |\-/\-/\-/
+&gt;          | |  |  |
+&gt;          | |  |   - permisos para usuarios que se conectan a la maq.
+&gt;          | |   ----    "       "  usuarios de la maquina
+&gt;          |  -------    "       "  el propietario
+&gt;          |
+&gt;          |    d directorio
+&gt;           --- l enlace simbolico
+&gt;               - fichero
+
+      El permiso x en directorios no significa permiso de
+      ejecucion sino permiso de acceder al directorio.
+
+
+  <h3><u>F.2.-Uso atributos</u></h3>
+
+  # ls -l &lt;fichero&gt;
+
+    * Permite ver los "flags" actuales de cada ficheros en dos y
+      unix si se omite &lt;f&gt;, presenta el listado de todos.
+
+  # umask 
+
+    * Permite ver la mascara de protecion usada por defecto.
+
+  # chmod {ugo}ñ{rwx} &lt;f|d&gt;
+
+    * Cambia los "flags".
+
+  # umask &lt;mascara&gt;
+
+    * Define la mascara-patron ( m ) a usar por chmod/...  por defecto.
+      Ojo, la mascara son los permisos que se anularan
+      por defecto (umask 077, pondra por defecto 700 al fichero)
+
+
+
+<!#########################################################################>
+<a name="n_manejo"><h1><p align=left><li>Manejo de Dispositivos</p></h1></a>
+
+
+<p>
+<h2>A.-Discos</h2>
+
+    <h3><u>A.1.-Acceso a disco</u></h3>
+    El acceso es "transparente" :
+    solo existe un "arbol" de directorios, si se quiere acceder a
+    un dispositivo (ej. un diskete) hay que leer el sistema de ficheros
+    del disquete y asignarlo a un directorio vacio, de forma que
+    cuando se entre en ese directorio realmente lo que se hace es
+    acceder a la raiz del "arbol" de directorios del diskquete.
+
+    # mount &lt;dispositivo&gt; &lt;directorio&gt;
+
+      * Une el sistema de ficheros de un disco
+        ( /dev/fd0 , /dev/hd1 , /dev/sd4 ,... )
+        a un directorio; cambiando a ese directorio
+        podemos ver el contenido de la unidad.
+      * Notas :
+        - los dispositivo llamados
+            hd?? son discos duros tipo ide
+            sd?? son scsi
+            ...
+        
+    # unmount &lt;directorio&gt; 
+
+      * Desmonta la unidad de disco que este asociada a
+        el directorio &lt;directorio&gt;
+      * NOTA :
+        - NO SE DEBE RETIRAR UN DISPOSITIVO FISICO
+          SI ANTES NO SE DESMONTO.
+
+
+    <h3><u>A.2.-Manejo de discos</u></h3>
+    Como si se tratara de un fichero de capacidad limitada;
+
+      /tmp/d00 &lt; /dev/fd0
+      cat /tmp/d00 &gt; /dev/fd0
+
+      * Permite duplicar un Floppy;
+        Antes del "cat ...", se saca el disco origen y
+        se inserta el destino.
+
+
+
+<p>
+<h2>B.-Impresion</h2>
+
+    # lpr {lp} &lt;f&gt;
+
+      * Envian un fichero a la impresora.
+        ( si se esta imprimiendo alguno, pasa a una cola de espera )
+
+    # lpq
+
+      * Permite visualizar la cola de impresion.
+        ( ficheros imprimiendose y/o en espera de ser impresos)
+
+    # lprm &lt;identificador&gt;
+
+      * Borra uno o mas trabajos de la cola de impresion;
+        &lt;identificador&gt; es el numero asociado al fichero
+        que aparece en el listado de 'lpq'
+
+
+
+<p>
+<h2>C.-Terminales</h2>
+
+    # tecla(Bloq Desp)  --- en LINUX
+      Control-S         --- En general
+
+      * Detiene la salida en pantalla de un proceso
+        (para leer poco a poco,  por ejemplo)
+
+    # tecla(Bloq Desp)  --- en LINUX
+      Control-Q         --- En general
+
+      * Continua la salida en pantalla.
+
+    # clear
+      Control-L
+
+      * Borra la pantalla y situa el cursor en la esquina
+        superior izquierda.
+
+
+<!#########################################################################>
+
+</pre>
+</ol>
+
+
+<hr><br>
+</html>
+

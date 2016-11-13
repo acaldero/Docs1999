@@ -1,0 +1,106 @@
+<html>
+
+<head>
+<title>Resumenes</title>
+<!body background="backhelp.gif">
+</head>
+
+<body>
+
+<p><br>
+</p>
+
+<hr>
+
+<h1 align="center"><strong>Compresores</strong></h1>
+
+<hr>
+
+<p><br>
+<br>
+<a name="Lista_CCE"></p>
+
+<h2>Compresion, Codificacion</h2>
+</a>
+
+<pre>
+	       |               |             |                |      |      |
+    Nombre     | comprimir     | listar      | descomprimir   | ext. | tipo |
+   ------------|---------------|-------------|----------------|------|------|
+   un/compress |compress &lt;f/s&gt; | fich sin .Z |uncompress &lt;f.Z&gt;| .Z   | 1 d,U|
+   ------------|---------------|-------------|----------------|------|------|
+   tar         | cvf &lt;f/s&gt;     | tvf &lt;f.tar&gt; | xvf &lt;f.tar&gt;    | .tar | 2 d,U|
+   ------------|---------------|-------------|----------------|------|------|
+   un/pack     | pack &lt;f/s&gt;    | unpack ...  | unpack &lt;f.z&gt;   | .z   | 1  d |
+   ------------|---------------|-------------|----------------|------|------|
+   (pk)un/zip  | zip &lt;f.zip&gt;   | unzip -v    | unzip -d       | .zip | 1    |
+               |     &lt;f/s&gt;     |   &lt;f.zip&gt;   |        &lt;f.zip&gt; |      | d,U,v|
+   ------------|---------------|-------------|----------------|------|------|
+   arj         | a &lt;f.arj&gt;     | l &lt;f.arj&gt;   | x &lt;f.arj&gt;      | .arj | 1    |
+               |         &lt;f/s&gt; |             |                |      | d,U  |
+   ------------|---------------|-------------|----------------|------|------|
+   ain         | a &lt;f.ain&gt;     | l &lt;f.arj&gt;   | x &lt;f.arj&gt;      | .ain | 1    |
+               |         &lt;f/s&gt; |             |                |      | d,U  |
+   ------------|---------------|-------------|----------------|------|------|
+   gzip        | -9 &lt;f/s&gt;      | -l &lt;f.gzip&gt; | -d &lt;f.gzip&gt;    | .gzip| 1    |
+               |               |             |                | .gz  | d,u,v|
+   ------------|---------------|-------------|----------------|------|------|
+   lha         | -a &lt;f.lzh&gt;    | -l &lt;f.lzh&gt;  | -e &lt;f.lzh&gt;     | .lzh | 1    |
+               |      &lt;f/s&gt;    |             |                |      | d    |
+   ------------|---------------|-------------|----------------|------|------|
+   zoo         | -add &lt;f.zoo&gt;  | -list       | -extract       | .zoo | 1    |
+               |      &lt;f/s&gt;    |     &lt;f.zoo&gt; |        &lt;f.zoo&gt; |      | d,U  |
+   ------------|---------------|-------------|----------------|------|------|
+   pkpack      | pkpack -a     | pkunpack -v | pkunpack -x    | .arc | 1    |
+   pkunpack    | &lt;f.arc&gt; &lt;f/s&gt; |   &lt;f.arc&gt;   |        &lt;f.arc&gt; |      | d    |
+   ------------|---------------|-------------|----------------|------|------|
+   shar        | shar &lt;f/s&gt; &gt;  |sh &lt; &lt;f.shar&gt;| sh &lt; &lt;f.shar&gt;  | .shar| 2    |
+               |      &lt;f.shar&gt; |  &gt; /dev/null|                |      | U    |
+   ------------|---------------|-------------|----------------|------|------|
+   uuencode    | uuencode &lt;f/s&gt;| uudecode    | uudecode &lt;f.ue&gt;|      | 3    |
+   uudecode    | &lt;fud&gt; &gt; &lt;f.ue&gt;| &lt;f.ue&gt; &gt;    |                |      | d,U,v|
+	       |               |  /dev/null  |                |      |      |
+   ------------|---------------|-------------|----------------|------|------|
+   encryp      | encryp &lt;f/s&gt;  |             | decryp &lt;fen&gt;   |      | 4    |
+   decryp      |  &gt; &lt;fen&gt;      |             |  &gt; &lt;fde&gt;       |      | u    |
+   -------------------------------------------------------------------------|
+
+
+     - Tipos :
+
+	1 --- compresores
+	2 --- compactadores
+	      ( no comprimen, solo juntan varios archivos en uno )
+	3 --- codificadores
+        4 --- codificadores
+
+	d --- dos
+	U --- Unix
+	v --- vms
+	e --- vm/esa
+
+     - Notas :
+
+        # uuencode &lt;nombre fichero a codificar&gt; :::
+                   &lt;nombre fichero al ser decodificado&gt; :::
+                    &gt; &lt;nombre del fichero codificado&gt;
+
+	  * Codifica un fichero binario en formato ascii, para poder
+	    ser enviado por mail (ean o news).
+	  * para decodificar el fichero poner :
+            uudecode &lt;nombre del fichero codificado&gt;
+
+	       ej.)
+                 - uuencode /bin/sh myshell &gt; correonow
+		 - mail -s &quot;esta uuenco&quot; miriam <correonow una vez que miriam lo salve al fichero mycorreo : uudecode mycorreo con lo que le aparecera un fichero mas llamado myshell ## NOTA: existen programas para DOS que hacen igual que el el tar y el compress de unix ( con la restriccion de que en dos los nombres de ficheros son 8 letras mas 3 de extension ) ## Nota: &lt;f/s&gt; &lt;nombre(s) fichero(s) a comprimir&gt; &lt;f.xxx&gt; &lt;nombre fichero comprimido&gt; o bien &lt;nombre que va a recibir el fichero comprimido&gt; &lt;fen&gt; &lt;nombre fichero codificado&gt; o bien &lt;nombre que va a recibir el fich. codificado&gt; &lt;fde&gt; &lt;nombre fichero decodificado&gt; &lt;fud&gt; &lt;nombre que recibira el fichero al deuucodificarse&gt; <!#########################################################################>
+
+</pre>
+
+<hr>
+
+<pre>
+
+</htmll>
+</pre>
+</body>
+</html>

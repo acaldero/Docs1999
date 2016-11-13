@@ -1,0 +1,176 @@
+<html>
+<title>Resumenes</title>
+<!body background="backhelp.gif">
+<br><hr>
+<h1><p align=center>Trucos y consejos</p></h1>
+<hr><br>
+
+
+<br><br><br>
+<h2>Indice</h2>
+<ol>
+    <li><a href="#Tip_chrare"> Solucionar tipos caracteres raros [Unix] </a>
+    <li><a href="#Tip_binasc"> Paso de ficheros binarios a ascii [general] </a>
+    <li><a href="#Tip_ftpnoi"> Ftps no interactivos [general] </a>
+    <li><a href="#Tip_search"> En que maquina tendran los ficheros que busco ...??? [general] </a>
+    <li><a href="#Tip_fxname"> Nombre ficheros Unix con caracteres "especiales" [Unix] </a>
+    <li><a href="#Tip_diccio"> Pequenyo diccionario idiomas [general] </a>
+    <li><a href="#Tip_biblio"> Consulta biblioteca politecnica [Unix] </a>
+</ol>
+<br><br><br><hr>
+
+
+
+<! ### Referencia basica ################################################## >
+
+<br>
+<a name="Tip_chrare"><h2> Solucionar tipos caracteres raros [Unix]</h2> </a>
+<p><pre>
+        En terminales que interpreten caracteres de escape, se pueden
+     conseguir "efectos especiales", ( como animaciones e incluso musica
+     a partir del pitido de alarma de los terminales de DEC ) pero
+     tambien problemas pues si se "typea" un fichero binario, puede
+     darse la casualidad que su contenido sea interpretado, y tenga
+     caracteres de escape impredecible. Uno de los problemas mas fasti-
+     diosos es cuando los caracteres son rayas! y puntos!;
+     Solucion :
+
+              - teclear ( a ciegas! ) "more /bin/sh"
+                ( o bien "cat /bin/sh | more" )
+              - dar a la barra espaciadora hasta que las letras
+                  More y el % se vean con claridad.
+              - salir del more con "q".
+</pre>
+
+
+<br><br><hr><br><br>
+<a name="Tip_binasc"><h2>Paso de ficheros binarios a ascii [general]</h2> </a>
+<p><pre>
+        Si os traeis un fichero asc en binario hay un truco para los
+     retornos de carro. Editais el fichero con el edit de DOS y dais
+     a salvar; el se encarga automaticamente de convertir.
+</pre>
+
+
+<br><br><hr><br><br>
+<a name="Tip_ftpnoi"><h2>Ftps no interactivos [general]</h2> </a>
+<p><pre>
+         Si el ftp no es interactivo, en algunos sistemas el caracter
+      @ lo interpreta como enter. Que hacer?.
+
+      He aqui un ejemplo de un fichero .com para zipi :
+
+               $ftp asterix.fi.upm.es
+               <enter>
+               user anonymous
+               pass a990123@t800.fi.upm.es
+               ...
+               exit
+
+      Observar que cuando el ftp te pida el username, leera un enter!.
+      Para el resto de sistema, hacer lo equivalente.
+</pre>
+
+
+<br><br><hr><br><br>
+<a name="Tip_seach"><h2>En que maquina tendran los ficheros que busco ...??? [general]</h2> </a>
+<p><pre>
+         Simplemente usar la aplicacion de correo electronico de vuestra
+      maquina y mandar un 'mail' de la siguiente forma a 'archie' :
+
+         <mail/ean/...> archie@archie.funet.fi
+         SUBJECT:
+         prog <tema buscado1>
+         prog <tema buscado2>
+          ........
+          ......
+         quit
+         .
+
+        Tarda unas de unos pocos minutos a 8 horas.
+        Archie busca :
+          - por patrones DISTINGUIENDO entre mayusculas y minusculas.
+            por ello si por ejemplo nuestro tema es music, poner
+            prog music, prog Music, prog MUSIC, ...
+          - en Ingles! (don't forget that!)
+</pre>
+
+
+<br><br><hr><br><br>
+<a name="Tip_fxname"><h2>Nombre ficheros Unix con caracteres "especiales" [Unix]</h2> </a>
+<p><pre>
+         El nombre de un fichero en Unix puede tener caracteres
+      "especiales", para escribirlos, colocar antes '\' :
+      ( caracteres especiales son aquellos que para el sistema
+        operativo tienen un significado especial, que es lo
+        primero que interpreta )
+
+          ej.)       /directorio!&/hola
+
+                  md /directorio\!\&/hola
+                  cd /directorio\!\&/hola
+</pre>
+
+
+<br><br><hr><br><br>
+<a name="Tip_diccio"><h2>Pequenyo diccionario idiomas [general]</h2> </a>
+<p><pre>
+      -  Abreviaturas Inglesas mas usadas al escribir informalmente
+      Usuales en programas como el irc, talk ...
+
+           English              Spanish?
+           -------              -------
+            cool         ---     chachi, guay
+            Tnx          ---     Thanks
+            Brb          ---     Be right back
+            c u later    ---     See you later
+            2            ---     To
+            4            ---     For
+            'lo          ---     Hello
+            dunnot       ---     I don't know
+            how r u ?    ---     How are you ?
+            dinna ken    ---     No creo
+            btw          ---     by the way
+            rtfm         ---     read the funcking manual
+            bloke        ---     colega
+
+      -  'Hola' en varios idiomas (gracias a MellMan) :
+
+            Terve        ---     Finlandes
+            Ciao         ---     Italiano
+            Guten Tag    ---     Aleman
+            Hi           ---     Ingles
+            Bonjour      ---     Frances
+            Kaixo        ---     Vasco
+            Sayonara     ---     Japones
+</pre>
+
+
+<br><br><hr><br><br>
+<a name="Tip_biblio"><h2>Consulta biblioteca politecnica [Unix]</h2> </a>
+<p><pre>
+
+   (gracias a Miguel)
+
+        Es mejor usar el programa 'tn3270', que es el telnet para
+   conectarse con sistemas VM/ESA de IBM, pero vale el 'telnet'
+   normal, salvo que no dispondremos de las teclas de funcion
+   y hay que salir matando el proceso.
+
+        - 'tn3270 vec.ccupm.upm.es'
+                    o
+          'telnet vec.ccupm.upm.es'
+
+        - 'ENTER' &lt;para pasar la pantalla primera&gt;
+
+        - 'd dobis'
+
+        - &lt;ya estareis en la pantalla que hay en la biblioteca.
+           proceder igual que alli&gt;
+</pre>
+
+
+<br><hr>
+</htmll>
+
+

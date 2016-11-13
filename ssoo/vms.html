@@ -1,0 +1,527 @@
+<html>
+<title>Sistemas Operativos</title>
+<!body background="backhelp.gif">
+<br><hr>
+<h1><p align=center>Sistema operativo V.M.S.</p></h1>
+<hr><br>
+
+
+<pre>
+<ol>
+
+<!#########################################################################>
+<a name="n_comenzando"><h1><p align=left><li>Comenzando</p></h1></a>
+
+<p>
+<a name="n_entrarysalir"><h2>A.-Entrar y Salir de la Cuenta</h2></a>
+
+    # set passwd
+
+      * Permite cambiar la contrase&ntilde;a usada para entrar
+        en tu cuenta.
+      * Notas :
+        - No puede haber dos contrase&ntilde;as iguales en el
+          sistema. Si tu nueva contrase&ntilde;a coincide con
+          la de otra persona, te dara un error.
+
+
+    # logout
+      log
+
+      * Cierras todos los programas en cursos y
+        terminas la sesion de trabajo.
+
+
+<p>
+<a name="n_informacion"><h2>B.-Informacion de Recursos disponibles</h2></a>
+
+    # sh quota
+                           
+      * Lista la cantidad de recurso asignado a ti y la cantidad
+        ocupado (tiempo, Disco, ...)
+
+
+<p>
+<a name="n_optener"><h2>C.-Optener Ayuda</h2></a>
+
+    # help &lt;comando&gt;
+
+      * Presenta informa sobre el comando que se le indique.
+        ( sintaxis, para que sirve y un monton de cosas mas... )
+
+
+
+<!#########################################################################>
+<a name="n_ejecucion"><h1><p align=left><li>Ejecucion de comandos</p></h1></a>
+
+<p>
+<a name="n_gestionprocesos"><h2>A.-Gestion de Procesos</h2></a>
+
+    #     &lt;programa&gt;
+      run &lt;programa&gt;
+
+      * Normalmete, para ejecutar un programa, solo hay que
+        poner el nombre (o path+nombre) y dar enter.
+
+        Cuando el programa no pertenece al sistema operativo, es decir,
+        es un programa externo, hay que anteponer run al nombre.
+        Pero de esta forma no se pueden pasar argumentos;
+        Si se quiere pasar argumentos, hay que hacerse un 'alias'
+        primero, y luego ejecutar el alias;
+        Por ejemplo :
+
+             $ l:=='disk$x7:[septimo.x999999]prog.exe'
+             $ l
+
+
+    # spawn
+
+      * Permite ejecutar un proceso;
+        Si el proceso padre (interprete de comandos DCL) va a
+        mantenerse (haciendo otras cosas), podemos lanzar el proceso
+        hijo en background de la siguiente manera (notar que si el
+        proceso padre (DCL) muere, el hijo tambien lo hace):
+
+            SPAWN/NOWAIT /INPUT=&lt;f_entrada&gt; /OUTPUT=&lt;fch_salida&gt; &lt;comando&gt;
+
+        ( Donde f_in y f_out es el nombre del fichero del que tomar
+          comandos y nombre fichero donde imprimir la salida respetivamente.
+
+        Ejemplo:
+         Queremos hacer un FTP para coger el ultimo SCAN de McAfee.
+         Haremos lo siguiente:
+
+          Creamos el fichero entrada.txt con las lineas:
+            anonymous
+            pass cuenta@
+            cd mirror/msdos/virus
+            mget scanv*.*
+            bye
+
+          Y tecleamos: ($ es el prompt de VMS)
+            $ SPAWN/NOWAIT /INPUT=entrada.txt /OUTPUT=salida.txt -
+            $_ ftp nic.switch.ch
+         (el comando es ftp nic.switch.ch)
+
+
+    # show system 
+
+      * Muestra la lista de procesos (tareas) con su corespondiente
+        numero asociado ( JobId en vms )
+
+        El proceso padre principal tiene como nombre tu cuenta
+        (ej. a990123) y los subprocesos abiertos con spawn son
+        a990123_1, a990123_2, ...
+
+
+    # stop/identification=&lt;JobId&gt;
+
+      * Mata un proceso de la lista de procesos identificado
+        por su numero asociado ( JobId en vms )
+        'stop/identification' va todo junto.
+
+
+    # Ctrl-c
+
+      * Salta al interprete de comandos.
+
+
+    # continue
+
+      * Se continua con la ejecucion parada con Control-c antes.    
+        pero se debe ejecutar inmediatamente despues de parar el    
+        proceso                                                     
+
+
+    # attach &lt;proc id&gt;
+
+      * "attach &lt;..&gt;" debes ejecutarlo en el interpretes de         
+        comando, normalmete resultado de un spawn anterior, con lo  
+        cual irias saltando de subproceso en subproceso. ( a base   
+        de attach &lt;pid 1&gt; , attach &lt;pid 2&gt; , ... ) Para "salirte"   
+        de un subproceso ( matarlo ) pondrias en el interprete de   
+        comandos fruto de spawn "log" (igual que cuando sales de    
+        la cuenta) y vuelves al proceso padre.                      
+        El &lt;process id&gt; parametro de attach es del tipo:            
+                                                                          
+                        a990123, a990123_1, ...                        
+
+
+    # submit &lt;fichero_comandos.com&gt;
+
+      * Indica que si hay 'procesadores' libres, se ejecute un
+        programa, aun cuando salgas despues de la cuenta.
+        Si no hay procesadores, se encola tu peticion en
+        una cola FIFO para todos los usuarios
+
+        En VMS, los fichero con extension "com" son como los
+        de extension "bat" en dos.
+
+
+    # submit/after=&lt;hora&gt; &lt;trabajo.com&gt;</a>
+                                       
+      * Para ejecutar un proceso(s) a la hora y dia que se quiera!.
+        "hora" tiene el formato [dd-mmm-yyyy[:]][hh:mm:ss.cc].      
+        Por ejemplo,                                                
+         15-APR-1985:12  corresponde a las 12h del 15 de Abril      
+                         de 1985.                                   
+         18:30           corresponde a las 18:30 proximas.          
+
+
+
+<p>
+<a name="n_interpretes"><h2>B.-Interpretes de comandos : 'shells'</h2></a>
+
+    <h3>B.1.-'Shells' mas sencillos</h3></li>
+
+    # swing
+
+      * Programa con un entorno que facilita el manejo de todos los
+        comandos anteriores, tanto para ver el sistema de fichero, como
+        para modificarlo.
+
+
+    <h3>B.2.-Como personalizar el 'shell'</h3></li>
+
+        <h4><u>B.2.1-NOMBRES LOGICOS</u></h4></li>
+        Una variable de entorno es una cadena de caracteres que hace
+        referencia a otra cadena. Ejemplo, "saludo=hola", saludo es
+        el nombre logico que usaremos para referirnos a hola.
+        Veamos su manejo con ejemplos de referencia.
+
+        # set &lt;&lt;HOMY&gt;&gt;=&lt;&lt;[.notes]&gt;&gt;
+
+          * Como se definen las variables de entorno ...
+
+        # show logical
+
+          * ... como se ver las variables de entorno y su equivalencia ...
+
+        # set &lt;&lt;HOMY&gt;&gt; 
+
+	  * ... y como se borran!.
+
+
+        <h4><u>B.2.2-FICHEROS DE CONFIGURACION</u></h4></li>
+        Seguramente, las modificaciones echas en el apartado anterior
+        querremos que sean permanentes, no tener que teclearlas cada
+        vez que arranquemos la cuenta. Como?, escribiendo los comandos
+        en un fichero llamado :
+
+           login.com
+
+
+
+<!#########################################################################>
+<a name="n_sistema"><h1><p align=left><li>Sistema de Ficheros</p></h1></a>
+
+<p>
+<h2>A.-Navegando en los Directorios</h2>
+
+    # dir [&lt;directorio&gt;]
+      directory [&lt;directorio&gt;]
+      . dir /size=all -- --&gt; informacion completa
+
+      * Lista los ficheros del directorio que se le pase como argumento
+        ( si no, lista el directorio en que nos encontremos en ese
+          preciso momento )
+
+[dir]
+&gt;
+&gt;   $dir
+&gt;
+&gt;    |  Contents of DISK$A4:[CUARTO.A990123]   &lt;-                       |
+&gt;    |                                            |                     |
+&gt;    |  FICHERO.1;2        FICHERO.4;1            |                     |
+&gt;    |  FICHERO.2;2                               |                     |
+&gt;    |  FICHERO.3;3         ---                   |                     |
+&gt;    |                       |                    |                     |
+&gt;    |  Total files 4        |                    |                     |
+&gt;    |                       |                ruta hasta el             |
+&gt;           ^                |               directorio actual          |
+&gt;           |                |                                          |
+&gt;        numero total de      ------ listado de los ficheros
+&gt;       ficheros listados           del directorio actual
+&gt;
+&gt;    |                                                                  |
+&gt;     ------------------------------------------------------------------
+&gt;
+
+
+    # cd &lt;directorio&gt;
+      set DEFAULT &lt;directorio&gt;
+      .cd SYS$LOGIN    --   ---&gt; ir a tu cuenta
+      .cd ..           --   ---&gt; ir al anterior
+
+      * Cambia de directorio.
+        Realmente, cambia el contenido de una variable del sistema
+        operativo en la cual guarda el directorio de trabajo, que es
+        aquel que el sistema usara cuando lo omitamos.
+
+        Existe un programa (cd) que permite usar igual sistaxis que   
+        en dos o unix :                                               
+          "cd &lt;d&gt;"          como "set default &lt;c&gt;"                   |
+          "cd /a990123"     como "cd DISK$A4:[A990123]."              
+          "cd /a990123/ean" como "cd DISK$A4:[A990123.ean]"           
+                (estos dos ultimos, estando en DISK$A4)               
+
+
+    # show default
+
+      * Escribe en pantalla el actual directorio de trabajo
+        usado por defecto.
+
+
+<p>
+<h2>B.-Analizando Ficheros</h2>
+
+    # more &lt;fichero&gt; 
+      most &lt;fichero&gt;
+       . -- q        ---> salir
+       . -- PgDown   ---> siguiente pagina
+       . -- PgUp     ---> pagina anterior
+       . -- Enter    ---> siguiente linea
+
+      * Visualiza el contenido de un fichero, parando cuando se
+        "llene" una pantalla y esperando a que el usuario presione
+        teclas para continuar, o no.
+
+
+    # type &lt;f&gt;
+
+      * Visualizacion fichero sin pausa.
+
+
+    # differences &lt;f&gt; &lt;f1&gt;
+
+      * Compara el contenido de dos ficheros e indica las diferencias
+        que encuentra.
+
+
+    # sort &lt;...&gt; 
+
+      * Ordena items de un fichero.
+
+
+<p>
+<h2>C.-Busqueda de/en Ficheros</h2>
+
+    # SEARCH &lt;...&gt;
+
+      * Busca una cadena de caracteres en un fichero.
+
+
+<p>
+<h2>D.-Facilidades en accesos a Ficheros</h2>
+
+  <u>1.- CAMINOS DE BUSQUEDA (PATH)</u>
+   - Se suele usar una variable de entorno especial que contiene
+     una lista de directorios donde buscar donde esta un fichero
+     ejecutable cuando solo le damos al interprete de comandos
+     el nombre del fichero binario, y no esta en el directorio
+     actual (primero en la busqueda).
+
+   - En general es algo asi:
+        path=$DISKA1[.public.utils];$DISKA2[.commands]
+
+
+  <u>2.- NOMBRES LOGICOS</u>
+   - Los nombres logicos son nombres ficticios que se usaran
+     para permitir abreviar la referencia a un fichero,
+     sustituyendo al camino de acceso.
+
+        # assing <<dh1:[my.me]>> <<myd>> 
+
+	  * Como se definen los "nombres logicos ...
+
+        # show logical 
+
+	  * ... como se ver los nombre logicos y su traduccion ...
+          * Notas :
+             - "show logical &lt;nombre a ver&gt;" lista la
+	       traducion de ese en concreto. Si se hace referencia
+	       a otro nombre logico, se traducira y asi recursivamente
+	       hasta nivel 10 de recursividad. (cuidado con los bucles!)
+             - "show translation &lt;nombre&gt;" mostrara a que se referencia
+	       pero si es otro nombre logico, no se buscara su traduccion
+	       como en "show logical".
+
+        # copy fich.1;2 <<myd>>:
+
+	  * ... y como se referencian ...
+	  *  NOTAS:
+	      - los comandos usados son ejemplos de referencia!.
+	      - Ojo a los simbolos que se usan para decirle al interprete
+		de comando que no use el "string" (nombre logico) sino lo
+		que referencia.
+
+        # unassign <<myd>> 
+
+	  * ... y como se borran!.
+
+
+<p>
+<h2>E.-Modificando el Sist. de Fich.</h2>
+
+    # create/directory [.&lt;dn&gt;] 
+
+      * Crea un directorio nuevo, hijo del actual, llamado &lt;dn&gt;.
+
+
+    # create/directory [d1.d2] 
+
+      * Crea varios directorios, al mismo tiempo.
+        ( creara el directorio d1 y luego el subdirectorio d2 y
+          asi sucesivamente )
+
+
+    # del    &lt;dn&gt;         
+      delete &lt;dn&gt;
+
+      * Borra el directorio &lt;dn&gt;.
+        &lt;dn&gt; puede ser el path concatenado con el nombre del
+        directorio a borrar.
+
+        Si no te deja, prueba :
+           SET PROTECTION &lt;dn&gt; 
+           DELETE &lt;dn&gt;         
+
+
+    # del    &lt;fn&gt;
+      delete &lt;f&gt;
+       .purge &lt;f&gt;  ---&gt; = delete pero conserva la
+                                   ultima version del fich.
+
+      * Borra el fichero &lt;fn&gt;.
+
+        Igual que al borrar directorios, &lt;fn&gt; puede ser
+        el path y nombre del fichero;
+
+
+    # copy &lt;fin&gt; &lt;fout&gt; 
+
+      * Copia un fichero :
+        crea otro fichero que tendra el mismo contenido que el original.
+
+        Normalmente no se permite que el fichero destino tenga el
+        mismo nombre que el origen.
+
+
+    # ren &lt;f&gt; &lt;nf&gt;
+      rename &lt;f&gt; &lt;nf&gt; 
+
+      * Cambia de nombre un fichero o directorio.
+
+
+    # ren &lt;f&gt; &lt;nueva_ubicacion&gt;
+      rename &lt;f&gt; &lt;nueva_ubicacion&gt; 
+
+      * Cambia la ubicacion de un fichero.
+        Por ejemplo :
+
+            ren pract99 [practicas.java.cap1]
+
+
+    # { LS|EDT|SLP|... }
+
+      * Edita un fichero. ( permite cambiar el contenido de un
+        fichero, normalmente de texto, claro. )
+
+
+<p>
+<h2>F.-Atributos</h2>
+
+  <h3><u>F.1.-Como interpretar los flags</u></h3>
+[dir/proctection]
+&gt;
+&gt;  $dir/proctection
+
+
+  <h3><u>F.2.-Uso atributos</u></h3>
+
+  # directory/protection &lt;f&gt;
+
+    * Permite ver los "flags" actuales de cada ficheros.
+      Si se omite &lt;f&gt;, presenta el listado de todos.
+
+  # show protection
+
+    * Permite ver la mascara de protecion usada por defecto.
+
+  # set protection=({SYSTEM/OWNER/GROUP/WORLD}:{R/W/E/D},...) &lt;f&gt;
+
+    * Cambia los "flags".
+
+  # set protection/default &lt;m&gt;
+
+    * Define la mascara-patron ( m ) a usar por defecto.
+
+
+
+<!#########################################################################>
+<a name="n_manejo"><h1><p align=left><li>Manejo de Dispositivos</p></h1></a>
+
+
+<p>
+<h2>A.-Discos</h2>
+
+    <h3><u>A.1.-Acceso a disco</u></h3>
+    VMS, es parecido a DOS, siendo los dispositivos explicitos
+    y para cambiar solo hay que poner algo asi como :
+
+    # cd &lt;nodo&gt;$&lt;dispositivo&gt;:[&lt;directorios&gt;].
+
+      * accede a la informacion de ese dispositivo.
+
+
+<p>
+<h2>B.-Impresion</h2>
+
+    # print &lt;f&gt;
+
+      * Envian un fichero a la impresora
+        ( si se esta imprimiendo alguno, pasa a una cola de espera )
+      
+        La extension por defecto del fichero a imprimir es .LIS
+
+    # sh qu
+      show queue
+
+      * Permite visualizar la cola de impresion.
+        ( ficheros a espera de ser imprimidos por la impresora )
+
+    # stop/... &lt;identificador&gt;
+
+      * Borra un trabajo de la cola de impresion.
+
+
+<p>
+<h2>C.-Terminales</h2>
+
+    # Control-S 
+
+      * Detiene la salida en pantalla de un proceso.
+        (para leerla tranquilamente, por ejemplo)
+
+    # Control-Q 
+
+      * Continua la salida en pantalla.
+
+    # Control-O
+
+      * La primera vez, hace que un proceso se ejecute, anulando
+        su salida por pantalla. La siguiente vez, permite la salida
+        por pantalla del proceso por donde se vaya en el momento.
+
+
+
+<!#########################################################################>
+
+</pre>
+</ol>
+
+
+<hr><br>
+</html>
+
+

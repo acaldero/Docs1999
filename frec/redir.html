@@ -1,0 +1,113 @@
+<html>
+<title>Resumenes</title>
+<!body background="backhelp.gif">
+<br><hr>
+<h1><p align=center>Redirecciones</p></h1>
+<hr><br>
+
+
+
+<br>
+<a><h2>Redireccion, sustitucion, ...</h2> </a>
+<p><pre>
+       Redireccion
+       -----------
+       # > --- > --| DEFINE/USER SYS$OUTPUT &lt;salida.txt&gt; |-- ???
+		   | Ver nota en siguiente apartado!!!   |
+
+	 * permite que la salida estandar de un proceso pueda ir a un
+	   fichero.
+	 * En unix,
+	   si lo que se quiere redirigir es la salida de errores, poner :
+
+		 sh -c 'comando 2>fichero'
+	   donde :
+	       comando es el comando a ejecutar
+	       fichero es el fichero donde guardar la salida
+	       ( realmente, se lanza un shell para la tarea. Es util para
+		 que la salida de un compilador (errores al compilar) vayan
+		 a un fichero. Algunos editores usan ese fichero para ayudar
+		 a depurar. Hay versiones de vi que permiten :
+                               vi -m &lt;fichero errores&gt;
+		 y te puedes mover el cursor entre error y error indicando
+                 el mensaje del compilador )
+
+       # < --- < --| DEFINE/USER SYS$INPUT &lt;entrada.txt&gt; |-- ???
+		   | Ver nota en este apartado           |
+
+	 * permite que la entrada de un proceso pueda ser a un fichero
+	   distinto del de entrada estandar
+	 ** NOTA!:
+	 En VMS puede redirigirse la entrada/salida de las siguientes
+	 formas:
+
+	   1.- Muchos comandos tienen los parametros
+	   /INPUT=file y /OUTPUT=file  Por ejemplo:
+
+	     SPAWN /INPUT=entrada.txt /OUTPUT=salida.txt myprog
+
+	   2.- En otros muchos casos, puede reajustarse la entrada y la
+	   salida antes de llamar al comando. Por ejemplo, ($ es el
+	   prompt de VMS)
+
+	     $ DEFINE/USER SYS$OUTPUT salida.txt
+	     $ DEFINE/USER SYS$INPUT entrada.txt
+	     $ SPAWN myprog                          # este es el comando
+
+	 !!!. La redireccion solo sirve para el siguiente comando que
+	 introduzcamos.
+
+
+       # >> --- >> --- ??? --- ???
+
+	 * permite que la salida de un comando se anyada al final de un
+	   fichero
+
+       # ??? --- | --- ??? --- ???
+
+	 * permite conectar la salida de un proceso con la entrada de
+	   otro (pipe)
+
+       Edicion comandos
+       ----------------
+       # ??? --- history (csh,...) --- ??? --- ???
+
+	 * lista los ultimos "n" comandos con su orden
+
+       # tecla(Up) --- !! (csh,...) --- tecla(Up) --- ???
+
+	 * repite el ultimo comando
+
+       # ??? --- !&lt;n&gt; (csh,...) --- ??? --- ???
+
+         * repite el comando de orden "&lt;n&gt;" que aparece al ejecutar history.
+	   - ej history : 1 ls
+			  2 cp or.t ah.p
+
+		  !-1 --> ls
+		  !2  --> cp or.t ah.p
+
+       # ??? --- !&lt;letra(s)&gt; (csh,...) --- ??? --- ???
+
+         * repite el ultimo comando que empieza por &lt;letra(s)&gt;.
+
+       Sistema ficheros
+       ----------------
+       # ??? --| ~ , $HOME (csh,..) |-- sys$login --- ???
+	       | $HOME     (ksh)    |
+
+	 * sirven para referenciar el directorio de nuestra cuenta.
+
+	   ej.) Unix
+
+		estamos en /usr/include y queremos copiarnos un fichero
+		a nuestra cuenta:
+		       cp ./sys.h /home/tercero/a990123/myh
+		       cp ./sys.h ~/myh
+		ambos son equivalentes
+		( usar $HOME si se esta en el ksh en lugar de ~ )
+</pre>
+
+
+<br><hr>
+</html>

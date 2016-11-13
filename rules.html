@@ -1,0 +1,179 @@
+<html>
+
+<head>
+
+<title>Textos de ayudas</title>
+<!------------------------------- I'LL BE BACK ... (Kirk Captain) ---------->
+</head>
+
+<body text="#0000FF" link="#FF0000" vlink="#0000FF">
+
+<p align="center">&nbsp; </p>
+
+<p align="center"><img src="../Icons/Cos_rule.gif" align="BOTTOM" border="0" vspace="0" hspace="0" width="500" height="6"> </p>
+<div align="center"><center>
+
+<table width="500" cellpadding="2" cellspacing="0" border="1">
+  <tr>
+    <td width="100%" valign="TOP"><p align="center"><font face="Comic Sans MS,Comic Sans,Times New Roman"><b>Reglas importantes</b></font></td>
+  </tr>
+</table>
+</center></div>
+
+<p align="center"><img src="../Icons/Cos_rule.gif" align="BOTTOM" border="0" vspace="0" hspace="0" width="500" height="6"> </p>
+
+<p align="center">&nbsp;</p>
+
+<blockquote>
+  <a href="edits/fedits.html">
+</a><blockquote>
+    <h2>Indice</h2>
+    <ul>
+      <li><a href="#introduccion">¿ Qu&eacute; es este documento ?</a> </li>
+      <li><a href="#reglas">Reglas de uso</a> </li>
+      <li><a href="#notas">Notas</a> </li>
+      <li><a href="#simbologia">¿ Qu&eacute;e necesito saber para entender la gu&iacute;a ?</a> </li>
+      <li><a href="#quienes">¿ Qui&eacute;enes han colaborado ?</a> </li>
+    </ul>
+  </blockquote>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <hr>
+<! ### Referencia basica ################################################## >
+  <ul>
+    <li><a name="introduccion">¿ Qu&eacute; es este documento ?</a> <pre><font face="Courier" color="#000000">
+A cada comando de Unix le acompa&amp;ntildearan los comandos de los
+sistemas operativos DOS (bajo DOS englobamos MS-DOS, DR-DOS y PC-DOS),
+VMS y CMS/CP, (y OS/9 algunas veces) que cumplen igual o parecida
+funci&oacute;n que el comando de Unix pero en sus respectivos sistemas
+operativos.
+As&iacute;i, en la gu&iacute;a nos encontraremos con, por ejemplo :
+</font></pre>
+      <p># dir --- ls --- directory --- filelist --- dir </p>
+      <p>* Lista los ficheros del directorio actual. El formato de listado depender&aacute; de cada
+      s.o. </p>
+      <p>y entenderemos que para ver los ficheros en el directorio actual usaremos el comando -
+      dir en DOS , - ls en UNIX , - directory en VMS y - filelist en CMS/CP, - dir en OS/9 todos
+      tienen la misma funci&oacute;n, aunque los datos que nos muestren en pantalla haya que
+      interpretarlos de forma diferente. </p>
+      <p>Por suerte o desgracia, no existe una correspondencia tan
+      &quot;cuadriculada&quot;.(Algunas veces, simplemente por que lo desconocemos) Por ello, se
+      intentar&aacute; en lo posible simular algunos comandos con otros, al menos. <br>
+      </p>
+      <p>&nbsp;</p>
+    </li>
+    <li><a name="reglas"><h3>Reglas de uso</a> </h3>
+      <pre>Solo os pedimos que :
+
+    1.- NO se venda (ESTE TEXTO ES GRATIS)
+    2.- NO lo pas&eacute;is con &quot;bromitas&quot;
+        ( como: &quot;format c:&quot; es para ver un directorio )
+    3.- Pasar la ayuda a todo el que lo necesite.
+
+Y, os rogamos ayuda para mejorarlo 
+CUALQUIER MEJORA - CORRECCION - AMPLIACION - ETC,ETC,
+SERA SIEMPRE MUY BIEN RECIBIDO/A.
+mandad las sugerencias a :</pre>
+      <p><a href="mailto:acaldero@arcos.inf.uc3m.es">Alex</a></p>
+      <p>Gracias por adelantado!.<br>
+      <br>
+      </p>
+    </li>
+    <li><a name="notas"><h3>Notas</a> </h3>
+      <pre>
+   Sobre las normas de uso de los programas, es seguro que hay
+un sitio donde estan. Las prohibiciones suelen aparecer en
+las News de zipi, la secci&oacute;n dedicada a la facultad, o bien
+en algun papel. Sino, ante la duda preguntad a algun respon-
+sable de algun sistema. Os ayudaran.
+
+
+   Un mal de la burocracia, es que las normas, y todo tipo de
+disposici&oacute;n, siempre estar&aacute;n en algun sitio, pero alejadas de
+quien pueda interesar. Muchas veces nos enteramos de alguna
+norma cuando nos castigan. Evitarlo.</pre>
+      <p><br>
+      <br>
+      </p>
+    </li>
+    <li><a name="simbologia"><h3>Simbolog&iacute;a usada</a> </h3>
+      <pre>
+* Siglas y otras cosas ...
+
+    5.0-&gt;      ---&gt; a partir de la versi&oacute;n 5.0
+    -&gt;5.0      ---&gt; desde los inicios, hasta la versi&oacute;n 5.0
+       <>        ---&gt; par&aacute;metro a sustituir
+       <<>&gt;       ---&gt; par&aacute;metro de ejemplo a sustituir
+     {}        ---&gt; dentro hay una serie de optativas a elegir 
+                    una o varias.
+                    Las opciones se separar&aacute;n con &quot;|&quot;.
+    :::        ---&gt; continua en la siguiente l&iacute;nea
+  a --- b      ---&gt; a y b son equivalentes, cada uno en un sistema operativo
+                    ( en la explicaci&oacute;n de las opciones de los programas ,
+                      significa que b es la definici&oacute;n de a )
+                    Algunas veces se usar&aacute; &quot;a -- b&quot; por cuesti&oacute;n de
+                    espacio.
+  a &#149;&#149;&#149; b      ---&gt; a y b son Aproximadamente equivalentes,
+                    o lo mas parecido en lo que implican
+                    Algunas veces se usara &quot;a &#149;&#149; b&quot; por cuesti&oacute;n
+		    de espacio.
+  a ---| c |   ---&gt; a es equivalente a ejecutar primero c
+       | d |        y luego d.
+  tecla(pausa) ---&gt; pulsar la tecla que tenga ese nombre
+                    ( es para diferenciarlo del comando
+		      que se llame &quot;pausa&quot; )
+  Ctrl-x       ---&gt; pulsar la tecla &quot;Control&quot; y al mismo tiempo
+		    la tecla &quot;x&quot;. En algun apartado se usara
+                    la notaci&oacute;n &quot;C-x&quot;, totalmente equivalente.
+  Alt-20       ---&gt; significa que presionando la tecla Alt,
+		    teclear un 20 en el teclado extendido y luego
+	            soltar. (asi se genera el caracter de orden
+	    	    20 en la tabla ascii)
+</pre>
+      <p>* Los comandos se agrupan por igual significado, siendo el orden : --- normalmente se
+      usar&aacute; : dos --- unix --- vms --- cms/cp --- os/9 --- entre parentesis y al lado del
+      comando, se indica el(los) sistema(s) operativo(s) que soporta cada comando --- o bien, se
+      dedica un subapartado para cada sistema operativo <br>
+      <br>
+      </p>
+    </li>
+    <li><a name="quienes"><h3>Quienes ?</a> </h3>
+      <pre>
+   Gracias a una cantidad enorme de gente que han aportado
+desde informaci&oacute;n hasta apoyo incondicional...
+
+     Vicente Luque,   Sira Vegas,         Pablo Baeza,
+     Jose Mar&iacute;a Rey,  Enrique Navarro,    Leandro Pascual,
+     Roman Camacho,   Ismael P&eacute;rez,       Antonio D&iacute;az,
+     Jes&uacute;s Quirce,    Antonio Martin,     H&eacute;ctor Perez,
+     Antonio Corral,  Mar&iacute;a Jos&eacute; P&eacute;rez,   Juan Luis Dominguez,
+     Alfredo Vegas,   Guillermo Rodrigez, Francisco Javier Lainez,
+     Benjam&iacute;n Moreno, David Escorial,     Antonio S&aacute;nchez Jerez,
+     Rodrigo y Miguel Angel Carmona,      Julian,
+     y mas y mas ...
+
+   Los que nos hemos encargado de recojer y fijar en letras
+toda la ayuda :
+
+       Guillermo Bautista (Unix,tele &amp; trucos) ,
+       Juan Jose Amor     (Unix,Vms,VM/ESA,tele, CMS)
+            (Internet) jjamor@moises.ls.fi.upm.es
+            (FidoNet)  2:341/12.19              
+       Francisco Ivanez   (VM/ESA!),
+       de JC usamos su ayuda de zipi para ampliar la nuestra.
+       Alejandro Calderon (dos,Unix,Vms)
+            acaldero@laurel.datsi.fi.upm.es
+
+   Si me olvido de alguien, perdonarme, ya sabeis lo despistado
+ que suelo ser!
+
+&nbsp;</pre>
+    </li>
+  </ul>
+</blockquote>
+
+<p align="center"><img src="../Icons/Cos_rule.gif" align="BOTTOM" border="0" vspace="0" hspace="0" width="500" height="6"> </p>
+
+<p align="center">&nbsp;</p>
+</body>
+</html>

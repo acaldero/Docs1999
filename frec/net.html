@@ -1,0 +1,304 @@
+<HTML>
+ <HEAD>
+ <TITLE>Compresores</TITLE><!-- ### Referencia basica ################################################## -->
+ <!-- ### Opciones importantes de los comandos ############################### -->
+ </HEAD>
+ <BODY>
+ <P ALIGN=CENTER>
+  <CENTER><HR ALIGN=CENTER WIDTH=100% SIZE=2>
+  </CENTER>
+ </P>
+ <H1
+  ALIGN=CENTER>
+  <CENTER>
+  <FONT FACE="Arial,Helvetica,Monaco"><FONT SIZE=5>Red [internet]</FONT></FONT></CENTER></H1><P ALIGN=CENTER><CENTER><HR ALIGN=CENTER WIDTH=100% SIZE=2></CENTER></P><P>&nbsp;<BR><BR><BR><H2>Indice</H2>
+ <P>
+  <UL>
+   <LI><A HREF="#Info_Usuarios">Usuarios de una Maquina</A><LI>
+   <A HREF="#Comun_Usuarios">Comunicarse con otros usuarios</A><UL>
+    <LI>Interactivos (...esta en 'casa'en este momento)<LI>
+    NO interactivos (...el contestador automatico)</UL>
+   <LI><A HREF="#Info_Ordenadores">Datos de una Maquina</A><LI>
+   <A HREF="#Comun_Ordenadores">Comunicacion entre Maquinas</A><UL>
+    <LI>ftp, fsp<LI>
+    telnet, rlogin,...</UL>
+   <LI><A HREF="#Nav_Internet">Navegadores Internet</A><UL>
+    <LI>NetScape, Xmosaic, lynx.</UL>
+  </UL><P>
+ &nbsp;<BR>
+ <BR>
+ <BR>
+ <HR ALIGN=CENTER WIDTH=100% SIZE=2>
+ <BR>
+ <A NAME="Info_Usuarios"></A>
+ <H2>
+ Usuarios de una Maquina</H2><PRE><UL>   <BR>LISTADO DE LOS USUARIOS CONECTADOS<BR><BR>      # !!! --- w --- sh users --- QUERY NAMES<BR><BR>        * Lista los usuarios conectados en ese momento a la<BR>          maquina local ( la maquina desde la que se ejecuta el<BR>          comando indicado ) y que comando esta ejecutando<BR>          en ese momento.<BR><BR>      # !!! --- who --- ??? --- ???<BR><BR>        * Lista los usuarios conectados en ese momento y desde<BR>          donde estan conectados.<BR><BR>      # finger &lt;@maquina&gt; (ux,vms)<BR><BR>        * lista los usuarios conectados a esa maquina en ese<BR>          preciso momento<BR><BR>      # !!! --- rusers --- ruser --- ???<BR><BR>        * Lista las maquinas accesibles desde la que estas conectado,<BR>          y de cada maquina, los usuarios conectados en ese momento.<BR>        * Si se queda como &quot;colgado&quot; pulsar control-c para regresar<BR>          al prompt del sistema.<BR><BR>   <BR>DATOS DE UN USUARIO<BR><BR>      # finger &lt;usuario@maquina&gt; (ux,vms)<BR><BR>        * Visualiza la informacion de un usuario.<BR>        * finger &lt;usuario&gt;  : busca el usuario en la maquina local<BR><BR>      # !!! --- whois &lt;usuario&gt; --- ??? --- ???<BR><BR>        * Intenta mostrar que cuentas tienen como nombre de usuario<BR>          el que se le pasa por parametro.<BR><BR>   <BR>CAMBIAR ALGUNOS DATOS TUYOS<BR><BR>      ( NOTA:<BR>         La mayoria de los datos presentados por los comandos<BR>         anteriores, estan en alguno de los &quot;ficheros especiales&quot;,<BR>         ver esa seccion para mas detalle. )<BR><BR>      # chfn (ux)<BR><BR>        * Cambia el nombre del propietario de la cuenta,<BR>          informacion esta que sale con la orden finger.<BR>        * Acronimo de &quot;CHange-Full-Name&quot;.</PRE></UL><PRE> </PRE><P>
+ &nbsp;<BR>
+ <BR>
+ <HR ALIGN=CENTER WIDTH=100% SIZE=2>
+ <BR>
+ <BR>
+ <A NAME="Comun_Usuarios"></A>
+ <H2>
+ Comunicarse con otros usuarios</H2><PRE><UL>   <BR>COMANDOS INTERACTIVOS<BR>   <BR><UL><BR>     <BR>Entre DOS usuarios<BR><BR>     # talk &lt;usuario@maquina&gt;  (ux,vms)<BR><BR>       * Permite una comunicacion interactiva.<BR>         ( debe estar conectado los dos usuarios )<BR>         Para hablar con el user &lt;x903...&gt;@bingo.zfk.es :<BR><BR>                talk &lt;x903...&gt;@bingo.zfk.es<BR><BR>         La pantalla se dividira en dos partes, una donde<BR>         escribiis vosotros y el lo leera instantaneamente, y<BR>         otra donde el os escribe a vosotros.<BR><BR>       * Particularidades :<BR><BR>        --- VMS -----------------------------------------------------<BR>       | - Entre dos ordenadores VMS puede usarse la orden:           |<BR>       |        phone &lt;maquina::usuario&gt;                              |<BR>        --------------------------------------------------------------<BR><BR>     # ??? --- write &lt;usuario&gt; --- ??? --- TELL &lt;user&gt; &lt;texto&gt;<BR><BR>       * Manda un mensaje al usuario ( debe estar conectado y<BR>         en la misma maquina ). Para terminar pulsar 'control-c'<BR>         a la vez.<BR>       * En CMS/CP, para enviar mensajes entre usuarios conectados<BR>         se debe utilizar bien<BR>              TELL &lt;usuario&gt; &lt;mensaje&gt; o<BR>              MSG  &lt;usuario&gt; &lt;mensaje&gt;<BR><BR>     # ??? --- msg {y/n}  --- ??? --- ???<BR><BR>       * Activa/desactiva la posibilidad de que te manden<BR>         mensajes los demas usuarios usando write y talk.<BR><BR>     <BR>Entre VARIOS usuarios<BR><BR>     # irc<BR><BR>       * Es un programa que permite conectarte con varios<BR>         usuarios a la vez, pudiendo ver lo que escriben<BR>         y tu vas respondiendo.<BR>       * IRC es acronimo de Internet Relay Chat.<BR>   <BR></UL><BR><BR><BR><BR>   <BR>COMANDOS NO INTERACTIVOS (usuario NO presente)<BR>   <BR><UL><BR>     <BR>Entre DOS usuarios<BR><BR>     # !!! --- mail &lt;usuario&gt;  --- ean --- NOTE / sendfile (ver nota)<BR><BR>       * Manda correo electronico<BR><BR>         - Opciones dentro del programa, mas frecuentes :<BR><BR>                               mail   ean<BR>                               ----   ---<BR>              ayuda        --&gt;  h      l<BR>              lista correo --&gt;  l      h<BR>                            -&gt;  x      x  (se sale sin modificar nada)<BR>              salir        &lt;<BR>                            -&gt;  q      q  (graba los mensajes leidos en<BR>                                           el fichero mbox. Si existe,<BR>                                           concatena los mail a los que<BR>                                           ya hubiera)<BR>         - Mas Informacion<BR>             - <A
+    HREF="#Ean-Mail"> Ean Vs. Mail </A><BR>             - <A
+    HREF="#VMSMail"> VMSMail </A><BR><BR>       * Particularidades :<BR><BR>        --- VMS ------------------------------------------------------<BR>       | - Existe un comando para mandar mails, pero SOLO entre       |<BR>       |   usuarios de la misma maquina.                              |<BR>        --- CMS-CP ---------------------------------------------------<BR>       | - &quot;sendfile&quot; envia ficheros a una zona reservada para cada   |<BR>       |    usuario (lectora virtual para los &quot;tesnicos&quot;). La forma<BR>       |    de usarlo, es distinto que el mail :                      |<BR>       |      - Sendfile no tiene un entorno para editar los ficheros |<BR>       |        a enviar, como si el mail tiene.                      |<BR>       |      - Sendfile no se encarga de tratar los ficheros         |<BR>       |        recibidos. Asi para :                                 |<BR>       |         . recepcionar los ficheros &quot;receive&quot; es el encargado |<BR>       |         . borrar los ficheros : &quot;discard&quot;                    |<BR>       |         . listar ficheros recibidos : &quot;rdrlist&quot;              |<BR>       |  - El comando NOTE y sendfile de CMS/CP solo sirve para ma-  |<BR>       |    quinas de este tipo en una red SNA. A efectos practicos,  |<BR>       |    solo sirve para pasarse mensajes entre usuarios de la     |<BR>       |    misma maquina.                                            |<BR>        --------------------------------------------------------------<BR><BR>     # biff {y|n} (ux)<BR><BR>       * Informa al usuario en el terminal en cuando llega correo<BR>         ( creo que al ejecutar revisa si se ha modificado el<BR>           fichero de correo, por lo cual puede dar falsas alarmas<BR>           cuando, por ejemplo borras un correo ).<BR>       * El porque este comando se llama biff, tiene su historia ...<BR>         Era el nombre del perro que estaba en Berkeley cuando se<BR>         iniciaba el BSD, (una &quot;version&quot; de Unix) y era conocido<BR>         por ladrar al cartero!.<BR><BR><BR>     <BR>Entre VARIOS usuarios<BR><BR>     # News (ux,vms)<BR><BR>       * Existen un listado de temas. Tu elijes uno y aparece<BR>         un listado de &quot;mails&quot; relacionados con ese tema<BR>         aunque usa el mismo formato, esos &quot;mails&quot; no se pueden<BR>         manejar con el comando mail ( ni leer, ni mandar, ... )<BR>         se usan solo y exclusivamente con el comando News<BR>         ( por ejemplo, la seccion &quot;fi.avisos&quot; es donde se van<BR>           anunciando las normas, tanto de usos del c.c.<BR>           (centro de calculo) como de estudios (cambios en<BR>           cierres, cambios en forma de pago...,cambios???)   )<BR><BR>       * Para mas informacion :<BR>           - <A
+    HREF="#NewsZipi"> News (zipi)</A><BR>           - <A
+    HREF="#NEWSRDR"> NEWSRDR</A><BR>   <BR></UL><BR></PRE></UL><PRE> </PRE><P>
+ &nbsp;<BR>
+ <BR>
+ <HR ALIGN=CENTER WIDTH=100% SIZE=2>
+ <BR>
+ <BR>
+ <A NAME="Info_Ordenadores"></A>
+ <H2>
+ Datos de una Maquina</H2><PRE><UL>   <BR>DATOS DE LOS ORDENADORES<BR><BR>     # ??? --- nslookup &lt;ordenador&gt; :::<BR>               --- multinet nslookup ordenador server --- ???<BR><BR>       * Da la direccion, en numero, del ordenador poniendo<BR>         su nombre. Ejemplos :<BR><BR> zipi.fi.upm.es   -&gt; 138.100.8.2<BR> batman.fi.upm.es -&gt; 138.100.8.3<BR><BR>       * Particularidades :<BR><BR>        --- VMS ----------------------------------------------------<BR>       | - hay que especificar el servidor inicial de nombres       |<BR>       |   (server). Se recomienda poner aqui goofy.fi.upm.es.      |<BR>        ------------------------------------------------------------<BR><BR>     # ping host n (ux) --- multinet ping host (vms)<BR><BR>       * Permite ver si podemos tener conexion on-line con el host<BR>         especificado ( util para ver si funciona la red, algo<BR>         importante en la LAN de la Facultad ;-) )<BR>         El parametro n indica, en la implementacion de Sun, el<BR>         numero de segundos del intento (por defecto, 20).<BR>         ( suele ser medida de tiempo o numero de intentos )</PRE></UL><PRE> </PRE><P>
+ &nbsp;<BR>
+ <BR>
+ <HR ALIGN=CENTER WIDTH=100% SIZE=2>
+ <BR>
+ <BR>
+ <A NAME="Comun_Ordenadores"></A>
+ <H2>
+ Comunicacion entre Maquinas</H2><PRE><UL>   <BR>ACCESO REMOTO A TU CUENTA<BR><BR>     # telnet &lt;maquina&gt;  (dos,ux,vms)<BR><BR>       * Permite conectarte a otro ordenador, como un usuario<BR>         en una terminal del mismo.<BR>       * En el &quot;argot&quot; informatico, esa maquina se llama HOST.<BR><BR>     # tn3270 &lt;host&gt; (dos,ux,vms)<BR><BR>       * Permite conectarte a un ordenador con VM-ESA(host), como<BR>         terminal 3270.<BR>       * Muchas versiones de telnet tienen un parametro para actuar<BR>         como este programa.<BR><BR>      Ej. en el telnet de AIX, &quot;telnet -e 3270&quot;<BR><BR>     # rlogin -l &lt;Usuario_Anfitrion&gt; &lt;maquina&gt; (Unx) :::<BR>          --- rlogin/username=&lt;Usuario_Anfitrion&gt; &lt;maquina&gt; (VMS)<BR><BR>       * Permite conectarte a la cuenta de un usuario de una maquina<BR>         ( puede ser la misma ) como si de el mismo se tratara sin<BR>           tener que introducir password ( antes , ese usuario tiene<BR>   que darte de alta en su fichero .rhosts ).<BR>   ( para mas informacion del fichero .rhosts ver seccion<BR>             ficheros especiales )<BR>   El parametro -l o /Username es opcional. Si no se indica, se<BR>   asume que queremos entrar en nuestra cuenta, de otra maquina.<BR><BR>     # psi  (vms)<BR><BR>       * Permite conectarte a otro ordenador, como un usuario<BR>       * Para mas informacion :<BR>           - <A
+   HREF="#PSI"> PSI</A><BR><BR>   <BR>ACCESO A LOS RECURSOS DE OTROS ORDENADORES<BR><BR>     # ftp &lt;maquina&gt;  (dos,ux,vms)<BR><BR>       * Permite intercambio de ficheros entre dos cuentas de<BR>         un mismo ordenador o de ordenadores diferentes.<BR>       * Ante la duda, traerse los fichero en binario. Exite<BR>         un truco para &quot;convertirlos&quot; a ascii.<BR>         (ver fichero trucos)<BR>       * Siglas de &quot;File Transfer Protocol&quot;.<BR>       * Si el ftp no es interactivo, en algunos sistemas el<BR>         caracter @ lo interpreta como enter. Que hacer?<BR>         (ver seccion trucos)<BR>       * Para mas informacion :<BR>           - <A
+   HREF="#FTP"> Ftp</A><BR><BR>     # fsp &lt;maquina&gt;  (dos,ux,vms,system7)<BR><BR>       * Intercambio de ficheros entre ordenadores, pero te conectas<BR>         sin necesitar password. Te conectas a un &quot;servidor fsp&quot;.<BR>       * No necesita linea dedicada; para cada orden te conectas,<BR>         se ejecuta y se desconecta.<BR>       * Las fuentes son publicas con lo que las puedes compilar<BR>         para cualquier maquina ( incluso las fuentes del servidor )<BR>       * Siglas de &quot;File Service Protocol&quot;.(?)<BR>       * Ojo, con fsp te conectas a un servidor fsp, no ftp<BR>         idem con ftp ( no sirve uno como otro, aunque tenga<BR>         funcion parecida )<BR>       * Ver en seccion programa, apartado fsp.</PRE></UL><PRE> </PRE><P>
+ &nbsp;<BR>
+ <BR>
+ <HR ALIGN=CENTER WIDTH=100% SIZE=2>
+ <BR>
+ <BR>
+ <A NAME="Nav_Internet"></A>
+ <H2>
+ Navegadores Internet</H2><PRE> <BR>     # gopher (ux) <BR><BR>       * Programa que ofrece varios servicios de los descritos en<BR>         anteriores puntos.<BR><BR>     </PRE><H3>
+ Navegadores WWW</H3><PRE> <BR>        Son programas que presenta 'hojas' de texto, en las cuales hay<BR>     unas palabras subrayadas. Si se quiere saber mas de esa palabra,<BR>     se seleciona con el raton esa opcion. En poco tiempo se muestra<BR>     otra pagina con informacion referente a esa palabra. De esta<BR>     forma se puede viajar por un &quot;periodico&quot; casi infinito.<BR>     Las hojas se llaman &quot;paginas web&quot; ;<BR>     Las paginas web forman una telaran~a mundial, conocida con el<BR>     nombre de &quot;Word-Wide-Wed&quot; o bien &quot;WWW&quot;.<BR>        Por dentro, la informacion de cada hoja se trae con un protocolo<BR>     de comunicaciones (http,ftp,news,gopher...), creandose una conexion<BR>     que se cierra al recibir la pagina. <BR><BR>       # NetScape (win,ux)<BR><BR>         * Presenta las paginas web, en modo grafico.<BR>           El mas conocido.<BR><BR>       # Xmosaic (ux)<BR><BR>         * Presenta las paginas web, en modo grafico.<BR>           El primero conocido.<BR><BR>       # lynx (ux,vms)<BR><BR>         * Presenta las paginas web, en modo TEXTO.<BR>           Muy usado por existir muchos terminales vt100.<BR><BR>       # explorer (win95)<BR><BR>         * En modo grafico...<BR></PRE><P>
+  <OL>
+  &nbsp;<BR>
+  <BR>
+  <HR ALIGN=CENTER WIDTH=100% SIZE=2>
+  <HR ALIGN=CENTER WIDTH=100% SIZE=2>
+  <BR>
+  <H2>
+   <LI>Parametros mas importantes</H2>
+   <P>
+    <UL>
+    <A NAME="Ean-Mail"></A>
+    </P>
+    <H3>
+    Correo Electronico : Ean-Mail</H3>
+    <H4>
+    Simbologia usada en este apartado :</H4><PRE>      <BR> . entre [] --- Estara lo que tienes que ir tecleando la<BR>explicacion se da con ejemplos, por lo que<BR>tendras que sustituir por lo apropiado para ti.<BR>         . &lt;enter&gt;  --- significa dar a la tecla enter.<BR></PRE><H4>
+     <OL>
+      <LI>comparativa ean-mail</H4>
+      <P>
+       <UL>
+       para mandar un mail a a990123 en raticulin :</P><PRE> <BR>    ( comentarios :<BR>        normalmente hay que poner la direccion entera, con<BR>        .fi.upm.es ( o .datsi, .dia ... )<BR>        ( Recordar siempre las leyes de murphy y el principio<BR>          de &quot;todos los ordenadores son tontos y los duenyos que<BR>          piensen lo contrario tambien&quot; )<BR>    )<BR><BR>  [ean a990123@raticulin.fi.upm.es]  |  [mail a990123@raticulin.fi.upm.es]<BR>  subject: [ sestienvre ]            |  subject: [sesti]<BR>  [                                  |  [<BR>     Con mucha razon decia Alberto   |     Eso pispo<BR>     que el lema del estudiante de   |  .<BR>     informatica era :               |  ]<BR>       estudiar como nunca,          |  Option &lt;enter&gt;<BR>       suspender como siempre!       |<BR>  .                                  |<BR>  ]                                  |<BR>  Option &lt;enter&gt;                     |<BR></PRE><P>
+       para leer los mail que te llegan :</P><PRE> <BR>    ( comentarios :<BR>        en el ejemplo se lee el primer correo<BR>    )<BR><BR>  [ean]                              |  [mail]<BR>  ...                                |  ...<BR>  1 &quot;julio&quot;  ...                     |  1 &quot;julio&quot;  ...<BR>  2 &quot;agosto&quot; ...                     |  2 &quot;agosto&quot; ...<BR>  ...                                |  ...<BR>  ean&gt;[1]                            |  mail&gt;[1]<BR>  ...                                |  ...<BR>  &quot; que bonito, que bonito           |  &quot; no se me ocurre otra ...<BR>    que bonito!                      |  &quot;<BR>  &quot;                                  |<BR></PRE><P>
+       para salvar un mail en un fichero :</P><PRE> <BR>    ( comentarios :<BR>        hay que estar dentro del Ean.<BR>        Si estamos en el sistema, entramos en el ean con &lt;ean&gt;<BR>        y vemos que queremos salvar el primer mail en el fichero<BR>        file<BR>        ( el comando a usar es print &lt;numero mail&gt; on &lt;nombre file&gt; )<BR>    )<BR><BR>  ...                                |  ...<BR>  1 &quot;julio&quot;  ...                     |  1 &quot;julio&quot;  ...<BR>  2 &quot;agosto&quot; ...                     |  2 &quot;agosto&quot; ...<BR>  ...                                |  ...<BR>  ean&gt;[print 1 on correojulio]       |  mail&gt;[s 1 correojulio]<BR><BR></PRE><P>
+       para volver a ver la lista de todos los mails :</P><PRE> <BR>    ( comentarios :<BR>        En unix solo sale la primera &quot;pantalla&quot;. Para ver el resto<BR>        de los mails (&quot;avanzar&quot; en esa lista), poner &quot;z&quot; en el<BR>        prompt del mail.<BR>    )<BR><BR>  ean&gt;[h]                            |  mail&gt;[l]<BR>  ...                                |  ...<BR>  1 &quot;julio&quot;  ...                     |  1 &quot;julio&quot;  ...<BR>  2 &quot;agosto&quot; ...                     |  2 &quot;agosto&quot; ...<BR>  ...                                |  ...<BR>  ean&gt;                               |  mail&gt;<BR></PRE><P>
+       para &quot;incluir&quot; un fichero en el mail :</P><PRE> <BR>    ( comentarios :<BR>        el comando a usar es &quot;#include &lt;fichero&gt;&quot;<BR>    )<BR><BR>  [ean a990123@raticulin.fi.upm.es]  |  [mail a990123@raticulin.fi.upm.es]<BR>  subject: [ sestienvre ]            |  subject: [sesti]<BR>  [                                  |  [<BR>    Te mando mi parte de la practica |    Lo mismoma<BR>    pruebala tu tambien              |    --- cut here ---<BR>    ----- cut here -----             |    ~r practico.so<BR>    #include practica.so;25          |    ----------------<BR>  .                                |    .<BR>  ]                                  |  ]<BR>  Option &lt;enter&gt;                     |  Option &lt;enter&gt;<BR></PRE><P>
+       para pedir ayuda :</P><PRE> <BR>  ean&gt;[help]                         |  mail&gt;[h]<BR>  ...                                |  ...<BR></PRE><P>
+       para visualizar la configuracion actual :</P><PRE> <BR>  ean&gt;[show]                         |  mail&gt;[set]<BR>  ...                                |  ...<BR>                                     |  mail&gt;[alias]<BR>                                     |  ...<BR></PRE><P>
+       para borrar un mensaje :</P><PRE> <BR>    ( comentarios :<BR>        para borrar un rango de mensajes en zipi, poner d <I>:&lt;f&gt;.</I><BR><I>        ejemplo, d 22:31 borra desde el correo 22 al 31, ambos</I><BR><I>        inclusive.</I><BR><I>    )</I><BR><BR><I>  ean&gt;[del &lt;numero de mensaje&gt; ]     |  mail&gt;[d &lt;orden correo&gt; ]</I><BR><I>  ...                                |  ...</I><BR></PRE><P>
+       <I>para aceptar nuevos mensajes :</I></P><PRE> <BR><I>    ean&gt;[accept]                       |  mail&gt;[receive]</I><BR><I>    ...                                |  ...</I><BR><BR></PRE></UL><H4>
+      <LI><I>comandos ean solo</I></H4><PRE> <BR><I>    En el ean, los mails se organizan por carpetas (folders). la</I><BR><I>   carpeta por defecto es inbox. Los comandos para manejar las</I><BR><I>   carpetas :</I><BR><BR><I>        folders    ---&gt; lista las carpetas existentes</I><BR><I>        open &lt;f&gt;   ---&gt; si existe la carpeta &lt;f&gt;, la abre y accedemos</I><BR><I>                        a ella, cerrando la abierta anteriormente.</I><BR><I>                        si no existe, la crea vacia</I><BR><BR><I>        move &lt;#c&gt; &lt;f&gt; ---&gt; copia un mensaje de orden &lt;#c&gt; existente</I><BR><I>                             en la actual carpeta, en la carpeta &lt;f&gt;</I><BR><I>                             (&quot;transfer&quot; en algunos sistemas)</I><BR><BR></PRE></OL><PRE> <BR><BR><BR><BR></PRE><P
+     ALIGN=CENTER>
+     <CENTER><HR ALIGN=CENTER WIDTH=100% SIZE=2>
+     </CENTER>
+    </P><PRE> <BR><A
+     NAME="VMSMail"></A><I></I></PRE><H3>
+    <I>VMSMail</I></H3><PRE><I> </I><BR><BR><I>     Es el sistema de mensajeria que viene incluido con VMS,</I><BR><I>  solo sirve para enviar mensajes localmente o utilizando DECnet</I><BR><I>  (software de comunicaciones de DEC), este sistema exige que la</I><BR><I>  maquina destino este funcionando y la entrega del mensaje se hace</I><BR><I>  en el momento.</I><BR><BR><I>     Sirve para enviar mensajes a los usuarios de la maquina y a</I><BR><I>  otras de la facultad que tienen DECnet (ZAPE, GOOFY, OBELIX, ...) el</I><BR><I>  formato de las direcciones en este caso es &quot;HOST::USUARIO&quot; donde HOST</I><BR><I>  es el nombre de la maquina y USUARIO el &quot;username&quot; de cada uno.</I><BR><BR><I>     Utilizando la pasarela de correo que tenemos instalada en la</I><BR><I>  facultad, este sistema nos permite, aunque de una forma un poco</I><BR><I>  mas incomoda, enviar mensajes a cualquier direccion internet, el</I><BR><I>  formato en este caso sera:</I><BR><BR><I>     IN::&quot;usuario@direccion.internet&quot;</I><BR><I>     (en este caso las dobles comillas son obligatorias y</I><BR><I>      parte de la direccion).</I><BR><BR><I>     Este sistema de correo tambien esta organizado en carpetas, No</I><BR><I>  guarda copia de los mensajes enviados (pero los mensajes se pueden</I><BR><I>  enviar con copia a uno mismo de forma automatica). Los mensajes se</I><BR><I>  reciben siempre en la carpeta NEWMAIL y cuando se leen pasan de</I><BR><I>  forma automatica a la carpeta MAIL que es donde se trabaja normalmente.</I><BR><BR><I>     Al entrar si hay mensajes pendientes nos situa en la carpeta</I><BR><I>  NEWMAIL y si no en la MAIL.</I><BR><BR><I>     Este sistema se activa con el comando MAIL, si se ha definido un</I><BR><I>  directorio de trabajo se almacenaran en el todos los ficheros del</I><BR><I>  MAIL (MAIL.MAI y los correspondientes a los mensajes), si no lo</I><BR><I>  hara en nuestro directorio por defecto.</I><BR><BR><I>     Los comandos, que se pueden abreviar siempre que no sean ambiguos,</I><BR><I>  mas habituales de este sistema son:</I><BR></PRE><PRE> <BR><BR><BR><BR><TABLE
+      CELLPADDING=2 CELLSPACING=2 BORDER=8>
+      <TR>
+       <TD VALIGN=CENTER>
+       </TD>
+       <TD VALIGN=CENTER><P>
+       HELP</TD>
+       <TD VALIGN=CENTER>
+       </TD>
+      </TR>
+      <TR>
+       <TD VALIGN=CENTER><P>
+       Ayuda &quot;on line&quot; de MAIL donde explica (en la forma habitual de VMS) todos los comandos.</TD>
+       <TD VALIGN=CENTER><P>
+       DIRECTORY</TD>
+       <TD VALIGN=CENTER>
+       </TD>
+      </TR>
+      <TR>
+       <TD VALIGN=CENTER><P>
+       Permite listar los mensajes en el folder.</TD>
+       <TD VALIGN=CENTER><P>
+       MOVE</TD>
+       <TD VALIGN=CENTER>
+       </TD>
+      </TR>
+      <TR>
+       <TD VALIGN=CENTER><P>
+       Sirve mover un mensaje de una carpeta a otra.</TD>
+       <TD VALIGN=CENTER><P>
+       SEND</TD>
+       <TD VALIGN=CENTER>
+       </TD>
+      </TR>
+      <TR>
+       <TD VALIGN=TOP><P>
+       Sirve para enviar un mensaje, preguntara la informacion necesaria y el mensaje (linea a linea) por pantalla. /EDIT Lo mismo per invocando al editor.</TD>
+       <TD VALIGN=TOP><P>
+       SEND fichero</TD>
+       <TD VALIGN=CENTER>
+       </TD>
+      </TR>
+      <TR>
+       <TD VALIGN=CENTER><P>
+       Envia el fichero que se indica como contenido del mensaje.</TD>
+       <TD VALIGN=CENTER><P>
+       REPLY</TD>
+       <TD VALIGN=CENTER>
+       </TD>
+      </TR>
+      <TR>
+       <TD VALIGN=CENTER><P>
+       Sirve para responder al mensaje que se esta leyendo.</TD>
+       <TD VALIGN=CENTER><P>
+       PRINT</TD>
+       <TD VALIGN=CENTER>
+       </TD>
+      </TR>
+      <TR>
+       <TD VALIGN=CENTER><P>
+       Permite imprimir el mensaje que se esta leyendo.</TD>
+       <TD VALIGN=CENTER><P>
+       EXTRACT</TD>
+       <TD VALIGN=CENTER>
+       </TD>
+      </TR>
+      <TR>
+       <TD VALIGN=CENTER><P>
+       Permite guardar en un fichero el mensaje que se esta leyendo.</TD>
+       <TD VALIGN=CENTER><P>
+       SET</TD>
+       <TD VALIGN=CENTER><P>
+       Sirve para definir el entorno de trabajo.</TD>
+      </TR>
+      <TR>
+       <TD VALIGN=CENTER>
+       </TD>
+       <TD VALIGN=CENTER>
+       </TD>
+       <TD VALIGN=CENTER><P>
+       set COPY_SELF</TD>
+      </TR>
+      <TR>
+       <TD VALIGN=CENTER><P>
+       Envia copia de cualquier mensaje a uno mismo.</TD>
+       <TD VALIGN=CENTER>
+       </TD>
+       <TD VALIGN=CENTER><P>
+       set EDITOR</TD>
+      </TR>
+      <TR>
+       <TD VALIGN=CENTER><P>
+       Define el editor a utilizar.</TD>
+       <TD VALIGN=CENTER>
+       </TD>
+       <TD VALIGN=CENTER><P>
+       set MAIL_DIRE</TD>
+      </TR>
+      <TR>
+       <TD VALIGN=CENTER><P>
+       Especifica el directorio donde se guardaran los ficheros de MAIL.</TD>
+       <TD VALIGN=CENTER>
+       </TD>
+       <TD VALIGN=CENTER><P>
+       set PERSONAL_NAME</TD>
+      </TR>
+      <TR>
+       <TD VALIGN=CENTER><P>
+       El nombre que aparecera junto a la direccion de todos los mensajes que enviamos.</TD>
+       <TD VALIGN=CENTER>
+       </TD>
+       <TD VALIGN=CENTER>
+       </TD>
+      </TR>
+      <TR>
+       <TD VALIGN=CENTER><P>
+       ...</TD>
+       <TD VALIGN=CENTER><P>
+       SHOW ALL</TD>
+       <TD VALIGN=CENTER>
+       </TD>
+      </TR>
+      <TR>
+       <TD VALIGN=CENTER><P>
+       Sirve para visualizar el entorno de trabajo de MAIL.</TD>
+       <TD VALIGN=CENTER><P>
+       READ n / n</TD>
+       <TD VALIGN=CENTER>
+       </TD>
+      </TR>
+      <TR>
+       <TD VALIGN=CENTER><P>
+       Sirve para leer el mensaje numero &quot;n&quot;.</TD>
+       <TD VALIGN=CENTER><P>
+       FORWARD</TD>
+       <TD VALIGN=CENTER>
+       </TD>
+      </TR>
+      <TR>
+       <TD VALIGN=CENTER><P>
+       Reenvia el mensaje que se este leyendo al usuario que se indique cuando se nos pregunte.</TD>
+       <TD VALIGN=CENTER><P>
+       BACKWARD</TD>
+       <TD VALIGN=CENTER>
+       </TD>
+      </TR>
+      <TR>
+       <TD VALIGN=CENTER><P>
+       Permite leer los mensajes en secuencia hacia atras.</TD>
+       <TD VALIGN=CENTER><P>
+       NEXT</TD>
+       <TD VALIGN=CENTER>
+       </TD>
+      </TR>
+      <TR>
+       <TD VALIGN=CENTER><P>
+       Permite leer los mensajes en secuencia hacia adelante.</TD>
+       <TD VALIGN=CENTER><P>
+       COPY</TD>
+       <TD VALIGN=CENTER>
+       </TD>
+      </TR>
+      <TR>
+       <TD VALIGN=CENTER><P>
+       Copia el mensaje actual a otra carpeta sin borrar el actual. Si la carpeta no existe pregunta si se desea crear.</TD>
+       <TD VALIGN=CENTER><P>
+       DELETE</TD>
+       <TD VALIGN=CENTER>
+       </TD>
+      </TR>
+     </TABLE>
+    <TT><FONT SIZE=2></FONT></TT><BR><TT><FONT SIZE=2></FONT></TT><BR><TT><FONT SIZE=2></FONT></TT><BR><TT><FONT SIZE=2><I>&nbsp; 
+    Para consultar estos u otros comandos utilizar el HELP de la aplicacion.</I></FONT></TT><BR><TT><FONT SIZE=2></FONT></TT></PRE><PRE> <BR><BR><BR><BR></PRE><P ALIGN=CENTER><CENTER><HR ALIGN=CENTER WIDTH=100% SIZE=2></CENTER></P><PRE> <BR><BR><BR><A NAME="FTP"></A><I></I></PRE><H3><I>Ftp</I></H3><PRE><I> </I><BR></PRE><PRE> <BR><I>       Para ejecutarlo, en el prompt escribir &quot;ftp&quot;.</I><BR><I>       Comandos basicos :</I><BR><BR><I>           open &lt;cuenta@ordenador.dom1..&gt; --&gt;</I><BR><I>           user &lt;usuario&gt;   --&gt; indentificacion de usuario</I><BR><I>           pass &lt;passwd&gt;    --&gt;      &quot;    de passw (suele NO verse)</I><BR><I>           cd   &lt;direc&gt;     --&gt; cambio de directorio</I><BR><I>           dir              --&gt; listar un directorio</I><BR><I>           bin              --&gt; para transferir ficheros NO texto.</I><BR><I>           asc              --&gt;  &quot;        &quot;        &quot;     de   &quot;</I><BR><I>           get  &lt;fichero&gt;   --&gt; se trae un fichero llamado &lt;fichero&gt;</I><BR><I>           mget &lt;f*&gt;        --&gt;  &quot;   &quot;  multiples ficheros</I><BR><I>           put  &lt;fichero&gt;   --&gt; pone un fichero llamado &lt;fichero&gt;</I><BR><I>           mput &lt;f*&gt;        --&gt;   &quot;  multiples ficheros</I><BR><I>           close            --&gt; cierra la conexion</I><BR><I>           bye,quit         --&gt; cierra y sale del programa</I><BR><I>           Ctr-A(zipi)      --&gt; bytes que han llegado</I><BR><I>           hash             --&gt; imprime un caracter cada bloque que</I><BR><I>                                llega</I><BR><I>           prompt [on/off]  --&gt; activa/desactiva el preguntar al usuario</I><BR><I>                                para confirmar las operaciones</I><BR><I>                                En algunos sistemas se llama &quot;confirm&quot;</I><BR><I>           help             --&gt; pide ayuda. Imprime la funcion del</I><BR><I>                                parametro que se le pase por argumento.</I><BR><I>                                Si no se le pasa argumento, lista todas</I><BR><I>                                las funciones disponibles</I><BR></PRE><PRE> <BR><BR><BR><BR></PRE><P
+     ALIGN=CENTER>
+     <CENTER><HR ALIGN=CENTER WIDTH=100% SIZE=2>
+     </CENTER>
+    </P><PRE> <BR><BR><BR><A
+     NAME="NewsZipi"></A><I></I></PRE><H3>
+    <I>News (zipi)</I></H3><PRE><I> </I><BR></PRE><PRE> <BR><I>  Las noticias (news) se parecen a los mails;</I><BR><I>Las de un tema estan agrupadas en un una carpeta (folder), y</I><BR><I>Las carpetas relacionadas, se agrupan a su vez en grupos.</I><BR><I>Una carpeta se identifica por :</I><BR><BR><I>    &lt;nombre grupo&gt;.&lt;nombre carpeta&gt;</I><BR><BR><I>  Es muy util, porque es usado para notificar a los usuarios los</I><BR><I>cambios en el sistema, avisos de los departamentos o avios en</I><BR><I>general de interes publico.</I><BR><BR><I>  Para empezar, teclear &quot;news&quot; en el prompt del sistema para</I><BR><I>entrar, con lo cual deberia aparecer el prompt del news (en zipi</I><BR><I>hay que esperar y esperar). Los comandos siguientes son los mas</I><BR><I>habituales :</I><BR><BR><I>      help            ---&gt; para pedir ayuda. Estructura normal de</I><BR><I>   Vms.</I><BR><BR><I>      dir             ---&gt; lista las news de la carpeta actual</I><BR><I>    apareceran varias columnas, como el</I><BR><I>    numero de orden, titulo de la news</I><BR><I>    quien la manda, etc.</I><BR><I>      dir/folders     ---&gt; lista todas las carpetas de un grupo.</I><BR><I>      dir/group       ---&gt; lista todos los grupos.</I><BR><BR><I>      select &lt;folder&gt; ---&gt; seleciona el folder: &lt;folder&gt;</I><BR><I>      select &lt;group&gt;  ---&gt; lo propio con grupos.</I><BR><BR><I>      set archive     ---&gt; permite listar todas las news, incluso</I><BR><I>     los pasados de fecha.</I><BR><I>     Las noticias tienen algo asi como una</I><BR><I>     &quot;fecha de caducidad&quot; a partir de la</I><BR><I>     cual, no se salen cuando pides el</I><BR><I>     listado de news...</I><BR><I>     a caso que ejecutes &quot;set archive&quot; antes</I><BR><I>     de pedir el listado, en cuyo caso,</I><BR><I>     te lista todo.</I><BR><BR><I>      read &lt;numero&gt;   ---&gt; permite leer la new que tenga como</I><BR><I>    numero de orden: &lt;numero&gt;</I><BR><I>      &lt;numero&gt;        ---&gt; igual que el anterior</I><BR><BR><I>      extract &lt;file&gt;  ---&gt; escribe todo al fichero &lt;file&gt;</I><BR><I> extract/noheader &lt;f&gt; ---&gt; escribe solo el contenido de la noticia</I><BR><I>    al fichero &lt;f&gt;.</I><BR><I>      add             ---&gt; anyade una noticia, si el grupo es</I><BR><I>    publico.</I><BR><BR><I>      up,down,newx,back,top,</I><BR><I>      current,bottom  ---&gt; permite movimiento dentro del sistema.</I><BR><BR><I>      q               ---&gt; sale de las news</I><BR></PRE><PRE> <BR><BR><BR><BR></PRE><P
+     ALIGN=CENTER>
+     <CENTER><HR ALIGN=CENTER WIDTH=100% SIZE=2>
+     </CENTER>
+    </P><PRE> <BR><BR><BR><A
+     NAME="NEWSRDR"></A><I></I></PRE><H3>
+    <I>NEWSRDR</I></H3><PRE><I> </I><BR></PRE><PRE> <BR><I>  Es un lector de NEWS interactivo pero no visual, cualquier</I><BR><I>informacion deseada hay que solicitarla, como cualquier otro</I><BR><I>sistema para leer NEWS es necesario suscribirse a los grupos en</I><BR><I>los que se tiene interes.</I><BR><BR><I>  Existe comandos para visualizar los grupos existentes, como los</I><BR><I>mensajes dentro de cada uno de ellos.</I><BR><BR><I>  La informacion del entorno de trabajo y el estado del sistema de</I><BR><I>NEWS (grupos suscritos, mensajes leidos, etc) se almacenan en un</I><BR><I>fichero en el directorio por defecto de cada usuario. Para evitar</I><BR><I>perder esta informacion no se debe modificar o borrar este fichero</I><BR><I>(NEWSRDR_PROFILE.NRPF).</I><BR><BR><I>  Esta aplicacion se arranca con el comando NEWSRDR, al arrancar se</I><BR><I>conecta al servidor de NEWS y recupera la informacion de todos los</I><BR><I>grupos de NEWS situandonos en el ultimo que utilizamos en la ultima</I><BR><I>sesion. Cuando estas operaciones (que pueden tardar dependiendo de</I><BR><I>la cantidad de grupos y noticias existentes) hayan finalizado nos</I><BR><I>sacara una lista de los grupos nuevos desde la ultima sesion por si</I><BR><I>nos interesara suscribirnos a alguno; y la cantidad de mensajes</I><BR><I>nuevos en cada uno de los grupos a los que estamos suscritos.</I><BR><I>Despues aparecera el prompt &quot;News&gt;&quot;.</I><BR><BR><I>Los comandos mas habituales dentro de esta aplicacion seran:</I><BR><BR><I>.HELPAyuda &quot;on line&quot; de esta aplicacion, utiliza la estructura</I><BR><I>propia de VMS.</I><BR><BR><I>.&lt;RETURN&gt;Permite avanzar por los diferentes grupos y las noticias de</I><BR><I>cada uno de ellos de forma secuencial.</I><BR><BR><I>.DIRECTORYobtenemos la lista de noticias del grupo actual.</I><BR><I>    /GROUPobtenemos la lista de grupos a los que estamos suscritos</I><BR><I>con los mensajes de cada uno y los que no hemos leido.</I><BR><I>    /GROUP/ALLLo mismo con todos los grupos existentes.</I><BR><BR><I>.GROUP grupoSelecciona el grupo de NEWS actual.</I><BR><BR><I>.SUBSCRIBE grupoPermite registrarse al grupo de noticias indicado,</I><BR><I>a partir de ahora se nos informara del estado de noticias</I><BR><I>no leidas en este grupo cada vez que entremos en la</I><BR><I>aplicacion.</I><BR><BR><I>.UNSUBSCRIBE grpEliminada la suscripcion al grupo indicado.</I><BR><BR><I>.READ n/ nPermite leer una noticia dentro del grupo actual.</I><BR><BR><I>.POST [grupo]Permite enviar una noticia al grupo actual (tambien se</I><BR><I>le puede indicar a que grupo).</I><BR><I>Este comando nos preguntara los datos necesarios por</I><BR><I>pantalla.</I><BR><I>    /EDITSe llamara al editor para componer el mensaje que vamos a</I><BR><I>enviar.</I><BR><BR><I>.REPLYPermite enviar una noticia al grupo actual para responder</I><BR><I>a aquella que estamos leyendo.</I><BR><I>    /EDITSe llamara al editor para componer la respuesta al mensaje.</I><BR><I>    /MAILSe respondera (via MAIL) de forma particular al autor del</I><BR><I>mensaje</I><BR><BR><I>.UPDATEActualiza la lista de grupos/mensajes desde el servidor.</I><BR><BR><I>.EXTRACT fich.Permite extraer a un fichero la noticia indicada (por</I><BR><I>defecto la que estamos leyendo).</I><BR><BR><I>.SETSirve para definir el entorno de trabajo o modificar el</I><BR><I>estado de las noticias (marcar como leidas, no leidas, etc.).</I><BR><BR><I>    PERSONAL_NAMENombre utilizado al enviar articulos.</I><BR><I>    ARCHIVE_DIRECT.Directorio donde se almacenaran las noticias que se</I><BR><I>extraigan (si no se da un nombre de fichero).</I><BR><I>    SIGNATURE fich.Nombre del fichero que se a&ntilde;adira de forma automatica</I><BR><I>a las noticias enviadas.</I><BR><I>    ...</I><BR><I>.HELP           dentro de la aplicacion, informa de todos los comandos.</I><BR></PRE><PRE> <BR><BR><BR><BR></PRE><P
+     ALIGN=CENTER>
+     <CENTER><HR ALIGN=CENTER WIDTH=100% SIZE=2>
+     </CENTER>
+    </P><PRE> <BR><BR><BR><A
+     NAME="PSI"></A><I></I></PRE><H3>
+    <I>Psi</I></H3><PRE><I> </I><BR></PRE><PRE> <BR><I>  Este conjunto de aplicaciones nos permite conectarnos como</I><BR><I>       terminal o enviar MAIL a usuarios que esten en maquinas conectadas</I><BR><I>       a X.25 (ARTIX -red X.25 privada de investigacion en Espanya-,</I><BR><I>       IBERPAC -red publica X.25 en Espanya-).</I><BR><BR><I>  Este es un recurso muy limitado en la Facultad y es esencial</I><BR><I>       para el funcionamiento de algunas aplicaciones. Si se observa un</I><BR><I>       uso continuado de la misma sera inhabilitada para los usuarios.</I><BR><BR><I>  Las aplicaciones son:</I><BR><BR><I>SET HOST/X29 nri     Permite conectarse como terminal de la maquina</I><BR><I>     identificada con su NRI dentro de la red ARTIX o</I><BR><I>     IBERPAC. A partir de aqui estaremos bajo el control</I><BR><I>     de la maquina remota hasta que nos despidamos de la</I><BR><I>     sesion o utilicemos el caracter de escape &lt;CTRL/P&gt;.</I><BR><BR><I>MAIL     Solo se podra enviar correo a los sistemas que utilicen</I><BR><I>     PSI, igualmente dentro de X.25, para esto se debe</I><BR><I>     utilizar la aplicacion VMSMAIL y la direccion de los</I><BR><I>     usuarios sera:</I><BR><BR><I>      PSI%nri::usuario.</I><BR><BR><I>     El NRI de ARTIX de ZIPI es 20431451002113 y el</I><BR><I>     de IBERPAC es 21709850500913.</I><BR><BR><I>  El prefijo de Espa&ntilde;a para IBERPAC si se llama desde el extranjero</I><BR><I>       es 2145. ARTIX esta integrada dentro de la red privada X.25 europea</I><BR><I>       denominada EMPB todos los sistemas de esta red estan igualmente</I><BR><I>       accesibles desde ARTIX sin especificar ningun prefijo especial.</I><BR><I>       Para mas informacion se puede consultar el directorio</I><BR><I> &quot;/pub/docs/artix&quot; en el servidor &quot;anonymous&quot; de asterix.</I><BR></PRE><PRE> <BR><BR><BR></PRE></UL></OL><PRE> </PRE><P
+  ALIGN=CENTER>
+  <CENTER><HR ALIGN=CENTER WIDTH=100% SIZE=2>
+  </CENTER>
+ </P><PRE> <BR><I>&lt;/html&gt;</I><BR></BODY></HTML>

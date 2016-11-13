@@ -1,0 +1,95 @@
+<htmll>
+<title>Sistemas Operativos</title>
+<!body background="backhelp.gif">
+<br><hr>
+<h1><p align=center>Edt (VMS)</p></h1>
+<hr><br>
+
+
+<pre>
+<ol>
+
+<!#########################################################################>
+<a name="n_caracteristicas"><h1><p align=left><li>CARACTERISTICAS GENERALES</p></h1></a>
+
+     El editor por defecto del sistema VMS es EDT.
+
+  Este editor puede trabajar en modo linea (el prompt es un "*"), o en modo
+  pantalla, en este caso el teclado esta definido para realizar una serie
+  de funciones. El teclado que se utiliza como base es el de una VT200,
+  este editor utiliza la parte numerica y las teclas de cursor.
+
+  Cada tecla realiza una funcion concreta Insertar, Borrar (caracteres,
+  palabras, lineas), CUT, PASTE, Avanzar, Retroceder, Buscar, Sustituir.
+
+  Cambio de modo :
+
+		       teclas: <ctrl/z>
+		      <----------------
+	       linea                     pantalla
+		      ---------------->
+		       comando:	CHANGE
+
+  Todos los comandos del modo linea se pueden abreviar excepto QUIT.
+
+
+
+<!#########################################################################>
+<a name="n_funcionalidades"><h1><p align=left><li>FUNCIONES MAS USUALES</p></h1></a>
+<ul> 
+     <a name="n_fquit"><li>Funciones salir</li></a>
+
+      - edt ---------------------------
+     |  desde modo linea
+     |     exit --- sale salvando cambios
+     |     quit --- sale y NO salva cambios
+      ---------------------------------
+
+     <a name="n_frdraw"><li>Funcion refresco de pantalla</li></a>
+
+      - edt --------------------------
+     |
+     |       Tecla &lt;CTRL/W&gt; refresca la pantalla
+     |
+      --------------------------------
+
+     <a name="n_fhelp" ><li>Funcion peticion de ayuda</li></a>
+
+      - edt --------------------------
+     |     modo linea :
+     |
+     |       help
+     |
+     |     modo pantalla :
+     |
+     |       pulsar tecla PF2 (en vt100)
+     |       (salir de la ayuda con barra espaciadora)
+      --------------------------------  
+
+     <a name="n_fmore" ><li>Otras Funciones...</li></a>
+
+      - edt --------------------------
+     |
+     |   buffers
+     |   -------
+     |    Para trabajar se dispone de BUFFERS que el usuario puede
+     |    crear y borrar a voluntad, se puede copiar y/o mover
+     |    informacion entre los BUFFERS.
+     |    Al salir del editor con EXIT el unico BUFFER que se salvara
+     |    sera el MAIN correspondiente al que se crea con el fichero
+     |    que se indica en el comando.
+     |
+      --------------------------------
+</ul> 
+
+</ul>
+
+
+<!#########################################################################>
+
+</pre>
+</ol>
+
+
+<hr><br>
+</htmll>

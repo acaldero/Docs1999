@@ -1,0 +1,204 @@
+<htmll>
+<title>Sistemas Operativos</title>
+<!body background="backhelp.gif">
+<br><hr>
+<h1><p align=center>Emacs (varios)</p></h1>
+<hr><br>
+
+
+<pre>
+<ol>
+
+<!#########################################################################>
+<a name="n_caracteristicas"><h1><p align=left><li>CARACTERISTICAS GENERALES</p></h1></a>
+
+     El Emacs es un editor de pantalla completa. Es muy usado
+  conjuntamente con Lisp.
+
+  Como notacion para entender las teclas, hay que saber que:
+       C-<key>  --- mantener Control       apretado y presionar <key>
+       M-<key>  ---    "     Meta,Alt,Edit     "    "     "       "
+
+
+
+<a name="n_funcionalidades"><h1><p align=left><li>FUNCIONES MAS USUALES</p></h1></a>
+<ul> 
+     <a name="n_fquit"><li>Funciones salir</li></a>
+
+      - emacs -------------------------
+     |     C-z     --- hace un "dosshell"
+     |     C-x C-c --- sale
+      ---------------------------------
+
+     <a name="n_fmove"><li>Funciones de Movimiento en el texto</li></a>
+     <ul>
+        <a name="n_fmoveinpan"><li>movimientos dentro de la pantalla</li></a>
+
+          - emacs -------------------------
+         |
+         |      M-v --&gt; pantalla anterior
+         |
+         |
+         |         --&gt;               C-p                 [linea i-1]
+         |        |
+         |        |
+         |         --  word1 w   xC-bxxxC-fx   w  word4  [linea i  ]
+         |        |
+         |        |
+         |         --&gt;               C-n
+         |
+         |              ^    ^       |||       ^    ^
+         |              |    |       |||       |    |    [linea i+1]
+         |              |     ------- | -------     |
+         |              |         M-b | M-f         |
+         |              |             |             |
+         |               ------------- -------------
+         |               C-a           C-e
+         |
+         |      C-v --&gt; pantalla siguiente
+         |
+         |      NOTAs:
+         |      ------
+         |       - principio oracion ... x .... final oracion
+         |           M-a                         M-e
+         |       - C-u 8 C-f mueve cursor 8 caracteres a delante.
+         |
+          ---------------------------------
+          
+         <a name="n_fmovebtpan"><li>movimiento entre pantallas</li></a>
+
+          - emacs -------------------------
+         |     M-&lt; --&gt; principio de fichero
+         |     M-v --&gt; pantalla anterior
+         |     C-v --&gt; pantalla siguiente
+         |     M-&gt; --&gt; final de fichero
+          ---------------------------------
+
+         <a name="n_fmovebtpan"><li>movimiento entre 'ventanas'</li></a>
+
+          - emacs -------------------------
+         |     C-x 1  --- queda solo la ventana que tiene el cursor
+         |     C-x 2  --- crea dos ventanas
+         |     C-x o  --- salta a la siguiente ventana
+         |     C-M-v  --- avanza una pagina en la otra ventana
+          ---------------------------------
+     </ul>
+
+     <a name="n_ffile" ><li>Funciones gestion ficheros</li></a>
+
+      - emacs -------------------------
+     |     C-x C-f  --- Busca y edita el fichero que se le diga.
+     |                  Si no existe, lo crea.
+     |                  ( para pasar de un fichero a otro, hay
+     |                    que "buscarlo" )
+     |     C-x C-s  --- Salva a fichero
+     |                  ( al original se le aniade "~" al nombre )
+      -------------------------
+
+     <a name="n_ffind" ><li>Funciones busqueda en texto</li></a>
+
+      - emacs ------------------------
+     |     C-s &lt;str&gt;&lt;Ret&gt; --- busqueda hacia delante
+     |         C-s para seguir buscando el mismo &lt;str&gt;
+     |     C-r &lt;str&gt;&lt;Ret&gt; ---     "      "   atras
+     |         C-r para seguir buscando el mismo &lt;str&gt;
+     |     ( NOTA: se realiza una busqueda incremental! )
+      --------------------------------
+
+     <a name="n_fxch"  ><li>Funciones reemplazamiento en texto</li></a>
+
+      - emacs ------------------------
+     |     M-x "repl s&lt;TAB&gt;"&lt;Return&gt;&lt;strorg&gt;&lt;Ret&gt;&lt;strdest&gt;&lt;Ret&gt;
+     |             -- replaza
+      --------------------------------
+
+     <a name="n_fins"  ><li>Funciones insertado y borrado (y desborrado)</li></a>
+
+      - emacs ------------------------
+     |
+     |      &lt;Del&gt;     borra el caracter justo antes   del cursor
+     |      C-d         "   "     "       "   despues  "    "
+     |
+     |      M-&lt;Del&gt;   mata la palabra inmediatamente antes del cursor
+     |      M-d        "   "  siguiente  palabra  despues   "    "
+     |
+     |      C-k       mata desde la posicion del cursor hasta el final
+     |                           de la linea
+     |      M-k         "  hasta el final de la actual oracion
+     |
+     |      ( NOTA: cuando se "mata", no se puede volver a recuperar )
+     |      ( NOTA: las oraciones empiezan y terminan con "." )
+     |      ( NOTA: C-u 8 *  --- ******** )
+     |
+     |      Desborrando:
+     |      C-y   --- recupera lo inmediatamente antes borrado
+     |      M-y   --- cada vez que da, se visualiza todos los
+     |                textos a desborrar y cuando se suelta, el
+     |                elegido se queda permanente
+     |      C-x u --- deshace los cambios del comando inmedia..
+     |                ( ejecutar varias veces para ir recuperando )
+     |      C-_   --- equivalente a C-x u
+     |                ( _ puede salir en terminales dec manteniendo
+     |                  apretada CTRL y tecleando / )
+     |
+      --------------------------------
+
+     <a name="n_frdraw"><li>Funcion refresco de pantalla</li></a>
+
+      - emacs ------------------------
+     |     C-l --- Borra toda la pantalla y reescribe todo poniendo el
+     |             texto cerca del cursor en el centro.
+     |             (Es control-L, no control-1.)
+     |     C-u 0 C-l --- rescribe situandose al inicio de la pantalla.
+      --------------------------------
+
+     <a name="n_fhelp" ><li>Funcion peticion de ayuda</li></a>
+
+      - emacs ------------------------
+     |     C-h   --- pedir ayuda
+     |               ( C-h ? --- saca un indice )
+     |               ( C-h b --- lista de funciones )
+      --------------------------------  
+
+     <a name="n_fmore" ><li>Otras Funciones...</li></a>
+
+      - emacs ------------------------
+     |
+     |   "buffers"
+     |   ---------
+     |     C-x C-b  --- Lista de buffers
+     |     C-x s    --- Recorre la lista de todos los buffers
+     |                  asociados a sus respectivos ficheros y
+     |                  pregunta si el usuario quiere salvarlos
+     |
+     |   modos de funcionamiento
+     |   -----------------------
+     |     M-x &lt;modo&gt;&lt;Ret&gt; --- cambio a otros modos de funcionamiento
+     |                         ( fundamental-mode , text-mode, lisp-mode,
+     |                           auto-fill-mode (4 on/off) , ... )
+     |     C-u 2 0 C-x f   --- cambia el marginado a 20 columnas.
+     |
+     |   nivel de edicion recursivo
+     |   --------------------------
+     |     M-x top-level&lt;Ret&gt; --- sale del nvel de edicion recursivo
+     |                            se detecta por que en nivel actual
+     |                            viene indicado entre [,]
+     |                            ( ejemplo [(fundamental)] )
+     |
+     |   cuando emacs parece colgado ...
+     |   -------------------------------
+     |     C-g --- Para cualquier funcion del emacs de una forma
+     |             segura y tambien sirve para descartar argumentos
+     |             numericos (cualquiera) que nos demos cuenta que
+     |             hemos metido mal
+     |
+     |     NOTA: salir de &lt;ESC&gt;&lt;ESC&gt; : con n
+     |
+      --------------------------------
+</ul>
+<!#########################################################################>
+
+</pre>
+</ol>
+<hr><br>
+</htmll>

@@ -1,0 +1,305 @@
+<html>
+<title>Resumenes</title>
+<!body background="backhelp.gif">
+<br><hr>
+<h1><p align=center>Ficheros de Configuracion</p></h1>
+<hr><br>
+
+
+<br>
+<a name="Lista_FConfig"><h2>Ficheros de Configuracion</h2> </a>
+<p><pre>
+       # *.bat --- "shells-scripts" --- *.com --- * exec
+
+	 * Fichero(s) que contienen una lista de comandos que se ejecutaran
+	   cuando se "ejecute" el fichero.
+	 * En Vms :
+	   - cada line incluye un comando a ejecutar; si pertenece
+	     al sistema operativo, hay que poner "$" delante, si no
+	     no hace falta.
+	   - si se quiere ejecutar un fichero ".com", anteponer @ al
+	     nombre.
+	     ( ej. , "@envia.com" en el prompt del sistema,
+	       ejecutara el fichero envia.com )
+	 * En Cms :
+	   - "Todos" los fichero con tipo EXEC corresponden a programas
+	      realizados en el lenguaje de comandos REXX y que incluyen
+	      comandos del sistema.
+
+	      ----------------------------------------------------
+	 Ejs | VMS (trae.com)          | UNIX (aliasls)     |
+	 ----|-------------------------|--------------------|----
+	     | $dir                    | #!/bin/sh          |
+	     | $cd ftpin               | alias dir ls -lasF |
+	     | $ftp                    | ...                |
+	     | open 138.100....        |                    |
+	     | get "otra.practica.mas" |                    |
+	     | bye                     |                    |
+	      ----------------------------------------------------
+
+       # autoexec.bat --- .profile (ksh) --- login.com --- PROFILE EXEC
+			  .cshrc   (csh)
+
+	 * Fichero que continen los comandos que se ejecutaran
+	   al arrancar la maquina de forma "automatica"
+	 * En Unix :
+	   - los ficheros de arranque suelen empezar por "."
+	     (.profile,.cshrc...) y deben estar en la raiz de tu cuenta
+	     para que tengan efecto.
+	   - si ejecutas ". .profile" en tu ksh, las inicializaciones
+	     de variables de entorno afectaran al actual ksh!.
+	     (es decir, que si haces una modificacion en el .profile
+	      no hace falta que salga y entres a la cuenta para tenerla
+	      en cuenta. Solo ejecuta ". .profile")
+	 * En Vms :
+	   - tras cualquier modificacion en el login.com no son
+	     inmediatos sus efectos, aunque se salga de la cuenta
+	     y se vuelva a entrar ( recordar la cantidad de trabajo
+	     que hay en algunos sistemas vms )
+	 * En Cms :
+	   - se ejecuta cuando arranca la maquina virtual. Se pueden
+	     introducir comandos para la inicializacion del entorno de
+	     trabajo.
+
+	      -----------------------------------------------
+	 Ejs | VMS (login.com)         | UNIX (.cshrc)       |
+	 ----|-------------------------|---------------------|
+	     | l:== dir/size=all       | set term=vt100      |
+	     | q:== show quote         | umask 077           |
+	     | kill:== stop/identif=   | stty erase ^H       |
+	     | $dir                    | PATH=/bin:/usr/bin: |
+	     | $ean                    |                     |
+	     | ...                     | ...                 |
+	      -----------------------------------------------
+
+       # ??? --- .aliases --- ??? --- &lt;fn&gt;
+
+	 * Fichero en el que normalmente se definen todos los "alias"
+	   ( un alias es un nombre para un comando complejo )
+	 * En Unix :
+	   Es llamado poniendo "source .aliases"
+	   ( normalmente como una linea en el .cshrc )
+	 * En Cms-cp :
+           Vale cualquier nombre para el fichero ( ejemplo, &lt;fn&gt; )
+           Es ejecutado poniendo "synonym &lt;fn&gt;"
+
+	      -----------------------------------------------------------
+         Ejs | UNIX (.alias)       | CMS (&lt;fn&gt;)                          |
+	 ----|---------------------|-------------------------------------|
+             | alias &lt;dir ls&gt;      | &lt;Comando_original&gt; &lt;Alias&gt; &lt;numero&gt; |
+             | alias &lt;l   ls -las&gt; | ...                                 |
+	     | ...                 | ...                                 |
+	      -----------------------------------------------------------
+
+         * NOTA &lt;numero&gt; expresa la abreviatura minima del alias.
+
+       # ??? --- .logout --- ??? --- ???
+
+	 * Comandos que se ejecutaran cuando salgas de la cuenta
+	   ( como el .profile/.cshrc, pero para salir )
+
+       Informacion
+       -----------
+       # ??? --- .plan --- plan --- ???
+
+	 * Texto que aparecera cuanto te hagan un finger.
+	 * El directorio donde este tiene que tener los derechos
+	   de lectura puesto.
+
+       # ??? --- .project --- ??? --- ???
+
+	 * Igual que .plan pero el mensaje solo puede ocupar una linea.
+	 * Derechos lectura activados, como .plan
+
+       # ??? --- /etc/issue --- ??? --- ???
+
+	 * Su contenido es la caratula que veremos al arrancar la
+	   conexion con ese ordenador.
+
+       # ??? --- /etc/motd --- ??? --- ???
+
+	 * Su contenido es un mensaje que aparece al entrar en tu cuenta.
+	 * Proviene de: Message Of The Day.
+	 * ( usualmente mensajes como que la maquina no funcionara
+             durante unos dias para renovar la version del sistema operativo
+             o algun programa. )
+
+       Configuracion Programas
+       -----------------------
+       # ??? ---| .mailrc  |--- [ean.profile.pro] --- ???
+		| .forward |
+
+	 * Permite configurar las opciones para el manejo de correo Electr.
+
+	      --------------------------------------------------------------
+	 Ejs | UNIX (.mailrc)         | VMS (profile.pro)                   |
+	 ----|------------------------|-------------------------------------|
+             | io &lt;a..@z..&gt; &lt;a..@z..&gt; | name &lt;usuario&gt;                      |
+             | prompt=&lt;Mail#&gt;         | mailbox &lt;user&gt;                      |
+             | ...                    | alias &lt;nombre user&gt; &lt;dire del user&gt; |
+             |                        | sigfile sys$login:&lt;firma.txt&gt;       |
+             |                        | prompt &lt;EAN&gt;                        |
+             |                        | auto-forward &lt;a..@raticulin..&gt;      |
+             |                        | forward &lt;TRUE&gt;                      |
+	     |                        | ...                                 |
+	      --------------------------------------------------------------
+
+         ** NOTA: sustituir lo que hay entre &lt;&gt; por lo que necesites.
+	 * Opciones que se pueden usar :
+	   -  Definicion grupos de usuarios que trataras como
+	      uno solo al hacer mail :
+
+	      ( lineas en el .mailrc )    | ( lineas en profile.pro )
+					  |
+               &lt;grpA&gt; &lt;nA1@dir&gt; &lt;nA2@dir&gt; | alias &lt;grpA&gt; &lt;nA1@dir&gt; &lt;nA2@dir&gt;
+               &lt;grpB&gt; &lt;nB1@dir&gt; &lt;nB2@dir&gt; | mailbox &lt;user&gt;
+	       ...                        | ..
+
+	     Asi, cuando hagas mail ngrupoA, es como si madaras el
+	     mismo mail a n1@dir y n2@dir.
+	   - Hacer que el correo que te manden a una maquina vaya a otra
+	     directamente como si te la hubieran mandado a esta ultima :
+
+	      ( linea EN EL .forward ) | ( linea en profile.pro )
+				       |
+               &lt;a999012@zipi...&gt;       | auto-forward &lt;a99012@zipi...&gt;
+				       |
+
+       # ??? --- .rhosts --- rhosts --- ???
+
+	 * Fichero que permite que otros usuarios ( o tu ) puedan
+	   acceder a tu cuenta desde cualquier maquina SIN password
+
+	      --------------------------------
+	 Ejs | UNIX (.rhosts)             |
+	 ----|----------------------------|--
+             | &lt;maq@dir.fi.upm.es&gt; &lt;user&gt; |
+	     | ...                        |
+	      --------------------------------
+
+             Estando en la cuenta del &lt;user&gt;, solo hay que poner :
+           rlogin &lt;maq@dir.fi.upm.es&gt; /username=&lt;user&gt;
+	   (la especificacion /user... depende de la implementacion)
+
+	 * si el contenido del fichero es "+ +" cualquier usuario de
+	   cualquier ordenador puede entrar
+
+       # edit.ini ---| .emacs |--- ??? ---| PROFILE XEDIT |
+		     | ...    |
+
+	 * Fichero de inicializacion del entorno del editor asociado.
+
+       x-windows (solo Ux)
+       ---------
+       # .xsession
+
+	 * Shell-Script ejecutable ( al menos -r-x------ ) que
+	   especifica la linea de comandos del los programas x-windows
+	   que seran ejecutados al arrancar la cuenta. Solo sirve si
+	   el root ha activado el programa xdm.
+
+	 (
+	   ej. :
+
+	    #!/bin/sh
+	    twm &
+	    ...
+	    xterm -bg black -fg white -font 7x13 -n Principal -e tcsh
+	 )
+
+       # .xinitrc
+
+	 * Solo contiene la linea de comandos de los programas
+	   x-windows (programas clientes), que seran ejecutados al
+	   arrancar xinit & (opcion a ejecutar si el root no
+	   activo xdm) Es ,por tanto, practicamente igual que el
+	   anterior eliminando la linea  #!/bin/sh
+
+	 (
+	   ej. :
+
+	    mwm &
+	    xterm -bg black -fg white -font 7x13 -n Principal -e tcsh &
+	    ...
+	    oclock
+	 )
+
+	 * OJO!, obserbar que el ultimo comando NO lleva &, tanto
+	   en el .xinitrc como en el .xsession.
+	   ( de esa forma cuando termine los clientes y termine
+	     ese el ultimo, el servidor de X se dara cuenta que
+	     tiene que matarse, pues no hay mas clientes a servir )
+
+       configuracion del sistema
+       -------------------------
+       # config.sys --| /etc/inittab |-- ??? --- ???
+		      | /etc/fstab   |
+                      | ...          |
+
+	 * En Unix :
+	   El encargado de la gestion de los ficheros de configuracion
+	   de la maquina es logicamente el superusuario.
+	   En las versiones de Unix que arrancan como el BSD, el primer
+	   proceso en ejecutarse se llama "init" y lo que hace es buscar
+	   este fichero y ejecutar lo que en el se diga (algo asi como
+	   en DOS, que al arrancar se busca el config.sys para configurar
+	   el sistema)
+	   Suele definirse 6 niveles de uso, y para cada nivel se definen
+	   en el fichero las aplicaciones a arrancar o otros fichero
+	   "script" a ejecutar. Los scripts mas famosos estan en el
+	   /etc/rc y son los encargados de configurar los terminales, modems
+	   impresoras (velocidad ,capacidad ...)
+	   Por su parte, /etc/fstab define la lista de particiones, el
+	   tipo de sistema de ficheros de cada una y el directorio donde
+	   se montaran automaticamente al arrancar.
+
+	 (
+	   ej. :
+
+	      #
+	      # Formato cada linea de inittab:
+	      #   identificador:nivel de ejecucion:accion:proceso
+	      #
+	      # Ejemplo:
+	      #   ejecucion de /etc/rc y
+	      #   arranque de los terminales 1 a 4:
+	      #   NOTA: en el terminal 1 NO se vera el fichero /etc/issue
+	      id:1:initdefault:
+	      rc::bootwait:/etc/rc
+	      1:1:respawn:/etc/getty -i 9600 tty1
+	      2:1:respawn:/etc/getty 9600 tty2
+	      3:1:respawn:/etc/getty 9600 tty3
+	      4:1:respawn:/etc/getty 9600 tty4
+	      ...
+	 )
+
+       # ??? --- /etc/passwd --- ??? --- ???
+
+	 * Aqui estan toda la informacion de todos los usuarios con
+	   sus respectivas ... passwords ... codificadas claro!.
+
+	 (
+	   ej. :
+
+	   (formato de cada linea)
+	   nombre_login:passwd:GID:UID:nombre_usuario:directorio_arranque:shell
+
+	   avence:xxx:100:500:avenino venceslao:/home/avence:/bin/tcsh
+	   ...
+	 )
+
+       # ??? --- /etc/group --- ??? --- ???
+
+	 * Define todos los grupos existentes.
+	 (
+	   ej. :
+
+	    formato de cada linea:
+	   nombre_grupo:passwd:GID:lista_de_usuarios_separados_por_comas
+
+	 )
+</pre>
+
+
+<br><hr>
+</html>

@@ -1,0 +1,322 @@
+<htmll>
+<title>Resumenes</title>
+<!body background="backhelp.gif">
+<br><hr>
+<h1><p align=center>Especificaciones en SS.OO.</p></h1>
+<hr><br>
+
+
+<pre>
+<ol>
+
+<!#########################################################################>
+<a name="spec_comenzando"><h1><p align=left><li>Comenzando</p></h1></a>
+
+<br>
+<a name="n_passwd">CUIDADO CON LAS PASSWORD</a>
+<pre>
+ . Introducir numeros y simbolos "raros" ( / @ # ... )
+ . NO sea el nombre de nadie conocido,
+     ( Javier, Francisco ... )
+   NI siglas,
+     ( FGL (Federico Garcia Lorca) , USA , SWalker ... )
+   pues los programas de "crackeo" de cuentas son de las
+   primeras cosas que buscan.
+   SI vale nombre raros (elfos) y cosas por el estilo.
+
+          Ejemplos: ramplumployo, estopasko ..
+
+ . Cambiarlo alguna vez durante el curso.
+ . OJO, existen programas que simulan el login a una maquina.
+   Cuando alquien deja el terminal y pone la pantalla login:,
+   puede ser este programa. Uno feliz, pone su nombre y
+   password y el programa lo almacena en un fichero y llama
+   al verdadero programa de login ( recuerdo que las fuentes
+   de los comandos unix son publicas ).
+   Por ello un buen consejo es que hagais :
+
+      - terminal vt-xxx :
+        dar a "tecla control" mantenerla pulsada, y pulsar
+        dos veces la tecla "[". Despues teclear los comandos:
+        disconn y luego connect
+
+      - P.C. :
+        resetearlo
+</pre>
+
+
+
+<!#########################################################################>
+<a name="n_ejecucion"><h1><p align=left><li>Ejecucion de comandos</p></h1></a>
+
+<br>
+<a name="n_FmtComandos">FORMATO DE LOS COMANDOS</a>
+<ol><li> Formato entrada comandos :</li>
+<pre>
+          ------------------------------------------------------------
+         | Sepa-  | Continua- /                         \             |
+         | racion | cion del /                           \  Numero    |
+         |        | coman-  /                             \  letras   |
+         | de     | do     / Formato de los comandos       \ 'short-  |
+         | Coman- |       /  ( &lt;cmdo&gt; --- &lt;comando&gt; )       \  form'  |
+         | dos    |      /                                   \        |
+         |        |     /                                     \       |
+   ------|--------|----|---------------------------------------|------|
+    DOS  | Alt-20 |    | &lt;cmd&gt; &lt;par&gt; /&lt;opcion&gt; &lt;enter&gt;         |  x   |
+   ------|--------|----|---------------------------------------|------|
+    UNIX |    ;   | \  | &lt;cmd&gt; {/,-}&lt;opcion&gt; &lt;par&gt; &lt;enter&gt;     |  x   |
+   ------|--------|----|---------------------------------------|------|
+    VMS  |        | -  | &lt;cmd&gt; /&lt;opcion[=valor]&gt; &lt;par&gt; &lt;enter&gt; |  3   |
+   ------|--------|----|---------------------------------------|------|
+    CMS  |        |    | &lt;cmd&gt; &lt;par&gt; ( &lt;opcion&gt;                |  3   |
+   -------------------------------------------------------------------
+</pre>
+    <li> Notas :</li>
+ <ul><li>  Para entender la separacion de comandos, vease el ejemplo :
+           en Unix, "make config ; make dep ; make zImage" equivale a
+           "make config" <enter>
+           "make dep"    <enter>
+           "make zImage" <enter></li>
+     <li>  'short-form' de un comando es el minimo numero de letras de
+           el que hay que escribir, de forma que se interpreta igual
+           que si se hubiera tecleado todo entero.
+           Asi, en VMS se reconoce cualquier comando con solo 2 o 3 letras
+           si no coincide con el nombre de otro comando.
+           'x' significa que esta opcion no es valida en ese S.O.
+           En el caso de CMS, la forma 'short' debe estar en mayusculas.</li>
+     <li>  Ojo al 'inocente' <enter> :
+           En CONAN , Los terminales de la biblioteca y las pantallas de
+           configuracion de los vt320, es el intro, una tecla que suele
+           estar 2 posiciones por debajo del enter!.</li>
+ </ul>
+</ol>
+
+
+<br>
+<a name="n_interpretes">Como personalizar el 'shell'</a>
+
+       <u>VARIABLES DE ENTORNO</u>
+             Una variable de entorno es una cadena de caracteres que
+       hace referencia a otra cadena. Ejemplo, "saludo=hola", saludo
+       es la variable de entorno que usaremos para referirnos a hola.
+             Si teneis un programa No interactivo, esos que lanzas
+       con una configuracion y si quieres cambiar su configuracion
+       debes pararlo (ejemplo, compila -optimizando -verbose ...)
+       para configurarlos se usan parametros (opciones que van despues
+       del nombre). Sin embargo, aquellos interactivos deben permitir
+       cambiar su configuracion sin tener que salir de ellos. No es
+       logico que salgas de un editor cada vez que tengas que cambiar
+       algo. Debe haber mecanismos para desde dentro configurar.
+       Para el caso de los interpretes de comandos el mecanismo es el
+       uso de variables de entorno. (pero hay otros programas que
+       tambien lo usa, el camllight por ejemplo)
+
+        <h4><u>FICHEROS DE CONFIGURACION</u></h4></li>
+        Seguramente, las modificaciones echas en el apartado anterior
+        querremos que sean permanentes, no tener que teclearlas cada
+        vez que arranquemos la cuenta. Como?, escribiendo los comandos
+        en un fichero que los shells leen al arrancar como si fueran
+        comandos tecleados nada mas entrar.
+
+
+
+<!#########################################################################>
+<a name="n_sistema"><h1><p align=left><li>Sistema de Ficheros</p></h1></a>
+
+<br>
+<a name="n_FmtNFicheros">IDENTIFICACION DE FICHEROS</a>
+<ol>
+    <li>Especificacion de un fichero :</li>
+<pre>
+          --------------------------------------------------------
+         | formato referencia a un fichero                        |
+   ------|--------------------------------------------------------|
+    DOS  | &lt;unidad&gt;:\&lt;dir&gt;\...\&lt;fichero.ext&gt;                      |
+   ------|--------------------------------------------------------|
+    UNIX | /&lt;directorio&gt;/.../&lt;fichero&gt;                            |
+   ------|--------------------------------------------------------|
+    VMS  | &lt;nodo&gt;$&lt;dispositivo&gt;:[&lt;dirs&gt;]&lt;nombre&gt;.&lt;tipo&gt;;&lt;version&gt; |
+   ------|--------------------------------------------------------|
+    CMS  | &lt;disk&gt;:&lt;direc1&gt;.&lt;direc2&gt;.&lt;fichero ext&gt;                 |
+   ---------------------------------------------------------------
+</pre><p>
+    <li>Caracteristicas de los identificadores</li>
+<pre>
+          --------------------------------------------------
+         |  las limitaciones en los sistemas operativos     |
+         |--------------------------------------------------|
+         | caracteres   | caracteres | niveles  |           |
+         | en nombre    | en el path | en sist. | Mays/min  |
+         | fichero      |            | ficheros |           |
+   ------|--------------|------------|----------|-----------|
+    DOS  |     8+3      |   64       |    64    | No        |
+   ------|--------------|------------|----------|-----------|
+    UNIX |     255 (1)  |            |          | Distingue |
+   ------|--------------|------------|----------|-----------|
+    VMS  | 8+8+1 numero |            |          | No        |
+   ------|--------------|------------|----------|-----------|
+    CMS  |    8+5+2     |    (2)     |    8     | No        |
+   ---------------------------------------------------------
+</pre>
+    <p><ul>
+        <li> (1) En Unix, el numero de caracteres del nombre de un
+             fichero depende de la version.</li>
+        <li> (2) En CMS/CP no puede especificarse un fichero junto a
+             su ruta de acceso (directorios). Ver el apartado 1.A.1.</li>
+    </ul><p>
+    <li>el uso de comodines en cada sistema operativo :</li>
+<pre>
+          -------------------------------------------------
+         | caracter  | nombre | fichero |  otros ...       |
+   ------|-----------|--------|---------|------------------|
+    DOS  |     ?     |   *    |   *.*   |                  |
+   ------|-----------|--------|---------|------------------|
+    UNIX |     ?     |   *    |    *    |                  |
+   ------|-----------|--------|---------|------------------|
+    VMS  |     %     |   *    |  *.*;*  | ... &lt;dir actual&gt; |
+   ------|-----------|--------|---------|------------------|
+    CMS  |     ?     |   *    |  * * x  | . &lt;tu cuenta&gt;    |
+   --------------------------------------------------------
+</pre>
+    <ul><li> En CMS, 'x' es el identificador del minidisco accedido </li></ul>
+
+
+<br>
+<a name="n_AccFicheros">Facilidades en accesos a Ficheros</a>
+
+        Cada sistema operativo ofrece unos mecanismos para, de las
+     grandes cantidades de ficheros que tenemos almacenados, podamos
+     acceder a unos pocos que usamos muy frecuentemente de una
+     forma mas comoda. Lo normal es que cada sistema operativo tenga
+     uno propio, aunque cada vez son mas versatiles e incluyen mas.
+
+      NOMBRES LOGICOS
+      ---------------
+      - Los nombres logicos son variables de entorno (nombres ficticios)
+        que se usaran para permitir abreviar la referencia a un fichero,
+        sustituyendo al camino de acceso.
+
+      CAMINOS DE BUSQUEDA (PATH)
+      --------------------------
+      - Se suele usar una variable de entorno especial que contiene
+        una lista de directorios donde buscar donde esta un fichero
+        ejecutable cuando solo le damos al interprete de comandos
+        el nombre del fichero binario, y no esta en el directorio
+        actual (primero en la busqueda).
+
+	- En general es algo asi:
+
+		   ------------------------------------------------------
+		  |  Formato        |  Limitaciones  | Directorio        |
+		  |                 |                | comienzo busqueda |
+	   -------|-----------------|----------------|------------------ |
+	    DOS   | PATH=c:\dos;c:\ | 128 caracteres | dir. actual       |
+	   -------|-----------------|----------------|------------------ |
+	    Unix  | PATH=/bin;/sbin |                | 1er dir en path   |
+	   -------|-----------------|----------------|-------------------|
+	    VMS   |                 |                | dir. actual       |
+	   -------|-----------------|----------------|-------------------|
+	    CMS/. |                 |                |                   |
+	   -------|-----------------|----------------|-------------------|
+
+      'LINKS'
+      -------
+      - Los links son referencias a otro fichero. Si tienes un fichero
+        en un lugar lejano, podras crearte un fichero en tu cuenta
+        que sera una referencia a ese lejano.
+        ? Que ventaja tiene con respecto a que te lo copies a tu cuenta ?,
+        pues que al copiartelo hay 2 copias (obvio) en cambio un link solo
+        hay una, y el link es solo una referencia con lo que no "gasta"
+        cuota, ahorrando espacio en disco.
+
+
+<br>
+<a name="n_DefaultDir">Directorios Comunes</a>
+<pre>
+        Unix
+        ----
+
+	  Si echamos un vistazo al directorio raiz de un sistema Unix
+	encontraremos al menos estos directorios :
+
+	  bin         --- Estan los ejecutables mas frecuentes
+	  dev         ---   "   los dispositivos
+	  etc         ---   "   los ficheros de configuracion del sistema
+	  home        ---   "   las cuentas de los usuarios ...
+			  (puede llamarse 'u')
+	  lib         ---   "   los obj y lib de c
+	  lost+found  --- Ficheros "huerfanos" por errores del sistema
+	  mnt         --- directorio donde montar dispositivos
+	  root        --- ... directorio para la cuenta del root
+	  sbin        --- Estan los binarios del sistema
+	  tmp         --- directorio para uso temporales
+	  usr         --- donde estan las librerias de c y utiles para
+			     los usuarios
+	  var         --- donde estan las aplicaciones mas pintorescas
+
+        CMS-CP
+        ------
+
+	  Los minidiscos (representados por letras del abecedario) mas
+	usuales son :
+
+	  a  --- Tu minidisco (para "trabajar")
+	  s  --- Donde reside CMS.
+	  y  ---   "      "   la instalacion (usual?)
+	  p  --- A partir de la letra "p" esta los compiladores y
+		   librerias.
+
+        Vms
+        ---
+
+	  Las "rutas" mas usuales son :
+	  (
+	    la gran mayoria estan simplificadas por el uso de
+            nombres logicos. Para ver la lista de nombres logicos,
+            usar 'show logical'.
+	  )
+
+	  sys$login   --- tu cuenta
+	  sys$sysroot --- la   " del SuperVisor!
+</pre>
+
+
+
+<!#########################################################################>
+<a name="n_manejo"><h1><p align=left><li>Manejo de Dispositivos</p></h1></a>
+
+<br>
+<a name="n_AccDiscos">Acceso a Discos</a>
+
+    Depende de lo que el sistema operativo que considere como "dispositivo"
+    y como los trata :
+    -En VM los dispositivos son los minidiscos, lectora(RDR),
+     impresoras (PRT), unidades de cinta, etc...
+    -En Unix son "devices"
+    -En DOS los discos (flopys, duros ...).
+    El acceso a ellos es tambien muy diferente :
+    -En DOS son distinguibles y se le asigna una letra
+     (a: para 1er floppy , c: primer disco duro ...)
+    -En Unix son "transparentes"; Solo existe un "arbol" de directorios.
+     Si se quiere acceder a un dispositivo (ej. un diskete) hay que leer
+     el sistema de directorios del disquete y asignarlo a un
+     directorio vacio, de tal forma que cuando se entre en ese
+     directorio realmente lo que se hace es acceder al "arbol"
+     de directorios del diskquete ,que es un "subarbol" del total
+     (esta triquinyuela permite que para los usuarios los discos
+     usados sean transparentes, es decir que no se enteren.
+     (en DOS se puede simular este comportamiento. JOIN asocia a
+     cada dispositivo un directorio).
+    -En CMS-CP en un paso intermedio; aunque los dispositivos son explicitos
+     (minidiscos) hay que manualmente "unir" su contenido con la lista
+     de minidiscos actual (LINK y ACCESS).
+    -Vms, es parecido a DOS, siendo los dispositivos explicitos y para
+     cambiar solo hay que poner algo asi como :
+       cd &lt;nodo&gt;$&lt;dispositivo&gt;:[&lt;directorios&gt;].
+
+
+<!#########################################################################>
+
+<hr><br>
+</htmll>
+

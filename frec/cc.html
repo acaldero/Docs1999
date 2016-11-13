@@ -1,0 +1,61 @@
+<html>
+<title>Resumenes</title>
+<!body background="backhelp.gif">
+<br><hr>
+<h1><p align=center>Compilacion</p></h1>
+<hr><br>
+
+
+
+<br>
+<a name="Build_Prog"><h2>Creacion y puesta a punto de Programas</h2></a>
+<p><pre>
+    # ... --- {gcc|cc} --- ... --- ?
+
+      * Compilador de C.
+      * Opciones mas usadas :
+
+         - Para compilar una libreria y generar solo el obj :
+
+              cc -g -c &lt;lib.c&gt; -o &lt;lib.[ao]&gt;
+
+         - Para compilar y link   :
+
+              cc -g -o &lt;main&gt; &lt;main.c&gt; &lt;lista de objs...&gt; -ll
+              ( ojo, -ll le dice, "coge el obj" en la
+                libreria /usr/lib/lib&lt;l&gt;.a !! )
+
+         - Para compilar a lo standar ... :
+
+              cc -ansi -g -v -o a a.c
+
+    # ... --- lint &lt;fichero.c&gt; --- ... --- ...
+
+      * En la salida estandar dice lo que el cree que son
+        errores en el &lt;fichero.c&gt;
+        (pueden serlos, o no, ojo.)
+
+    # ... --- ctrace &lt;fichero.c&gt;  --- ... --- ...
+
+      * A partir de un fichero en c, genera en la salida estandar
+        otro fichero en c que permitira depurar mejor &lt;fichero.c&gt;.
+
+    # ... --- cflow &lt;fichero.c&gt;   --- ... --- ...
+
+      * Genera en la salida estandar un diagrama de dependencias
+        entre las distintas funciones declaradas y usadas en
+        &lt;fichero.c&gt;.
+
+    # ... --- strace &lt;fichero_exe&gt; --- ... --- ...
+
+      * Presenta en pantalla cada llamada al sistema que haga el
+        programa &lt;fichero_exe&gt; y los parametros que se le pase
+        ( AHHGG!, poner por ejemplo 'strace sh' y vereis ... )
+</pre>
+
+
+
+<br><hr>
+</htmll>
+
+

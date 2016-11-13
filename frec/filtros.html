@@ -1,0 +1,87 @@
+<html>
+<title>Resumenes</title>
+<!body background="backhelp.gif">
+<br><hr>
+<h1><p align=center>Filtros</p></h1>
+<hr><br>
+
+
+
+<br>
+<a><h2>Filtros (Unix)</h2></a>
+<p><pre>
+	  En unix, se puede comunicar procesos por medio de "tubos"
+	(pipes) que unen la salida de un comando con la entrada de
+	otro; ( El simbolo del tubo es "|" )
+	El uso de varios comandos (que a su salida dan lo que
+	se le indique a su entrada con modificaciones) unidos de esa
+	forma puede generar nuevas funciones.
+	Asi si usamos el comando grep para buscar numeros de matricula
+	en un fichero, y el resultado se lo pasamos a un sort y el
+	resultado del sort a un more, tendremos "virtualmente" un nuevo
+	comando que nos presenta ordenadamente y pantalla a pantalla las
+	matriculas que haya en un fichero.
+	Estos "comandos compuestos" pueden ser almacenados en fichero
+	de comandos.
+	Los mensajes de error van a la salida estandar de errores.
+	( en unix 'shell-script', en dos 'procesamiento por lotes')
+
+
+	    Ejemplo : comando treer
+		      ( es un fichero shell-script )
+
+	  #!/bin/sh
+	  #
+	  # Imprime un arbol desde el directorio actual/dado
+	  #
+	  DIR=.
+	  if [ X$1 != X ] ; then
+	     DIR=$1
+	  fi
+
+	  echo $DIR; find $DIR -type d -print | tr / \\1 | sort -f | tr \\1 / |\
+	  sed -e s,\^$DIR,, -e /\^$/d -e "s,[^/]*/\\([^/]*\\)\$, \`-----\\1," \
+	   -e "s,[^/]*/, |     ,g"
+	  #/*
+
+        # ... | grep &lt;palabra&gt; | ...
+
+          * Su salida son lineas que continen alguna &lt;palabra&gt;
+
+        # ... | sort &lt;opcion&gt; | ...
+
+	  * Su salida son las lineas que hay a su entrada ordenas
+	    segun opcion :
+	       '-n' --- en orden numerico
+	       '-r' --- invierte el efecto de la opcion
+
+        # ... | tee &lt;fichero&gt; | ...
+
+	  * Pasa a la salida su entrada y ademas, la almacenara en
+              &lt;fichero&gt;
+
+        # ... | tr &lt;a-z&gt; &lt;A-Z&gt; | ...
+
+	  * Su entrada es transforma segun sus parametros
+	    Los parametros forman como una tabla y el se encarga
+	    de traducir segun ella :
+
+		    hola   ->| a - A |->   HOLA
+			       b - B
+				...
+
+        # ... | sed &lt;opcion&gt; | ...
+
+	  * El editor de 'flujo'. Manda a su salida la entrada modificada
+            segun lo comandos de &lt;opciones&gt; que pertenecen tambien al
+	    editor 'ed'.
+	  * Ejemplo :
+
+		 cat Manu | sed 's/UNIX/UNIX(tm)/' > newManu
+
+	    sustituira las cadenas 'UNIX' por 'UNIX(tm)'
+</pre>
+
+
+<br><hr>
+</htmll>

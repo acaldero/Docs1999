@@ -1,0 +1,409 @@
+<html>
+<title>Sistemas Operativos</title>
+<!body background="backhelp.gif">
+<br><hr>
+<h1><p align=center>Sistema operativo VM</p></h1>
+<hr><br>
+
+
+<pre>
+<ol>
+
+<!#########################################################################>
+<a name="n_comenzando"><h1><p align=left><li>Comenzando</p></h1></a>
+
+<p>
+<a name="n_entrarysalir"><h2>A.-Entrar y Salir de la Cuenta</h2></a>
+
+  # l
+    logon
+
+    * Comando que nos permiten entrar en nuestra cuenta
+      ( l es la abreviatura de 'logon' )
+
+  # password
+
+    * Permite cambiar la contrase&ntilde;a de entrada
+
+
+  # log
+    logoff
+
+    * Permite salir de la cuenta.
+
+
+<p>
+<a name="n_informacion"><h2>B.-Informacion de Recursos disponibles</h2></a>
+
+    # q limits
+      query limits
+                           
+      * Lista la cantidad de recurso asignado a ti y la cantidad
+        ocupado (tiempo, Disco, ...)
+
+    # q V STOR
+      query V STOR
+
+	 * Lista el espacio total+libre de cada una de las unidades.
+
+    # q DISK
+      query disk
+
+	 * Informacion de todos los minidiscos accedidos.
+
+    # q TIME
+      query time
+
+	 * Informacion de la hora de entrada, tiempo de CPU....
+
+
+<p>
+<a name="n_optener"><h2>C.-Optener Ayuda</h2></a>
+
+    # help
+
+      * El comando de ayuda es HELP y da paso a un amplio indice de
+        temas y comandos que se pueden consultar. 
+        Ademas normalmente cada comando (XEDIT, BROWSE, ...) tiene  
+        su propia ayuda asociada y se accede a ella tecleando HELP  
+        en la linea de comandos del mismo o normalmente pulsando    
+        la tecla &lt;PF1&gt;.                                             
+
+
+
+<!#########################################################################>
+<a name="n_ejecucion"><h1><p align=left><li>Ejecucion de comandos</p></h1></a>
+
+<p>
+<a name="n_gestionprocesos"><h2>A.-Gestion de Procesos</h2></a>
+
+    # &lt;prog&gt;
+
+      * Normalmete, para ejecutar un programa, solo hay que
+          poner el nombre (o path+nombre) y dar enter.
+
+    # q names
+      query names
+
+      * Dadas las caracteristicas del S.O., un usuario "normal"  de
+        un sistema VM no puede ver la gestion de colas de la CPU,
+        aunque si puede conocer las maquinas virtuales que hay
+        conectadas al sistema ( QUERY NAMES )                 
+
+    # disconn/begin
+
+      * Con DISCONN "desenganchas" la maquina virtual del terminal;
+        con BEGIN puedes reengancharte
+ 
+        ( De Francisco ) :
+          En CMS/CP, El sistema operativo de maquina virtual CMS es
+        monousuario y monoproceso, por lo cual los comandos no se ejecuta
+        hasta que ha finalizado la ejecucion del ultimo comando.
+        Hay comandos de CMS y comandos de CP. Unicamente los comandos
+        de CP son los que se pueden ejecutar al tiempo que estais
+        ejecutando un comando CMS o un programa de usuario.
+        Esto se puede hacer de dos formas diferentes:
+
+          1.- Pulsando la tecla &lt;PA1&gt;, entonces aparece el
+              indicativo de CP READ en la esquina inferior derecha
+              de la pantalla, y puedes introducir comandos de CP.
+
+          2.- tecleando:  #CP comando.
+
+          Entre estos comandos de CP se encuentra el DISCONNECT. Permite
+        dejar la maquina virtual sin control de consola, por lo que la
+        ejecucion del programa se realizara en background. Hay que tener
+        cuidado con este tipo de ejecucion ya que el usuario pierde el
+        control de la aplicacion, esta se puede meter en un bucle, o
+        solicitar algo por pantalla.... Hay que preparar este tipo de
+        trabajos de forma ordenada y que finalicen siempre; tras la
+        finalizacion del comando habra que introducir un LOGOFF para que
+        finalice tambien la sesion de la maquina virtual. Como ya se ha
+        comentado el comando se puede introducir de cualquiera de las dos
+        formas indicadas anteriormente.
+
+    # cmsbatch
+                                       
+      * Para ejecutar un proceso(s) a la hora y dia que se quiera.
+
+
+<p>
+<a name="n_interpretes"><h2>B.-Interpretes de comandos : 'shells'</h2></a>
+
+    <h3>B.1.-'Shells' mas sencillos</h3></li>
+
+    # filelist &lt;fn ft &lt;fl&gt;&gt; 
+      dirlist  &lt;fn ft &lt;fl&gt;&gt; 
+
+      * Programa con un entorno que 'facilita' el manejo de los
+        comandos del sistema de fichero.
+        Es como si en msdos pusieras dir, y te dejara una columna
+        libre a la izquierda; te mueves con el cursor y pones ahi,
+        al lado del fichero el comando que quieras que se ejecute
+        sobre el.
+
+
+    <h3>B.2.-Como personalizar el 'shell'</h3></li>
+
+        <h4><u>B.2.2-FICHEROS DE CONFIGURACION</u></h4></li>
+        Para automatizar la ejecucion de una serie de comandos cada
+        vez se se inicie una sesion de trabajo, tenemos la posibilidad
+        de escribirlos en un fichero llamado :
+
+           profile exec
+
+
+
+<!#########################################################################>
+<a name="n_sistema"><h1><p align=left><li>Sistema de Ficheros</p></h1></a>
+
+<p>
+<h2>A.-Navegando en los Directorios</h2>
+
+    # listfile &lt;fn ft fm&gt;
+      listdir  &lt;fn ft fm&gt;
+
+      * Se lista es un minidisco;
+        (los minidiscos se representan con letra del abecedario)
+        Pero si se puede asociar un directorio a un minidisco que
+        este libre, un directorio. (ver 'cd-Particularidades')
+
+
+    # acc &lt;letra&gt; &lt;c&gt;
+
+      * Se accede a un directorio mediante una letra.
+        El directorio por defecto es el asociado a la letra 'a'.
+        Cambiar de directorio aqui seria asociar un directorio
+        a la letra 'a', (el directorio "apuntado" por 'a' pasa
+        a la siguiente letra libre : b,c ...)
+
+        Para poder operar con los ficheros de un directorio, primero  
+        lo asociamos a un minidisco, pues casi todos los comandos se  
+        definen para minidiscos :                                     
+            acc &lt;minidisco(letra) libre&gt; &lt;directorio&gt;"                 
+            (ej. acc k tercero:a990123.direct                         
+                listfile * * k                                        
+            ! con lo cual ya podemos "acceder" al directorio)         
+
+
+    # q ACCESSED
+      QUERY ACCESSED
+
+      * Se visualizaran la lista de las "letras" (minidiscos) y los   
+        "path" asociados (donde path es el listado de directorios     
+        desde la raiz del dispositivo, hasta el asociado a ese        
+        minidiscos)                                                   
+
+
+<p>
+<h2>B.-Analizando Ficheros</h2>
+
+    # browse &lt;fn ft fm&gt; -- list &lt;f&gt;
+       . F3   ---> salir
+       . F8   ---> siguiente pagina
+       . F7   ---> pagina anterior
+       . F1   ---> ayuda
+
+      * Visualiza el contenido de un fichero, parando cuando se
+        "llene" una pantalla y esperando a que el usuario presione
+        teclas para continuar, o NO.
+
+
+    # type &lt;fn ft &lt;fm&gt;&gt;
+
+      * Visualizacion fichero sin pausa.
+
+
+    # comp &lt;fn1&gt; &lt;ft1&gt; &lt;fm1&gt; &lt;fn2&gt; &lt;ft2&gt; &lt;fm2&gt;
+
+      * Compara el contenido de dos ficheros e indica las diferencias
+        que encuentra.
+
+
+    # sort &lt;...&gt; -- sort &lt;...&gt; -- ?? -- SORT &lt;fn1 ft1 fm1&gt; &lt;fn2 ft2 fm2&gt;
+
+      * Ordena los registros de un fichero obteniendo por resultado
+        el nuevo fichero ordenado.
+
+
+<p>
+<h2>C.-Modificando el Sist. de Fich.</h2>
+
+    # CREATE DIRECTORY &lt;&lt;segundo:I050.TEXT&gt;&gt;
+
+      * Crea un directorio nuevo, hijo del actual, llamado &lt;dn&gt;.
+
+
+    # ERASE &lt;dirid&gt;
+
+      * Borra el directorio &lt;dn&gt;.
+        &lt;dn&gt; puede ser el path concatenado con el nombre del
+        directorio a borrar.
+        Por ejemplo :
+             CMS  -&gt; tercero:a990123.&lt;DirABorrar&gt;
+
+
+    # ERASE &lt;fn ft (fm)&gt;
+
+      * Borra el fichero &lt;fn&gt;.
+
+        Igual que al borrar directorios, &lt;fn&gt; puede ser el path y
+        nombre del fichero; Ejemplos :
+
+
+        Si no te deja borrar el s.o. , es que segun las proteccion,
+        no estas autorizado. Cambialas y luego intentalo de nuevo
+        (ver seccion protecciones)
+
+      
+    # COPYFILE &lt;fn ft fm&gt; &lt;2fn 2ft 2fm&gt;
+
+      * Copia un fichero :
+        crea otro fichero que tendra el mismo contenido que el original.
+
+        Normalmente no se permite que el fichero destino tenga el
+        mismo nombre que el origen.
+
+
+    # append &lt;a&gt; &lt;b&gt;
+
+      * Concatena el fichero &lt;b&gt; al final del &lt;a&gt;.
+
+
+    # rename &lt;fn ft fm&gt; &lt;nfn fnt nfm&gt;
+
+      * Cambia de nombre un fichero... y en algunos sistemas
+	   tambien el nombre del un directorio (en DOS, no)
+
+
+    # MOVEfile &lt;fn ft fa&gt; &lt;fnd ftd fad&gt;
+
+      * Cambia la ubicacion de un fichero.
+        (lo traslada a otro directorio borrandolo de su posicion original)
+
+
+    # xedit fn1 ft1 fm1 (noscreen
+
+      * Edita linea a linea (sin retroceso) un fichero.
+
+[xedit]
+&gt;   XEDIT A A A &lt;INTRO&gt;
+&gt;   i &lt;INTRO&gt;                                                
+&gt;   .                                                        
+&gt;   .                                                        
+&gt;   texto &lt;INTRO&gt;                                            
+&gt;   .                                                        
+&gt;   .                                                        
+&gt;   &lt;INTRO&gt;                                                  
+&gt;   FILE &lt;INTRO&gt;                                             
+
+
+    # XEDIT &lt;fn ft &lt;fm&gt;&gt;
+
+      * Edita un fichero. ( permite cambiar el contenido de un
+        fichero, normalmente de texto, claro. )
+
+
+<p>
+<h2>F.-Atributos</h2>
+
+  <h3><u>F.1.-Como interpretar los flags</u></h3>
+  La proteccion consiste en una serie de "flags" que segun
+  esten o no activos dan o no privilegios para efectuar una
+  accion sobre un fichero o directorio al que estan asociados
+  El numero y significado depende de cada sistema operativo
+  (segun el sistema de ficheros que soporte)
+  (el significado de "flag" es equivalente a un BOOLEAN)
+
+
+  <h3><u>F.2.-Uso atributos</u></h3>
+
+  # QUERY AUTHORITY &lt;fn ft&gt; &lt;dirid&gt;
+
+    * Permite ver los "flags" actuales de cada ficheros en dos y
+      unix si se omite &lt;f&gt;, presenta el listado de todos.
+
+  # GRANT AUTHORITY &lt;fn ft&gt; &lt;dirid&gt; TO {&lt;usuario&gt;/public}
+
+    * Da accesos a un usuario (o a todo el mundo) sobre un fichero.
+
+  # REVOKE AUTHORITY &lt;fn ft&gt; &lt;dirid&gt; FROM {&lt;usuario&gt;/public}
+
+    * Quita accesos a un usuario sobre un fichero.
+
+
+
+<!#########################################################################>
+<a name="n_manejo"><h1><p align=left><li>Manejo de Dispositivos</p></h1></a>
+
+
+<p>
+<h2>A.-Discos</h2>
+
+    <h3><u>A.1.-Acceso a disco</u></h3>
+    En VM los dispositivos son los minidiscos, lectora(RDR),
+    impresoras (PRT), unidades de cinta, etc...
+    Los dispositivos son explicitos (minidiscos) hay que manualmente
+    "unir" su contenido con la lista de minidiscos actual (LINK y ACCESS).
+    Los minidiscos son identificados mediante numeros o letras :
+    [001h-5FFh] (a-f) 
+
+    # LINK &lt;m.d.&gt;
+      +
+      ACCESS &lt;m.d.&gt;
+
+      * Permiten aceder a un minidisco.
+        Ojo, Link y acess leen el contenido del directorio raiz
+        de ese minidisco. Si otro usuario hace modificaciones
+        tendras que volver a "Link y acess" para actualizar la
+        informacion que tienes.
+
+
+    <h3><u>A.2.-Manejo de discos</u></h3>
+
+    # DEFINE T9336 &lt;vaddr&gt; /&lt;nbytes&gt;
+      +
+      FORMAT &lt;vaddr&gt; A              
+
+      *  Define un minidisco virtual auxiliar, estando en 'cp'.
+
+
+<p>
+<h2>B.-Impresion</h2>
+
+    # print &lt;f&gt;
+
+      * Envian un fichero a la impresora
+        ( si se esta imprimiendo alguno, pasa a una cola
+          de espera )
+
+        En la maquina conan.fi.upm.es (VM-ESA) teclear:
+           listar &lt;f&gt;                                               
+
+    # QUERY PRINTER
+
+      * Permite visualizar la cola de impresion
+        ( ficheros a espera de ser imprimidos por la impresora )
+
+
+<p>
+<h2>C.-Terminales</h2>
+
+    # CLRSCRN
+      VMFCLEAR
+      Pulsando la tecla '&lt;PA2&gt;'
+
+      * Borra la pantalla y situa el cursor en la esquina
+        superior izquierda.
+
+
+
+<!#########################################################################>
+
+</pre>
+</ol>
+
+
+<hr><br>
+</html>
+

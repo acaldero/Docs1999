@@ -1,0 +1,94 @@
+<html>
+<title>Resumenes</title>
+<!body background="backhelp.gif">
+<br><hr>
+<h1><p align=center>Comandos y programas de Gestion</p></h1>
+<hr><br>
+
+
+
+<! ### Referencia basica ################################################## >
+<br>
+<a name="Lista_Super"><h2>Supervision Y Gestion</h2> </a>
+<p><pre>
+    # su  (ux)
+
+      * Permite, dando la password, ser superusuario!
+      * Si eres superusuario ya, poniendo su &lt;usuario&gt;, entraras
+        como si fueras ese usuario y podras hacer lo que
+        puede hacer el usuario. Para salir, poner exit y vuelves
+        al shell del superusuario. ( el comando whoami lo usa
+        normalmente el superusuario cuando no se acuerda "quien"
+        es en ese momento ). Si no eres superusuario, al poner
+        'su &lt;usuario&gt;' te pedira la password de ese usuario.
+
+    # shutdown -r now  (ux)
+
+      * Manda un aviso a los usuarios de que el sistema operativo
+        va a resetear la maquina; despues va mandando la senyal de
+        terminacion a los procesos y despues la senyal de matar
+        ( para los procesos que se hallan echo el longi ); por ultimo
+          resetea.
+
+        - Hay dos comandos muy parecidos :
+           - 'halt'
+              no resetea, "cuelga" la maquina
+           - 'reboot'
+              permite mas cosas que shutdown, como resetear
+              sin mandar ninguna senyal!,...
+
+    # chgrp &lt;nuevo grupo&gt; &lt;fichero&gt;  (ux)
+
+      * Cambia el grupo al que pertenece un fichero.
+
+    # chown &lt;nuevo duenyo&gt; &lt;fichero&gt;  (ux)
+
+      * Cambia el duenyo al que pertenece un fichero.
+    
+    # newgrp &lt;grupo&gt;  (ux)
+
+      * Crea un nuevo grupo de usuarios.
+        ( lo anyade al fichero /etc/group )
+
+    # last (ux)
+
+      * Lista los usuarios que se han conectado con la fecha y hora
+        de salida del sistema y minutos que ha estado en el.
+      * Para un usuario en particular, "last &lt;user&gt;"
+
+    # whoami (ux)
+
+      * Presenta que usuario eres ( a990... )
+
+    # groups (ux)
+
+      * Presenta a que grupo perteneces
+
+    # id (ux)
+
+      * Presenta el identificacion de usuario (UID) y el identi-
+        ficador de grupo (GID), tanto el real como el efectivo
+        ( tanto el UID como el GID son normalmente numero de 3
+          cifras que identifica univocamente al usuario y al
+          grupo al que pertenece )
+
+    # tload (ux) --- indicate (cms/cp)
+
+      * Presenta un "grafico" (con texto) de la carga del sistema
+        ( si usas X-Windows, usa xload )
+
+      * Particularidades :
+
+       --- CMS-CP ---------------------------------------------------
+      | - para conocer el nivel de consumo del usuario se puede      |
+      |   ejecutar el comando:                                       |
+      |         INDICATE USER                                        |
+       --------------------------------------------------------------
+
+</pre>
+
+
+<br><hr>
+</htmll>
+
+
